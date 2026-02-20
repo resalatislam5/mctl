@@ -1,0 +1,13 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+/* global CSS */
+.ant-modal-mask {
+  backdrop-filter: none !important;
+}
+
+.modal-container {
+  background-color: #f2f2f2;
+}
