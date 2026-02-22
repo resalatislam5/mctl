@@ -11,14 +11,14 @@ const countryEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
     getCountryList: build.query<Response<ICountryList[]>, ICountryQuery>({
       query: (query) => ({
-        url: '/country',
+        url: '/config/country',
         query,
       }),
       providesTags: () => [CREATE_TAG('COUNTRY')],
     }),
     createCountry: build.mutation<Response<string>, ICreateCountry>({
       query: (body) => ({
-        url: '/country',
+        url: '/config/country',
         method: 'POST',
         body,
       }),
@@ -29,7 +29,7 @@ const countryEndpoints = api.injectEndpoints({
       { body: ICreateCountry; id: string }
     >({
       query: ({ body, id }) => ({
-        url: `/country/${id}`,
+        url: `/config/country/${id}`,
         method: 'PATCH',
         body,
       }),
@@ -38,7 +38,7 @@ const countryEndpoints = api.injectEndpoints({
 
     deleteCountry: build.mutation<Response<string>, string>({
       query: (id) => ({
-        url: `/country/${id}`,
+        url: `/config/country/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: () => [CREATE_TAG('COUNTRY')],

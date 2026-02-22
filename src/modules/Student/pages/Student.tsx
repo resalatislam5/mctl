@@ -1,6 +1,5 @@
 import { openModal } from '../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../app/hooks/hooks';
-import AntTable from '../../../common/Table/AntTable';
 import ContainerLayout from '../../../layout/components/ContainerLayout';
 import CreateStudent from '../components/CreateStudent';
 
@@ -20,7 +19,8 @@ const Student = () => {
       }
       title='Student List'
     >
-      <AntTable />
+      {/* <AntTable /> */}
+      test
     </ContainerLayout>
   );
 };

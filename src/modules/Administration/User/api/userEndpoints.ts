@@ -7,14 +7,14 @@ const userEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
     userList: build.query<Response<IUserList[]>, IUserQuery>({
       query: (query) => ({
-        url: '/user',
+        url: '/config/user',
         query,
       }),
       providesTags: () => [CREATE_TAG('DASHBOARD')],
     }),
     createUser: build.mutation<Response<string>, ICreateUser>({
       query: (body) => ({
-        url: '/user',
+        url: '/config/user',
         method: 'POST',
         body,
       }),

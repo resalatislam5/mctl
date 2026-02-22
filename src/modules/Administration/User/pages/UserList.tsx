@@ -23,6 +23,7 @@ const UserList = () => {
       }
       title='User List'
     >
+      test
       <AntTable
         dataSource={data?.data}
         rowKey={'_id'}

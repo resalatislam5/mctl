@@ -5,22 +5,53 @@ import type { ICreateRole, IRoleList, IRoleQuery } from '../types/roleTypes';
 
 const roleEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
-    userList: build.query<Response<IRoleList>, IRoleQuery>({
+    getRoleList: build.query<Response<IRoleList[]>, IRoleQuery>({
       query: (query) => ({
-        url: '/user',
+        url: 'config/role',
         query,
       }),
-      providesTags: () => [CREATE_TAG('DASHBOARD')],
+      providesTags: () => [CREATE_TAG('ROLE')],
     }),
-    createUser: build.mutation<Response<string>, ICreateRole>({
+    getModuleList: build.query<Response<IRoleList[]>, IRoleQuery>({
+      query: (query) => ({
+        url: 'config/module',
+        query,
+      }),
+      providesTags: () => [CREATE_TAG('ROLE')],
+    }),
+    createRole: build.mutation<Response<string>, ICreateRole>({
       query: (body) => ({
-        url: '/user',
+        url: 'config/role',
         method: 'POST',
         body,
       }),
-      invalidatesTags: () => [CREATE_TAG('DASHBOARD')],
+      invalidatesTags: () => [CREATE_TAG('ROLE')],
+    }),
+    updateRole: build.mutation<
+      Response<string>,
+      { body: ICreateRole; _id: string }
+    >({
+      query: ({ body, _id }) => ({
+        url: `config/role/${_id}`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [CREATE_TAG('ROLE')],
+    }),
+    deleteRole: build.mutation<Response<string>, string>({
+      query: (_id) => ({
+        url: `config/role/${_id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: () => [CREATE_TAG('ROLE')],
     }),
   }),
 });
 
-export const { useCreateUserMutation, useUserListQuery } = roleEndpoints;
+export const {
+  useCreateRoleMutation,
+  useGetRoleListQuery,
+  useUpdateRoleMutation,
+  useDeleteRoleMutation,
+  useGetModuleListQuery,
+} = roleEndpoints;

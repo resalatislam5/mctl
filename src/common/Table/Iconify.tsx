@@ -2,12 +2,11 @@ import { Icon } from '@iconify/react';
 
 interface Props {
   icon: string;
-  width?: number | string;
-  height?: number | string;
+  fontSize?: string | number;
 }
 
-const Iconify = ({ icon, width = 20, height = 20, ...rest }: Props) => {
-  return <Icon icon={icon} width={width} height={height} {...rest} />;
+const Iconify = ({ icon, fontSize, ...rest }: Props) => {
+  return <Icon icon={icon} fontSize={fontSize || '18px'} {...rest} />;
 };
 
 export default Iconify;
