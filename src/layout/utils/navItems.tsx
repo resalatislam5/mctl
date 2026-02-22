@@ -18,6 +18,28 @@ export const navItems: INavItem[] = [
     name: 'Dashboard',
   },
   {
+    key: '/configuration',
+    to: '/configuration',
+    label: 'Configuration',
+    icon: 'ph:student-fill',
+    children: [
+      {
+        key: '/configuration/country',
+        to: '/configuration/country',
+        label: 'Country',
+        icon: 'mdi:account-key',
+        name: 'COUNTRY',
+      },
+      {
+        key: '/configuration/use',
+        to: '/configuration/user',
+        label: 'User List',
+        icon: 'mdi:account-key',
+        name: 'Users',
+      },
+    ],
+  },
+  {
     key: '/administration',
     to: '/administration',
     label: 'Administration',

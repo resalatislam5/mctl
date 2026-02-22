@@ -1,5 +1,6 @@
 import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
+import CountryList from '../modules/Configuration/Country/pages/CountryList';
 
 export const AppRoutes = [
   {
@@ -15,6 +16,16 @@ export const AppRoutes = [
   {
     path: '/administration/user',
     element: <UserList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/administration/user',
+    element: <UserList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/configuration/country',
+    element: <CountryList />,
     name: 'DASHBOARD',
   },
 ];

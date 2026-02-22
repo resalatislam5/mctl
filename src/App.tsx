@@ -18,6 +18,8 @@ function App() {
             colorPrimary: '#00b96b',
             // colorBgLayout: "",
             // colorBgContainer: "#1f1f1f",
+            // marginLG: 0,
+            paddingMD: 10,
           },
         }}
       >

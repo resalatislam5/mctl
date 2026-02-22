@@ -7,14 +7,14 @@ const roleEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
     userList: build.query<Response<IRoleList>, IRoleQuery>({
       query: (query) => ({
-        url: '/v1/user',
+        url: '/user',
         query,
       }),
       providesTags: () => [CREATE_TAG('DASHBOARD')],
     }),
     createUser: build.mutation<Response<string>, ICreateRole>({
       query: (body) => ({
-        url: '/v1/user',
+        url: '/user',
         method: 'POST',
         body,
       }),

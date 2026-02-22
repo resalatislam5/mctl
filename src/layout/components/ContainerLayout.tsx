@@ -51,7 +51,7 @@ const ContainerLayout = ({
         <Row align={'middle'} gutter={[12, 12]}>
           <Col>
             {showButton && (
-              <Button onClick={onClick} type='primary' size='large'>
+              <Button onClick={onClick} type='primary' size='middle'>
                 <Iconify icon='ic:baseline-plus' />
                 {buttonText}
               </Button>

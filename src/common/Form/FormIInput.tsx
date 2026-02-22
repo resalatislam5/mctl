@@ -121,7 +121,7 @@ export const FormInputText = ({
   xl,
   xxl,
   rules,
-  size = 'large',
+  size = 'middle',
   onChange,
   ...rest
 }: Props) => {

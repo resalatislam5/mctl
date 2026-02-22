@@ -6,13 +6,13 @@ export const authEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<Response<LoginResponseType>, LoginTypes>({
       query: (body) => ({
-        url: '/v1/auth/login',
+        url: '/auth/login',
         method: 'POST',
         body,
       }),
     }),
     checkPermission: build.query({
-      query: () => '/v1/check-permission',
+      query: () => '/check-permission',
     }),
   }),
 });
