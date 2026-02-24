@@ -53,7 +53,7 @@ export const navItems: INavItem[] = [
         name: 'ROLE',
       },
       {
-        key: '/administration/use',
+        key: '/administration/user',
         to: '/administration/user',
         label: 'User List',
         icon: 'ic:twotone-list',

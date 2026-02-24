@@ -2,7 +2,7 @@ import { Button, type ButtonProps } from 'antd';
 import Iconify from '../Table/Iconify';
 
 interface Props extends ButtonProps {
-  loading: boolean;
+  loading?: boolean;
   type?: 'primary' | 'text' | 'dashed';
   text: string;
   icon?: string;

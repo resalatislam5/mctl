@@ -1,11 +1,6 @@
 export interface Response<T> {
   success: boolean;
+  total?: number;
   data?: T;
-  message: string;
-  meta?: {
-    page: number;
-    limit: number;
-    total: number;
-    totalPage: number;
-  };
+  message?: string;
 }

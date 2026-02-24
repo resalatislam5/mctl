@@ -32,10 +32,11 @@ export const handleSuccessAndError: Middleware =
     /* ❌ ERROR */
     if (isRejectedWithValue(action)) {
       const payload = action.payload as {
-        message?: string;
+        data?: { message?: string };
       };
 
-      const errorMessage = payload?.message || 'Something went wrong';
+      const errorMessage = payload?.data?.message || 'Something went wrong';
+      console.log(payload);
 
       message.error(errorMessage);
     }

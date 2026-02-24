@@ -10,7 +10,7 @@ const userEndpoints = api.injectEndpoints({
         url: '/config/user',
         query,
       }),
-      providesTags: () => [CREATE_TAG('DASHBOARD')],
+      providesTags: () => [CREATE_TAG('USER')],
     }),
     createUser: build.mutation<Response<string>, ICreateUser>({
       query: (body) => ({
@@ -18,9 +18,34 @@ const userEndpoints = api.injectEndpoints({
         method: 'POST',
         body,
       }),
-      invalidatesTags: () => [CREATE_TAG('DASHBOARD')],
+      invalidatesTags: () => [CREATE_TAG('USER')],
+    }),
+
+    updateUser: build.mutation<
+      Response<string>,
+      { body: ICreateUser; _id: string }
+    >({
+      query: ({ body, _id }) => ({
+        url: `config/user/${_id}`,
+        method: 'PATCH',
+        body,
+      }),
+      invalidatesTags: () => [CREATE_TAG('USER')],
+    }),
+
+    deleteUser: build.mutation<Response<string>, string>({
+      query: (_id) => ({
+        url: `config/user/${_id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: () => [CREATE_TAG('USER')],
     }),
   }),
 });
 
-export const { useCreateUserMutation, useUserListQuery } = userEndpoints;
+export const {
+  useCreateUserMutation,
+  useUserListQuery,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} = userEndpoints;

@@ -1,4 +1,11 @@
-import { Col, Form, Input, type FormItemProps } from 'antd';
+import {
+  Col,
+  Form,
+  Input,
+  Select,
+  type FormItemProps,
+  type SelectProps,
+} from 'antd';
 import type { ChangeEvent } from 'react';
 
 type Props = {
@@ -33,7 +40,7 @@ export const FormInputEmail = ({
   xl,
   xxl,
   rules,
-  size = 'large',
+  size = 'middle',
   onChange,
   ...rest
 }: Props) => {
@@ -77,7 +84,7 @@ export const FormInputPassword = ({
   xl,
   xxl,
   rules,
-  size = 'large',
+  size = 'middle',
   onChange,
   ...rest
 }: Props) => {
@@ -144,6 +151,50 @@ export const FormInputText = ({
           disabled={disabled}
           size={size}
           onChange={onChange}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+
+export const FormInputSelect = ({
+  label,
+  name,
+  placeholder,
+  required,
+  disabled,
+  layout = 'vertical',
+  options,
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  rules,
+  size = 'middle',
+  onChange,
+  ...rest
+}: Props & SelectProps) => {
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        layout={layout}
+        rules={[
+          { required, message: `${label} is required` },
+          ...(rules || []),
+        ]}
+      >
+        <Select
+          placeholder={placeholder || `Select ${label}`}
+          disabled={disabled}
+          size={size}
+          options={options}
+          onChange={onChange}
+          allowClear
+          {...rest}
         />
       </Form.Item>
     </Col>
