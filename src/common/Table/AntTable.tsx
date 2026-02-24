@@ -1,4 +1,4 @@
-import { Empty, Skeleton, Table, Typography, type TableProps } from 'antd';
+import { Empty, Table, Typography, type TableProps } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 
 interface Props<T> extends Omit<
@@ -11,7 +11,6 @@ interface Props<T> extends Omit<
   dataSource?: T[];
   loading?: boolean;
   showTotal?: boolean; // optional total row title
-  skeletonRows?: number; // how many rows to show in skeleton
 }
 
 const AntTable = <T extends object>({
@@ -21,17 +20,13 @@ const AntTable = <T extends object>({
   dataSource = [],
   loading = false,
   showTotal = true,
-  skeletonRows = 5,
+  // skeletonRows = 5,
   ...rest
 }: Props<T>) => {
-  // Render Skeleton dynamically based on columns
-  if (loading) {
-    return <Skeleton active paragraph={{ rows: skeletonRows }} />;
-  }
-
   return (
     <Table<T>
       bordered
+      loading={loading}
       size={size}
       rowKey={rowKey}
       columns={columns}

@@ -8,7 +8,6 @@ const CreateCountry = () => {
   const [form] = useForm();
   const [create, { isLoading }] = useCreateCountryMutation();
   const onFinish = (values: ICreateCountry) => {
-    console.log(values);
     create(values);
     form.resetFields();
   };

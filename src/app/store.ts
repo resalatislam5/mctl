@@ -5,6 +5,7 @@ import modalReducer from './features/modalSlice';
 import authSlice from './features/authSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import { handleSuccessAndError } from './utils/handleSuccesAndError';
 
 const rootReducer = combineReducers({
   theme: themeReducer,
@@ -28,8 +29,18 @@ export const store = configureStore({
       serializableCheck: {
         // ignore these redux-persist actions
         ignoredActions: ['persist/PERSIST', 'persist/REHYDRATE'],
+
+        ignoredActionPaths: [
+          'payload.content',
+          'meta.arg',
+          'meta.baseQueryMeta',
+        ],
+
+        ignoredPaths: ['modal.content', 'api.queries', 'api.mutations'],
       },
-    }).concat(api.middleware),
+    })
+      .concat(api.middleware)
+      .concat(handleSuccessAndError),
 });
 
 // 5️⃣ Persistor

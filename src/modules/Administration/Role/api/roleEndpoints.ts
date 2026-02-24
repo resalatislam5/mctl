@@ -1,7 +1,12 @@
 import { api } from '../../../../app/api/api';
 import { CREATE_TAG } from '../../../../app/utils/CreateTags';
 import type { Response } from '../../../../common/types/common.type';
-import type { ICreateRole, IRoleList, IRoleQuery } from '../types/roleTypes';
+import type {
+  ICreateRole,
+  IRoleList,
+  IRoleQuery,
+  IViewRole,
+} from '../types/roleTypes';
 
 const roleEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
@@ -9,6 +14,12 @@ const roleEndpoints = api.injectEndpoints({
       query: (query) => ({
         url: 'config/role',
         query,
+      }),
+      providesTags: () => [CREATE_TAG('ROLE')],
+    }),
+    getSingleRole: build.query<Response<IViewRole>, string>({
+      query: (id) => ({
+        url: `config/role/${id}`,
       }),
       providesTags: () => [CREATE_TAG('ROLE')],
     }),
@@ -54,4 +65,5 @@ export const {
   useUpdateRoleMutation,
   useDeleteRoleMutation,
   useGetModuleListQuery,
+  useGetSingleRoleQuery,
 } = roleEndpoints;

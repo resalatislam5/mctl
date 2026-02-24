@@ -25,9 +25,10 @@ type Props = {
   onFinish: (values: ICreateRole) => void;
   loading: boolean;
   form: FormInstance<ICreateRole>;
+  editMode?: boolean;
 };
 
-const RoleInputs = ({ onFinish, loading, form }: Props) => {
+const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
   const { data, isLoading, isFetching } = useGetModuleListQuery({});
   const modules: IModule[] = data?.data || [];
 
@@ -216,7 +217,11 @@ const RoleInputs = ({ onFinish, loading, form }: Props) => {
         </Col>
       </Row>
 
-      <FromSubmit text='Submit' loading={loading} />
+      <FromSubmit
+        style={{ marginTop: '16px' }}
+        text={editMode ? 'Update' : 'Create'}
+        loading={loading}
+      />
     </Form>
   );
 };

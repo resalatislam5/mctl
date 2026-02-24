@@ -12,7 +12,7 @@ const { Text } = Typography;
 const Login = () => {
   const { sm } = useBreakpoint();
   const [form] = Form.useForm();
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const onFinish = (values: LoginTypes) => {
@@ -54,7 +54,13 @@ const Login = () => {
             </Link>
           </Flex>
           <Col xs={24}>
-            <Button size='large' type='primary' htmlType='submit' block>
+            <Button
+              size='large'
+              type='primary'
+              htmlType='submit'
+              loading={isLoading}
+              block
+            >
               Login
             </Button>
           </Col>

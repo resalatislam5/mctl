@@ -28,7 +28,6 @@ const baseQueryWithAuth: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, apiCtx, extraOptions) => {
   const result = await rawBaseQuery(args, apiCtx, extraOptions);
-  console.log(result?.error);
 
   if (result.error?.status === 401) {
     apiCtx.dispatch(api.util.resetApiState());

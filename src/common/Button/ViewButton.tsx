@@ -5,13 +5,13 @@ interface Props extends ButtonProps {
   text?: string;
   icon?: string;
 }
-const EditButton = ({ icon, text, ...rest }: Props) => {
+const ViewButton = ({ icon, text, ...rest }: Props) => {
   return (
-    <Button {...rest} type='primary' danger size='small'>
-      <Iconify icon={icon || 'ic:baseline-edit'} />
+    <Button {...rest} type='primary' size='small'>
+      <Iconify icon={icon || 'raphael:view'} />
       {text}
     </Button>
   );
 };
 
-export default EditButton;
+export default ViewButton;

@@ -14,7 +14,6 @@ const UpdateCountry = ({ record }: Props) => {
   const [update, { isLoading }] = useUpdateCountryMutation();
 
   const onFinish = (values: ICreateCountry) => {
-    console.log(values);
     update({ body: values, id: _id })
       .unwrap()
       .then(() => {
