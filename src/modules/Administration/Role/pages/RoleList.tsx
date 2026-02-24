@@ -47,6 +47,7 @@ const RoleList = () => {
             key: 'createdAt',
             title: 'Date',
             render: (text) => dateAndTimeFormat(text),
+            width: 150,
           },
           {
             dataIndex: 'name',
@@ -65,24 +66,24 @@ const RoleList = () => {
             width: 200,
             render: (_, record) => (
               <Space>
-                <EditButton
-                  onClick={() =>
-                    dispatch(
-                      openModal({
-                        title: 'Edit Role',
-                        content: <UpdateRole id={record._id} />,
-                        open: true,
-                        width: 1000,
-                      }),
-                    )
-                  }
-                />
                 <ViewButton
                   onClick={() =>
                     dispatch(
                       openModal({
                         title: 'view Role',
                         content: <ViewRole id={record?._id} />,
+                        open: true,
+                        width: 1000,
+                      }),
+                    )
+                  }
+                />
+                <EditButton
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        title: 'Edit Role',
+                        content: <UpdateRole id={record._id} />,
                         open: true,
                         width: 1000,
                       }),
