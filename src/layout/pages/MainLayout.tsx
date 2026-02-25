@@ -1,6 +1,19 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import { Icon } from '@iconify/react';
-import { Button, Layout, Space, theme } from 'antd';
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  Flex,
+  Layout,
+  Space,
+  theme,
+  type MenuProps,
+} from 'antd';
 import { useCallback, useRef, useState } from 'react';
 import { Outlet } from 'react-router';
 import { toggleTheme } from '../../app/features/themeSlice';
@@ -8,6 +21,25 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks/hooks';
 import SideMenu from '../components/SideMenu';
 
 const { Header } = Layout;
+
+const items: MenuProps['items'] = [
+  {
+    label: (
+      <Button
+        onClick={() => {
+          localStorage.removeItem('mctl_token');
+          setTimeout(() => {
+            window.location.href = '/auth/login';
+          }, 50);
+        }}
+      >
+        Logout
+      </Button>
+    ),
+    key: 'logout',
+  },
+];
+
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [width, setWidth] = useState(260);
@@ -93,7 +125,7 @@ const MainLayout = () => {
             {/* <h4>Role</h4>
             </Flex> */}
           </Space>
-          <div style={{ marginRight: 30 }}>
+          <Flex gap={16} align='center' style={{ marginRight: 30 }}>
             <Button size='small' onClick={() => dispatch(toggleTheme())}>
               {mode === 'light' ? (
                 <Icon style={{}} icon={'material-symbols:dark-mode'} />
@@ -101,7 +133,18 @@ const MainLayout = () => {
                 <Icon style={{}} icon={'material-symbols:light-mode'} />
               )}
             </Button>
-          </div>
+            {/* <Button size='small'> */}
+            <Dropdown menu={{ items }}>
+              <Avatar
+                style={{ cursor: 'pointer' }}
+                size='small'
+                shape='square'
+                icon={<UserOutlined />}
+              />
+            </Dropdown>
+
+            {/* </Button> */}
+          </Flex>
         </Header>
         <Outlet />
       </Layout>

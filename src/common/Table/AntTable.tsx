@@ -12,6 +12,7 @@ interface Props<T> extends Omit<
   loading?: boolean;
   showTotal?: boolean; // optional total row title
   total?: number; // total total for pagination
+  showSL?: boolean;
 }
 
 const AntTable = <T extends object>({
@@ -22,6 +23,7 @@ const AntTable = <T extends object>({
   loading = false,
   showTotal = true,
   total,
+  showSL = true,
   ...rest
 }: Props<T>) => {
   return (
@@ -30,7 +32,18 @@ const AntTable = <T extends object>({
       loading={loading}
       size={size}
       rowKey={rowKey}
-      columns={columns}
+      columns={[
+        ...(showSL
+          ? [
+              {
+                title: 'SL.',
+                render: (_: string, __: object, index: number) => index + 1,
+                width: 60, // optional
+              },
+            ]
+          : []),
+        ...columns, // your other columns
+      ]}
       dataSource={dataSource}
       title={
         showTotal
