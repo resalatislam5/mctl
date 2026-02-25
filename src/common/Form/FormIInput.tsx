@@ -130,8 +130,9 @@ export const FormInputText = ({
   rules,
   size = 'middle',
   onChange,
+  value,
   ...rest
-}: Props) => {
+}: Props & { value?: string | null }) => {
   return (
     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
       <Form.Item
@@ -151,6 +152,7 @@ export const FormInputText = ({
           disabled={disabled}
           size={size}
           onChange={onChange}
+          value={value || ''}
         />
       </Form.Item>
     </Col>

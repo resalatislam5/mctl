@@ -10,10 +10,13 @@ import { useDeleteRoleMutation } from '../../Role/api/roleEndpoints';
 import { useUserListQuery } from '../api/userEndpoints';
 import CreateUser from '../components/CreateUser';
 import UpdateUser from '../components/UpdateUser';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 
 const UserList = () => {
+  const { query } = useQueryParams({});
+
   const dispatch = useAppDispatch();
-  const { data, isLoading, isFetching } = useUserListQuery({});
+  const { data, isLoading, isFetching } = useUserListQuery(query);
   const [deleteItem, { isLoading: isDeleting }] = useDeleteRoleMutation();
 
   return (
@@ -36,6 +39,7 @@ const UserList = () => {
         bordered
         size='small'
         loading={isFetching || isLoading}
+        total={data?.total}
         columns={[
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'email', key: 'email', title: 'Email' },

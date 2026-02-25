@@ -8,7 +8,7 @@ const userEndpoints = api.injectEndpoints({
     userList: build.query<Response<IUserList[]>, IUserQuery>({
       query: (query) => ({
         url: '/config/user',
-        query,
+        params: query,
       }),
       providesTags: () => [CREATE_TAG('USER')],
     }),

@@ -1,9 +1,10 @@
-import { Button, Col, Flex, Row, theme } from 'antd';
+import { Button, Col, Flex, Input, Row, theme } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-import type { ReactNode } from 'react';
-import { FormInputText } from '../../common/Form/FormIInput';
+import { useEffect, useState, type ReactNode } from 'react';
+import { useSearchParams } from 'react-router';
 import Iconify from '../../common/Table/Iconify';
 import DynamicBreadcrumb from '../../common/ui/DynamicBreadcrumb';
+import useDebounce from '../../common/utils/debounced';
 
 interface Props {
   children: ReactNode;
@@ -23,6 +24,14 @@ const ContainerLayout = ({
   onClick,
 }: Props) => {
   const { showButton = true, showSearch = true } = options || {};
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [search, seSearch] = useState(searchParams.get('search'));
+  const debouncedValue = useDebounce(search);
+
+  useEffect(() => {
+    setSearchParams({ search: debouncedValue || '' });
+  }, [debouncedValue, setSearchParams]);
+
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -48,6 +57,7 @@ const ContainerLayout = ({
         }}
       >
         {/* <h1>{title}</h1> */}
+
         <Row align={'middle'} gutter={[12, 12]}>
           <Col>
             {showButton && (
@@ -59,9 +69,17 @@ const ContainerLayout = ({
           </Col>
 
           {showSearch && (
-            <FormInputText lg={5} label={'search'} name={'search'} noStyle />
+            <Col xs={24} sm={8} lg={6}>
+              <Input
+                onChange={(e) => seSearch(e.target.value)}
+                name={'search'}
+                value={search || ''}
+                placeholder='Search'
+              />
+            </Col>
           )}
         </Row>
+
         <div style={{ marginTop: 20 }}>{children}</div>
       </Content>
     </div>

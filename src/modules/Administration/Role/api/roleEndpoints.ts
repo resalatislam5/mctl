@@ -13,7 +13,7 @@ const roleEndpoints = api.injectEndpoints({
     getRoleList: build.query<Response<IRoleList[]>, IRoleQuery>({
       query: (query) => ({
         url: 'config/role',
-        query,
+        params: query,
       }),
       providesTags: () => [CREATE_TAG('ROLE')],
     }),

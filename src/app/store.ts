@@ -3,6 +3,7 @@ import { api } from './api/api';
 import themeReducer from './features//themeSlice';
 import modalReducer from './features/modalSlice';
 import authSlice from './features/authSlice';
+import filterSlice from './features/filterSlice';
 import { persistReducer, persistStore } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { handleSuccessAndError } from './utils/handleSuccesAndError';
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   modal: modalReducer,
   auth: authSlice,
+  filter: filterSlice,
   [api.reducerPath]: api.reducer,
 });
 

@@ -12,7 +12,7 @@ export interface IUserList {
 
 export type IUserQuery = Partial<{
   limit: number;
-  page: number;
+  skip: number;
   search: string;
 }>;
 export interface ICreateUser {

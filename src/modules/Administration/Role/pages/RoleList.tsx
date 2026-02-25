@@ -16,10 +16,12 @@ import {
 import CreateRole from '../components/CreateRole';
 import UpdateRole from '../components/UpdateRole';
 import ViewRole from '../components/ViewRole';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 
 const RoleList = () => {
   const dispatch = useAppDispatch();
-  const { data, isLoading, isFetching } = useGetRoleListQuery({});
+  const { query } = useQueryParams();
+  const { data, isLoading, isFetching } = useGetRoleListQuery(query);
   const [deleteItem, { isLoading: isDeleting }] = useDeleteRoleMutation();
 
   return (
@@ -41,6 +43,7 @@ const RoleList = () => {
         rowKey={'_id'}
         loading={isLoading || isFetching}
         bordered
+        total={data?.total}
         columns={[
           {
             dataIndex: 'createdAt',
@@ -70,7 +73,7 @@ const RoleList = () => {
                   onClick={() =>
                     dispatch(
                       openModal({
-                        title: 'view Role',
+                        title: 'View Role',
                         content: <ViewRole id={record?._id} />,
                         open: true,
                         width: 1000,

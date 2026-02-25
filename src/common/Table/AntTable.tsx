@@ -11,6 +11,7 @@ interface Props<T> extends Omit<
   dataSource?: T[];
   loading?: boolean;
   showTotal?: boolean; // optional total row title
+  total?: number; // total total for pagination
 }
 
 const AntTable = <T extends object>({
@@ -20,7 +21,7 @@ const AntTable = <T extends object>({
   dataSource = [],
   loading = false,
   showTotal = true,
-  // skeletonRows = 5,
+  total,
   ...rest
 }: Props<T>) => {
   return (
@@ -33,7 +34,11 @@ const AntTable = <T extends object>({
       dataSource={dataSource}
       title={
         showTotal
-          ? () => <Typography.Text strong>Total Result</Typography.Text>
+          ? () => (
+              <Typography.Text strong>
+                Total Result Found {total || 0}
+              </Typography.Text>
+            )
           : undefined
       }
       locale={{ emptyText: <Empty description='No Data' /> }}
