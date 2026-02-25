@@ -15,3 +15,68 @@
 html.light .modal-container {
   background: #f2f2f2;
 }
+
+/* ================================
+   MODERN GLOBAL SCROLLBAR
+================================ */
+
+/* ---------- Theme Colors ---------- */
+:root {
+  --scrollbar-size: 8px;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.25);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
+}
+
+/* Dark Mode */
+.dark {
+  --scrollbar-thumb: rgba(255, 255, 255, 0.25);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.45);
+}
+/* ---------- Theme Colors ---------- */
+:root {
+  --scrollbar-size: 8px;
+  --scrollbar-thumb: rgba(0, 0, 0, 0.25);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.4);
+}
+
+/* Dark Mode */
+.dark {
+  --scrollbar-thumb: rgba(255, 255, 255, 0.25);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.45);
+}
+
+/* ---------- Chrome / Edge / Safari ---------- */
+::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* ✅ track invisible */
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ---------- Firefox ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+.custom-scroll .ant-table-body {
+  overflow-y: auto !important;
+  overflow-x: auto !important;
+}
+
+.custom-scroll .ant-table-body::-webkit-scrollbar-track {
+  background: transparent; /* hide track */
+}
