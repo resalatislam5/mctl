@@ -4,10 +4,16 @@ import { useAppSelector } from './app/hooks/hooks';
 import AntModal from './common/Modal/AntModal';
 import { router } from './routes/router';
 import type { RootState } from './app/store';
+import { useEffect } from 'react';
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 function App() {
   const { mode } = useAppSelector((state: RootState) => state.theme);
+
+  useEffect(() => {
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(mode);
+  }, [mode]);
 
   return (
     <>
@@ -20,6 +26,14 @@ function App() {
             // colorBgContainer: "#1f1f1f",
             // marginLG: 0,
             paddingMD: 10,
+          },
+          components: {
+            Table:
+              mode === 'light'
+                ? {
+                    headerBg: '#6ce7b3',
+                  }
+                : {},
           },
         }}
       >

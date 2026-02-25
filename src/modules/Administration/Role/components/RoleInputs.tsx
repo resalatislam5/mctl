@@ -110,7 +110,11 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
             )}
 
             {/* selected checkbox */}
-            <Form.Item name={[index, 'selected']} valuePropName='checked'>
+            <Form.Item
+              name={[index, 'selected']}
+              valuePropName='checked'
+              style={{ margin: 0 }}
+            >
               <Checkbox
                 checked={isSelected}
                 onChange={(e) => handleSelectChange(index, e.target.checked)}
@@ -132,6 +136,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           name={[index, 'can_read']}
           valuePropName='checked'
           initialValue={false}
+          style={{ margin: 0 }}
         >
           <Checkbox
             onChange={(e) =>
@@ -140,6 +145,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           />
         </Form.Item>
       ),
+      align: 'center',
     },
 
     {
@@ -149,6 +155,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           name={[index, 'can_create']}
           valuePropName='checked'
           initialValue={false}
+          style={{ margin: 0 }}
         >
           <Checkbox
             onChange={(e) =>
@@ -157,6 +164,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           />
         </Form.Item>
       ),
+      align: 'center',
     },
 
     {
@@ -166,6 +174,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           name={[index, 'can_update']}
           valuePropName='checked'
           initialValue={false}
+          style={{ margin: 0 }}
         >
           <Checkbox
             onChange={(e) =>
@@ -174,6 +183,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           />
         </Form.Item>
       ),
+      align: 'center',
     },
 
     {
@@ -183,6 +193,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           name={[index, 'can_delete']}
           valuePropName='checked'
           initialValue={false}
+          style={{ margin: 0 }}
         >
           <Checkbox
             onChange={(e) =>
@@ -191,6 +202,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
           />
         </Form.Item>
       ),
+      align: 'center',
     },
   ];
 
@@ -206,6 +218,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
             {() => (
               <Table<IModule>
                 rowKey='_id'
+                size='small'
                 bordered
                 columns={columns}
                 dataSource={modules}

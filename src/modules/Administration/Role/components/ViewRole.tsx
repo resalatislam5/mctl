@@ -18,6 +18,8 @@ const ViewRole = ({ id }: { id: string }) => {
         dataSource={data?.data?.permissions || []}
         loading={isLoading}
         rowKey={'_id'}
+        pagination={false}
+        total={data?.data?.permissions?.length}
         columns={[
           {
             key: 'module_name',

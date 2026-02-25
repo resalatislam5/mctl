@@ -8,6 +8,10 @@
   backdrop-filter: none !important;
 }
 
-.modal-container {
+/* .modal-container {
   background-color: #f2f2f2;
+} */
+
+html.light .modal-container {
+  background: #f2f2f2;
 }
