@@ -1,10 +1,10 @@
 import { Divider, Image, Layout, Menu, theme, Typography } from 'antd';
 import type { SliderProps } from 'antd/es/slider';
-import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import { useBreakpoint } from '../../common/utils/constant';
 import { navItems, renderItems } from '../utils/navItems';
+import HeaderTime from './HeaderTime';
 
 interface Props extends SliderProps {
   handleCollapse: (value: boolean) => void;
@@ -25,7 +25,6 @@ const SideMenu = ({
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const location = useLocation();
   const screens = useBreakpoint();
-  const [time, setTime] = useState('');
 
   const onOpenChange = useCallback((keys: string[]) => setOpenKeys(keys), []);
 
@@ -57,14 +56,7 @@ const SideMenu = ({
     token: { colorBgContainer },
   } = theme.useToken();
 
-  useEffect(() => {
-    const tick = () => setTime(dayjs().format('ddd DD MMM YYYY hh:mm:ss A'));
-
-    tick();
-    const i = setInterval(tick, 1000);
-    return () => clearInterval(i);
-  }, []);
-
+  console.count('test');
   return (
     <Sider
       trigger={null}
@@ -98,7 +90,7 @@ const SideMenu = ({
             <Typography.Title level={5} style={{ fontWeight: 700 }}>
               MTCL Global Private Limited
             </Typography.Title>
-            <Typography.Text type='secondary'>{time}</Typography.Text>
+            <HeaderTime />
           </>
         )}
         <Divider style={{ margin: '10px 0 0px 0' }} />

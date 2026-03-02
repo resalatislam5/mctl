@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router';
 import Iconify from '../../common/Table/Iconify';
 import DynamicBreadcrumb from '../../common/ui/DynamicBreadcrumb';
 import useDebounce from '../../common/utils/debounced';
+import { cleanQuery } from '../../common/utils/cleanQuery';
 
 interface Props {
   children: ReactNode;
@@ -29,7 +30,9 @@ const ContainerLayout = ({
   const debouncedValue = useDebounce(search);
 
   useEffect(() => {
-    setSearchParams({ search: debouncedValue || '' });
+    setSearchParams(
+      cleanQuery({ search: encodeURIComponent(debouncedValue || '') }),
+    );
   }, [debouncedValue, setSearchParams]);
 
   const {
