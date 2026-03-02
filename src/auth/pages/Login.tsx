@@ -1,4 +1,14 @@
-import { Button, Col, Flex, Form, Row, Space, Typography } from 'antd';
+import {
+  Button,
+  Col,
+  ConfigProvider,
+  Flex,
+  Form,
+  Row,
+  Space,
+  theme,
+  Typography,
+} from 'antd';
 import { Link, useNavigate } from 'react-router';
 import {
   FormInputEmail,
@@ -27,46 +37,48 @@ const Login = () => {
   };
 
   return (
-    <Flex style={{ flexDirection: 'column' }} gap={40}>
-      <Space orientation='vertical'>
-        <h1 style={{ fontSize: sm ? 50 : 40 }}>Welcome Back!</h1>
-        <Text>Please enter log in details below</Text>
-      </Space>
-      <Form form={form} onFinish={onFinish}>
-        <Row>
-          <FormInputEmail lg={24} label='Email' name='email' required />
-          <FormInputPassword
-            lg={24}
-            label='Password'
-            name='password'
-            required
-            style={{ marginBottom: 10 }}
-          />
-          <Flex justify='end' style={{ width: '100%' }}>
-            <Link
-              to={'/forgot-password'}
-              style={{
-                fontWeight: 500,
-                marginBottom: 20,
-              }}
-            >
-              Forgot Password?
-            </Link>
-          </Flex>
-          <Col xs={24}>
-            <Button
-              size='large'
-              type='primary'
-              htmlType='submit'
-              loading={isLoading}
-              block
-            >
-              Login
-            </Button>
-          </Col>
-        </Row>
-      </Form>
-    </Flex>
+    <ConfigProvider theme={{ algorithm: theme.defaultAlgorithm }}>
+      <Flex style={{ flexDirection: 'column' }} gap={40}>
+        <Space orientation='vertical'>
+          <h1 style={{ fontSize: sm ? 50 : 40 }}>Welcome Back!</h1>
+          <Text>Please enter log in details below</Text>
+        </Space>
+        <Form form={form} onFinish={onFinish}>
+          <Row>
+            <FormInputEmail lg={24} label='Email' name='email' required />
+            <FormInputPassword
+              lg={24}
+              label='Password'
+              name='password'
+              required
+              style={{ marginBottom: 10 }}
+            />
+            <Flex justify='end' style={{ width: '100%' }}>
+              <Link
+                to={'/forgot-password'}
+                style={{
+                  fontWeight: 500,
+                  marginBottom: 20,
+                }}
+              >
+                Forgot Password?
+              </Link>
+            </Flex>
+            <Col xs={24}>
+              <Button
+                size='large'
+                type='primary'
+                htmlType='submit'
+                loading={isLoading}
+                block
+              >
+                Login
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      </Flex>
+    </ConfigProvider>
   );
 };
 

@@ -48,7 +48,7 @@ export const navItems: INavItem[] = [
       {
         key: '/administration/roles',
         to: '/administration/roles',
-        label: 'Roles',
+        label: 'Role List',
         icon: 'ic:twotone-list',
         name: 'ROLE',
       },

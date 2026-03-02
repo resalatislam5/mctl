@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from 'antd';
+import { Button, Tooltip, type ButtonProps } from 'antd';
 import Iconify from '../Table/Iconify';
 
 interface Props extends ButtonProps {
@@ -7,10 +7,12 @@ interface Props extends ButtonProps {
 }
 const ViewButton = ({ icon, text, ...rest }: Props) => {
   return (
-    <Button {...rest} type='primary' size='small'>
-      <Iconify icon={icon || 'raphael:view'} />
-      {text}
-    </Button>
+    <Tooltip title='View'>
+      <Button {...rest} type='primary' size='small'>
+        <Iconify icon={icon || 'raphael:view'} />
+        {text}
+      </Button>
+    </Tooltip>
   );
 };
 

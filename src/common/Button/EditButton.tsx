@@ -1,4 +1,4 @@
-import { Button, type ButtonProps } from 'antd';
+import { Button, Tooltip, type ButtonProps } from 'antd';
 import Iconify from '../Table/Iconify';
 
 interface Props extends ButtonProps {
@@ -7,10 +7,12 @@ interface Props extends ButtonProps {
 }
 const EditButton = ({ icon, text, ...rest }: Props) => {
   return (
-    <Button {...rest} type='primary' danger size='small'>
-      <Iconify icon={icon || 'ic:baseline-edit'} />
-      {text}
-    </Button>
+    <Tooltip title='Edit'>
+      <Button {...rest} type='primary' danger size='small'>
+        <Iconify icon={icon || 'ic:baseline-edit'} />
+        {text}
+      </Button>
+    </Tooltip>
   );
 };
 

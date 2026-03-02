@@ -224,6 +224,7 @@ const RoleInputs = ({ onFinish, loading, editMode, form }: Props) => {
                 dataSource={modules}
                 pagination={false}
                 loading={isLoading || isFetching}
+                scroll={{ x: 'max-content' }}
               />
             )}
           </Form.List>

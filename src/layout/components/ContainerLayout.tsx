@@ -1,4 +1,4 @@
-import { Button, Col, Flex, Input, Row, theme } from 'antd';
+import { Button, Col, Flex, Input, Row, theme, Typography } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import { useEffect, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router';
@@ -42,8 +42,11 @@ const ContainerLayout = ({
         align='center'
         justify='space-between'
         style={{ margin: '24px 16px 0px 24px' }}
+        wrap
       >
-        <h1>{title}</h1>
+        <Typography.Title style={{ margin: 0 }} level={1}>
+          {title}
+        </Typography.Title>
         <DynamicBreadcrumb />
       </Flex>
 
