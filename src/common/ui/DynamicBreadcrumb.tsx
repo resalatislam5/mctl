@@ -1,7 +1,7 @@
 import { Breadcrumb, type BreadcrumbProps } from 'antd';
 import { Link, useLocation } from 'react-router';
 
-const DISABLE_PATHS = ['administration'];
+const DISABLE_PATHS = ['administration', 'configuration'];
 
 const DynamicBreadcrumb = ({ ...rest }: BreadcrumbProps) => {
   const location = useLocation();

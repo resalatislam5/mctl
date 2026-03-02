@@ -10,9 +10,9 @@ import type {
 const countryEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
     getCountryList: build.query<Response<ICountryList[]>, ICountryQuery>({
-      query: (query) => ({
+      query: (params) => ({
         url: '/config/country',
-        query,
+        params,
       }),
       providesTags: () => [CREATE_TAG('COUNTRY')],
     }),

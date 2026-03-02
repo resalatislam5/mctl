@@ -1,14 +1,24 @@
+import { Space } from 'antd';
 import { openModal } from '../../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../../app/hooks/hooks';
+import DeleteButton from '../../../../common/Button/DeleteButton';
+import EditButton from '../../../../common/Button/EditButton';
 import AntTable from '../../../../common/Table/AntTable';
+import { getStatusTag } from '../../../../common/utils/status';
 import ContainerLayout from '../../../../layout/components/ContainerLayout';
-import { useGetCountryListQuery } from '../api/countryEndpoints';
+import {
+  useDeleteCountryMutation,
+  useGetCountryListQuery,
+} from '../api/countryEndpoints';
 import CreateCountry from '../components/CreateCountry';
+import UpdateCountry from '../components/UpdateCountry';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 
 const CountryList = () => {
   const dispatch = useAppDispatch();
-  const { data, isLoading, isFetching } = useGetCountryListQuery({});
-  // const [deleting, { isLoading: isDeleting }] = useDeleteCountryMutation();
+  const { query } = useQueryParams();
+  const { data, isLoading, isFetching } = useGetCountryListQuery(query);
+  const [deleting, { isLoading: isDeleting }] = useDeleteCountryMutation();
 
   return (
     <ContainerLayout
@@ -22,7 +32,7 @@ const CountryList = () => {
           }),
         )
       }
-      title='User List'
+      title='Country List'
     >
       <AntTable
         dataSource={data?.data}
@@ -30,35 +40,41 @@ const CountryList = () => {
         bordered
         size='small'
         loading={isFetching || isLoading}
+        total={data?.total}
         columns={[
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'code', key: 'code', title: 'Code' },
-          { dataIndex: 'status', key: 'status', title: 'Status' },
-          // {
-          //   title: 'Action',
-          //   key: 'action',
-          //   width: 150,
-          //   render: (_text: string, record: ICountryList) => (
-          //     <Space size='middle'>
-          //       <EditButton
-          //         onClick={() =>
-          //           dispatch(
-          //             openModal({
-          //               title: 'Edit Country',
-          //               content: <UpdateCountry record={record} />,
-          //               open: true,
-          //               width: 600,
-          //             }),
-          //           )
-          //         }
-          //       />
-          //       <DeleteButton
-          //         loading={isDeleting}
-          //         onClick={() => deleting(record._id)}
-          //       />
-          //     </Space>
-          //   ),
-          // },
+          {
+            dataIndex: 'status',
+            key: 'status',
+            title: 'Status',
+            render: (text) => getStatusTag(text),
+          },
+          {
+            title: 'Action',
+            key: 'action',
+            width: 150,
+            render: (_text, record) => (
+              <Space size='middle'>
+                <EditButton
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        title: 'Edit Country',
+                        content: <UpdateCountry record={record} />,
+                        open: true,
+                        width: 600,
+                      }),
+                    )
+                  }
+                />
+                <DeleteButton
+                  loading={isDeleting}
+                  onClick={() => deleting(record._id)}
+                />
+              </Space>
+            ),
+          },
         ]}
       />
     </ContainerLayout>

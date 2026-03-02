@@ -26,15 +26,15 @@ export const navItems: INavItem[] = [
       {
         key: '/configuration/country',
         to: '/configuration/country',
-        label: 'Country',
-        icon: 'mdi:account-key',
+        label: 'Country List',
+        icon: 'ic:twotone-list',
         name: 'COUNTRY',
       },
       {
         key: '/configuration/use',
         to: '/configuration/user',
         label: 'User List',
-        icon: 'mdi:account-key',
+        icon: 'ic:twotone-list',
         name: 'USER',
       },
     ],
