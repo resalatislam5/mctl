@@ -7,3 +7,18 @@ export type IRoleSelect = {
   _id: string;
   name: string;
 };
+export type ICountrySelect = {
+  _id: string;
+  name: string;
+  code: string;
+};
+export type IDistrictSelect = {
+  _id: string;
+  name: string;
+  code: string;
+};
+export type IDivisionSelect = {
+  _id: string;
+  name: string;
+  code: string;
+};

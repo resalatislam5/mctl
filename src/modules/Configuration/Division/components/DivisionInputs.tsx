@@ -4,21 +4,24 @@ import {
   FormInputSelect,
   FormInputText,
 } from '../../../../common/Form/FormIInput';
-import type { ICreateCountry } from '../types/countryTypes';
+import { SelectCountry } from '../../../../common/SelectWithApi/Select';
+import type { ICreateDivision } from '../types/divisionTypes';
 
 type Props = {
-  onFinish: (arg: ICreateCountry) => void;
-  form: FormInstance;
+  onFinish: (arg: ICreateDivision) => void;
+  form: FormInstance<ICreateDivision>;
   loading: boolean;
   editMode?: boolean;
 };
 
-const CountryInputs = ({ onFinish, form, loading, editMode }: Props) => {
+const DivisionInputs = ({ onFinish, form, loading, editMode }: Props) => {
   return (
     <Form onFinish={onFinish} form={form}>
       <Row gutter={[8, 8]}>
+        <SelectCountry lg={24} name={'country_id'} label={'Country'} required />
         <FormInputText lg={24} name={'name'} label={'Name'} required />
         <FormInputText lg={24} name={'code'} label={'Code'} required />
+
         {editMode && (
           <FormInputSelect
             name={'status'}
@@ -36,4 +39,4 @@ const CountryInputs = ({ onFinish, form, loading, editMode }: Props) => {
   );
 };
 
-export default CountryInputs;
+export default DivisionInputs;

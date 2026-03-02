@@ -44,4 +44,7 @@ export const api = createApi({
   baseQuery: baseQueryWithAuth,
   tagTypes: [...tags],
   endpoints: () => ({}),
+  refetchOnMountOrArgChange: true,
+  refetchOnFocus: true,
+  refetchOnReconnect: true,
 });

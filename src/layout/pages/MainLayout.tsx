@@ -84,7 +84,7 @@ const MainLayout = () => {
 
   return (
     <Layout
-      style={{ minHeight: '100vh', maxHeight: '100vh', overflow: 'hidden' }}
+      style={{ minHeight: '100vh', overflow: 'hidden' }}
       onMouseMove={(e) => resize(e)}
       onMouseUp={stopResize}
       onMouseLeave={stopResize}

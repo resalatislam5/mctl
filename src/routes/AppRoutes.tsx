@@ -1,6 +1,8 @@
 import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
 import CountryList from '../modules/Configuration/Country/pages/CountryList';
+import DistrictList from '../modules/Configuration/District/pages/DistrictList';
+import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 
 export const AppRoutes = [
   {
@@ -19,13 +21,18 @@ export const AppRoutes = [
     name: 'DASHBOARD',
   },
   {
-    path: '/administration/user',
-    element: <UserList />,
+    path: '/configuration/country',
+    element: <CountryList />,
     name: 'DASHBOARD',
   },
   {
-    path: '/configuration/country',
-    element: <CountryList />,
+    path: '/configuration/division',
+    element: <DivisionList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/configuration/district',
+    element: <DistrictList />,
     name: 'DASHBOARD',
   },
 ];
