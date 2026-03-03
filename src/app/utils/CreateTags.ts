@@ -8,6 +8,7 @@ export const tags = [
   'DISTRICT',
   'DIVISION',
   'UPAZILA',
+  'BATCH',
 ] as const;
 
 type tagTypes = (typeof tags)[number];

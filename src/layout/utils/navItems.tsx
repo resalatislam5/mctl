@@ -51,6 +51,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'UPAZILA',
       },
+      {
+        key: '/configuration/batch',
+        to: '/configuration/batch',
+        label: 'Batch List',
+        icon: 'ic:twotone-list',
+        name: 'BATCH',
+      },
     ],
   },
   {
