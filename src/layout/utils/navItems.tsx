@@ -58,6 +58,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'BATCH',
       },
+      {
+        key: '/configuration/course',
+        to: '/configuration/course',
+        label: 'Course List',
+        icon: 'ic:twotone-list',
+        name: 'COURSE',
+      },
     ],
   },
   {

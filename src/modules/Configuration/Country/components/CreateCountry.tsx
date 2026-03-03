@@ -3,13 +3,18 @@ import { useForm } from 'antd/es/form/Form';
 import type { ICreateCountry } from '../types/countryTypes';
 import CountryInputs from './CountryInputs';
 import { useCreateCountryMutation } from '../api/countryEndpoints';
+import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 
 const CreateCountry = () => {
   const [form] = useForm();
   const [create, { isLoading }] = useCreateCountryMutation();
   const onFinish = (values: ICreateCountry) => {
-    create(values);
-    form.resetFields();
+    const body = sanitizeObjectValue(values);
+    create(body)
+      .unwrap()
+      .then(() => {
+        form.resetFields();
+      });
   };
 
   return (

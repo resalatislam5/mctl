@@ -3,13 +3,18 @@ import { useForm } from 'antd/es/form/Form';
 import type { ICreateBatch } from '../types/batchTypes';
 import BatchInputs from './BatchInputs';
 import { useCreateBatchMutation } from '../api/batchEndpoints';
+import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 
 const CreateBatch = () => {
   const [form] = useForm();
   const [create, { isLoading }] = useCreateBatchMutation();
   const onFinish = (values: ICreateBatch) => {
-    create(values);
-    form.resetFields();
+    const body = sanitizeObjectValue(values);
+    create(body)
+      .unwrap()
+      .then(() => {
+        form.resetFields();
+      });
   };
 
   return (

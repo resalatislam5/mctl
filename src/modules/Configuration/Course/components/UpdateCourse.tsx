@@ -1,22 +1,21 @@
 import { useForm } from 'antd/es/form/Form';
-import { useUpdateCountryMutation } from '../api/countryEndpoints';
-import type { ICountryList, ICreateCountry } from '../types/countryTypes';
+import { useUpdateCourseMutation } from '../api/courseEndpoints';
+import type { ICourseList, ICreateCourse } from '../types/courseTypes';
 import { Card } from 'antd';
-import CountryInputs from './CountryInputs';
+import CourseInputs from './CourseInputs';
 import { useEffect } from 'react';
 import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 
 type Props = {
-  record: ICountryList;
+  record: ICourseList;
 };
-const UpdateCountry = ({ record }: Props) => {
+const UpdateCourse = ({ record }: Props) => {
   const [form] = useForm();
-  const { name, code, status, _id } = record;
-  const [update, { isLoading }] = useUpdateCountryMutation();
+  const { name, price, status, _id } = record;
+  const [update, { isLoading }] = useUpdateCourseMutation();
 
-  const onFinish = (values: ICreateCountry) => {
+  const onFinish = (values: ICreateCourse) => {
     const body = sanitizeObjectValue(values);
-
     update({ body, id: _id })
       .unwrap()
       .then(() => {
@@ -28,15 +27,15 @@ const UpdateCountry = ({ record }: Props) => {
     if (record) {
       form.setFieldsValue({
         name,
-        code,
+        price,
         status,
       });
     }
-  }, [form, name, code, status, record]);
+  }, [form, name, price, status, record]);
 
   return (
     <Card size='small' className='modal-container'>
-      <CountryInputs
+      <CourseInputs
         onFinish={onFinish}
         form={form}
         loading={isLoading}
@@ -46,4 +45,4 @@ const UpdateCountry = ({ record }: Props) => {
   );
 };
 
-export default UpdateCountry;
+export default UpdateCourse;

@@ -20,7 +20,9 @@ const UpdateUpazila = ({ _id }: Props) => {
   const [update, { isLoading }] = useUpdateUpazilaMutation();
 
   const onFinish = (values: ICreateUpazila) => {
-    const body = sanitizeObjectValue(values, { ignoreKeys: ['country_id'] });
+    const body = sanitizeObjectValue(values, {
+      ignoreKeys: ['country_id', 'division_id'],
+    });
     update({ body, id: _id })
       .unwrap()
       .then(() => {

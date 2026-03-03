@@ -18,6 +18,5 @@ export interface ICreateDivision {
   name: string;
   code: string;
   country_id: string;
-  division_id: string;
   status: 'ACTIVE' | 'INACTIVE';
 }

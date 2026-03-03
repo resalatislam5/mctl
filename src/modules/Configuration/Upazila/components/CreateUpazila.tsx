@@ -9,7 +9,9 @@ const CreateUpazila = () => {
   const [form] = useForm();
   const [create, { isLoading }] = useCreateUpazilaMutation();
   const onFinish = (values: ICreateUpazila) => {
-    const body = sanitizeObjectValue(values, { ignoreKeys: ['country_id'] });
+    const body = sanitizeObjectValue(values, {
+      ignoreKeys: ['country_id', 'division_id'],
+    });
     create(body)
       .unwrap()
       .then(() => {

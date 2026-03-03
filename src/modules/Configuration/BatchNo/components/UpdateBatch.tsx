@@ -4,6 +4,7 @@ import type { IBatchList, ICreateBatch } from '../types/batchTypes';
 import { Card } from 'antd';
 import BatchInputs from './BatchInputs';
 import { useEffect } from 'react';
+import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 
 type Props = {
   record: IBatchList;
@@ -14,7 +15,8 @@ const UpdateBatch = ({ record }: Props) => {
   const [update, { isLoading }] = useUpdateBatchMutation();
 
   const onFinish = (values: ICreateBatch) => {
-    update({ body: values, id: _id })
+    const body = sanitizeObjectValue(values);
+    update({ body, id: _id })
       .unwrap()
       .then(() => {
         form.resetFields();

@@ -24,6 +24,7 @@ type Props = {
   xxl?: number;
   size?: 'small' | 'middle' | 'large';
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  allowClear?: boolean;
 } & FormItemProps;
 
 export const FormInputEmail = ({
@@ -42,6 +43,7 @@ export const FormInputEmail = ({
   rules,
   size = 'middle',
   onChange,
+  allowClear = true,
   ...rest
 }: Props) => {
   return (
@@ -64,6 +66,7 @@ export const FormInputEmail = ({
           disabled={disabled}
           size={size}
           onChange={onChange}
+          allowClear={allowClear}
         />
       </Form.Item>
     </Col>
@@ -86,6 +89,7 @@ export const FormInputPassword = ({
   rules,
   size = 'middle',
   onChange,
+  allowClear = true,
   ...rest
 }: Props) => {
   return (
@@ -108,6 +112,7 @@ export const FormInputPassword = ({
           disabled={disabled}
           size={size}
           onChange={onChange}
+          allowClear={allowClear}
         />
       </Form.Item>
     </Col>
@@ -131,6 +136,7 @@ export const FormInputText = ({
   size = 'middle',
   onChange,
   value,
+  allowClear = true,
   ...rest
 }: Props & { value?: string | null }) => {
   return (
@@ -153,6 +159,53 @@ export const FormInputText = ({
           size={size}
           onChange={onChange}
           value={value || ''}
+          allowClear={allowClear}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+export const FormInputNumber = ({
+  label,
+  name,
+  placeholder,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  rules,
+  size = 'middle',
+  onChange,
+  value,
+  allowClear = true,
+  ...rest
+}: Props & { value?: string | null }) => {
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        layout={layout}
+        rules={[
+          { required: required, message: `${label} is required` },
+
+          ...(rules || []),
+        ]}
+        {...rest}
+      >
+        <Input
+          type='number'
+          placeholder={placeholder ? placeholder : `Enter Your ${label}`}
+          disabled={disabled}
+          size={size}
+          onChange={onChange}
+          value={value || ''}
+          allowClear={allowClear}
         />
       </Form.Item>
     </Col>
@@ -176,6 +229,7 @@ export const FormInputSelect = ({
   rules,
   size = 'middle',
   onChange,
+  allowClear = true,
   ...rest
 }: Props & SelectProps) => {
   return (
@@ -195,7 +249,7 @@ export const FormInputSelect = ({
           size={size}
           options={options}
           onChange={onChange}
-          allowClear
+          allowClear={allowClear}
           {...rest}
         />
       </Form.Item>

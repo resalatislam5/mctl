@@ -2,6 +2,7 @@ import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
 import BatchList from '../modules/Configuration/BatchNo/pages/BatchList';
 import CountryList from '../modules/Configuration/Country/pages/CountryList';
+import CourseList from '../modules/Configuration/Course/pages/CourseList';
 import DistrictList from '../modules/Configuration/District/pages/DistrictList';
 import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
@@ -45,6 +46,11 @@ export const AppRoutes = [
   {
     path: '/configuration/batch',
     element: <BatchList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/configuration/course',
+    element: <CourseList />,
     name: 'DASHBOARD',
   },
 ];

@@ -13,7 +13,6 @@ export type IBatchQuery = Partial<{
   search: string;
 }>;
 export interface ICreateBatch {
-  name: string;
-  code: string;
+  batch_no: string;
   status: 'ACTIVE' | 'INACTIVE';
 }
