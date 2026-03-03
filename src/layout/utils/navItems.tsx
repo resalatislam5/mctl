@@ -21,7 +21,7 @@ export const navItems: INavItem[] = [
     key: '/configuration',
     to: '/configuration',
     label: 'Configuration',
-    icon: 'ph:student-fill',
+    icon: 'grommet-icons:configure',
     children: [
       {
         key: '/configuration/country',
@@ -43,6 +43,13 @@ export const navItems: INavItem[] = [
         label: 'District List',
         icon: 'ic:twotone-list',
         name: 'DISTRICT',
+      },
+      {
+        key: '/configuration/upazila',
+        to: '/configuration/upazila',
+        label: 'Upazila List',
+        icon: 'ic:twotone-list',
+        name: 'UPAZILA',
       },
     ],
   },

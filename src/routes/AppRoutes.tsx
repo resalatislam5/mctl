@@ -3,6 +3,7 @@ import UserList from '../modules/Administration/User/pages/UserList';
 import CountryList from '../modules/Configuration/Country/pages/CountryList';
 import DistrictList from '../modules/Configuration/District/pages/DistrictList';
 import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
+import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
 
 export const AppRoutes = [
   {
@@ -33,6 +34,11 @@ export const AppRoutes = [
   {
     path: '/configuration/district',
     element: <DistrictList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/configuration/upazila',
+    element: <UpazilaList />,
     name: 'DASHBOARD',
   },
 ];

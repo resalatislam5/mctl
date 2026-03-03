@@ -7,6 +7,7 @@ export const tags = [
   'USER',
   'DISTRICT',
   'DIVISION',
+  'UPAZILA',
 ] as const;
 
 type tagTypes = (typeof tags)[number];

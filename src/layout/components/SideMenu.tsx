@@ -13,6 +13,21 @@ interface Props extends SliderProps {
   width?: string | number;
   style?: React.CSSProperties;
 }
+
+function normalizePath(path: string) {
+  if (path === '/') return '/';
+  const newPath = path.replace(/\/+$/, ''); // remove trailing slash
+
+  // Only removes the last path segment if it's a number; used for dynamic sidebar highlighting
+  const pathSplit = newPath.split('/');
+  const catchLastPathElement = pathSplit.pop();
+  if (Number(catchLastPathElement)) {
+    return pathSplit.join('/');
+  }
+
+  return newPath;
+}
+
 const { Sider } = Layout;
 
 const SideMenu = ({
@@ -56,7 +71,6 @@ const SideMenu = ({
     token: { colorBgContainer },
   } = theme.useToken();
 
-  console.count('test');
   return (
     <Sider
       trigger={null}
@@ -97,7 +111,7 @@ const SideMenu = ({
       </div>
       <Menu
         mode='inline'
-        selectedKeys={[location.pathname]}
+        selectedKeys={[normalizePath(location.pathname)]}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
         items={[...filteredMenuItems()].map(renderItems)}

@@ -5,7 +5,8 @@ export type permissionTags =
   | 'ROLE'
   | 'STUDENT'
   | 'DIVISION'
-  | 'DISTRICT';
+  | 'DISTRICT'
+  | 'UPAZILA';
 const useCheckPermission = () => {
   return {};
 };

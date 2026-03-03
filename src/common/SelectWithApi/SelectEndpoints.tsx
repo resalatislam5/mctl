@@ -41,7 +41,7 @@ const selectEndpoints = api.injectEndpoints({
     }),
     getDistrictSelect: build.query<
       Response<IDistrictSelect[]>,
-      { district_id?: string }
+      { division_id?: string }
     >({
       query: (params) => ({
         url: '/config/district/select',
