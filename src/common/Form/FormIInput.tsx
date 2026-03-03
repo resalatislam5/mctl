@@ -211,6 +211,52 @@ export const FormInputNumber = ({
     </Col>
   );
 };
+export const FormInputMobile = ({
+  label,
+  name,
+  placeholder,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  rules,
+  size = 'middle',
+  onChange,
+  value,
+  allowClear = true,
+  ...rest
+}: Props & { value?: string | null }) => {
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        layout={layout}
+        rules={[
+          { required: required, message: `${label} is required` },
+
+          ...(rules || []),
+        ]}
+        {...rest}
+      >
+        <Input
+          type='number'
+          placeholder={placeholder ? placeholder : `Enter Your ${label}`}
+          disabled={disabled}
+          size={size}
+          onChange={onChange}
+          value={value || ''}
+          allowClear={allowClear}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
 
 export const FormInputSelect = ({
   label,

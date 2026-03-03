@@ -39,7 +39,7 @@ const STATUS_COLOR = {
 
 import { Tag } from 'antd';
 
-type StatusType = keyof typeof STATUS_COLOR;
+export type StatusType = keyof typeof STATUS_COLOR;
 
 export const getStatusTag = (status: StatusType | boolean) => {
   const formattedStatus =

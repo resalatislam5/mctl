@@ -65,6 +65,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'COURSE',
       },
+      {
+        key: '/configuration/agent',
+        to: '/configuration/agent',
+        label: 'Agent List',
+        icon: 'ic:twotone-list',
+        name: 'AGENT',
+      },
     ],
   },
   {

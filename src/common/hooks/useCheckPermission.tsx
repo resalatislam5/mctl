@@ -8,7 +8,8 @@ export type permissionTags =
   | 'DISTRICT'
   | 'UPAZILA'
   | 'BATCH'
-  | 'COURSE';
+  | 'COURSE'
+  | 'AGENT';
 const useCheckPermission = () => {
   return {};
 };
