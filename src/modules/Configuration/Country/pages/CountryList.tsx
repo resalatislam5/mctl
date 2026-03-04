@@ -13,8 +13,10 @@ import {
 import CreateCountry from '../components/CreateCountry';
 import UpdateCountry from '../components/UpdateCountry';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const CountryList = () => {
+  const { can_delete, can_create, can_update } = useCheckPermission('COUNTRY');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetCountryListQuery(query);
@@ -32,6 +34,7 @@ const CountryList = () => {
           }),
         )
       }
+      options={{ showButton: can_create }}
       title='Country List'
     >
       <AntTable
@@ -57,6 +60,7 @@ const CountryList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -68,7 +72,9 @@ const CountryList = () => {
                     )
                   }
                 />
+
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

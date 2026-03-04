@@ -10,10 +10,11 @@ import ContainerLayout from '../../../../layout/components/ContainerLayout';
 import { useDeleteUserMutation, useUserListQuery } from '../api/userEndpoints';
 import CreateUser from '../components/CreateUser';
 import UpdateUser from '../components/UpdateUser';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const UserList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('USER');
   const { query } = useQueryParams({});
-
   const dispatch = useAppDispatch();
   const { data, isLoading, isFetching } = useUserListQuery(query);
   const [deleteItem, { isLoading: isDeleting }] = useDeleteUserMutation();
@@ -31,6 +32,7 @@ const UserList = () => {
         )
       }
       title='User List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -55,6 +57,7 @@ const UserList = () => {
             render: (_, record) => (
               <Space>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -68,6 +71,7 @@ const UserList = () => {
                 />
 
                 <DeleteButton
+                  can_delete={can_delete}
                   onClick={() => deleteItem(record._id)}
                   loading={isDeleting}
                 />

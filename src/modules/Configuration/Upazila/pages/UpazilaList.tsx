@@ -14,8 +14,10 @@ import {
 } from '../api/upazilaEndpoints';
 import CreateUpazila from '../components/CreateUpazila';
 import UpdateUpazila from '../components/UpdateUpazila';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const UpazilaList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('UPAZILA');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetUpazilaListQuery(query);
@@ -34,6 +36,7 @@ const UpazilaList = () => {
         )
       }
       title='Upazila List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -58,6 +61,7 @@ const UpazilaList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -70,6 +74,7 @@ const UpazilaList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

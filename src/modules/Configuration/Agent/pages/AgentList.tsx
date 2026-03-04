@@ -16,8 +16,10 @@ import CreateAgent from '../components/CreateAgent';
 import UpdateAgent from '../components/UpdateAgent';
 import ViewAgent from '../components/ViewAgent';
 import ViewButton from '../../../../common/Button/ViewButton';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const AgentList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('AGENT');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetAgentListQuery(query);
@@ -36,6 +38,7 @@ const AgentList = () => {
         )
       }
       title='Agent List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -73,6 +76,7 @@ const AgentList = () => {
                   }
                 />
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -85,6 +89,7 @@ const AgentList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

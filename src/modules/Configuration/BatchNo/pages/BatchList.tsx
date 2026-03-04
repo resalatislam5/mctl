@@ -13,8 +13,10 @@ import {
 import CreateBatch from '../components/CreateBatch';
 import UpdateBatch from '../components/UpdateBatch';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const BatchList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('BATCH');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetBatchListQuery(query);
@@ -33,6 +35,7 @@ const BatchList = () => {
         )
       }
       title='Batch List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -56,6 +59,7 @@ const BatchList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -68,6 +72,7 @@ const BatchList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

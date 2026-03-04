@@ -51,7 +51,7 @@ const roleEndpoints = api.injectEndpoints({
     }),
     deleteRole: build.mutation<Response<string>, string>({
       query: (_id) => ({
-        url: `config/role/${_id}`,
+        url: `config/rol/${_id}`,
         method: 'DELETE',
       }),
       invalidatesTags: () => [CREATE_TAG('ROLE')],

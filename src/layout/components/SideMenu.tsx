@@ -7,6 +7,8 @@ import { useBreakpoint } from '../../common/utils/constant';
 import type { INavItem } from '../types/layoutTypes';
 import { navItems, renderItems } from '../utils/navItems';
 import HeaderTime from './HeaderTime';
+import { useAppDispatch } from '../../app/hooks/hooks';
+import { addUser } from '../../app/features/authSlice';
 
 interface Props extends SliderProps {
   handleCollapse: (value: boolean) => void;
@@ -46,8 +48,10 @@ const SideMenu = ({
   const onOpenChange = useCallback((keys: string[]) => setOpenKeys(keys), []);
   const { data } = useCheckPermissionQuery();
 
+  const dispatch = useAppDispatch();
   const menuItems = useMemo(() => {
     if (!data?.data?.permissions) return [];
+    dispatch(addUser({ user: data?.data }));
 
     return navItems
       .map((item) => {
@@ -66,7 +70,7 @@ const SideMenu = ({
       })
       .filter((item): item is INavItem => item !== null)
       .map(renderItems);
-  }, [data?.data?.permissions]);
+  }, [data?.data, dispatch]);
 
   useEffect(() => {
     const matchingKeys: string[] = navItems

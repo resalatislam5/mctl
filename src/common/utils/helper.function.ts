@@ -15,3 +15,8 @@ export const dateAndTimeFormat = (
 
   return dayjs(date).format(format);
 };
+
+export const capitalizeFirstLetter = (value: string) => {
+  if (!value) return '';
+  return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+};

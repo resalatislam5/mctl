@@ -14,8 +14,10 @@ import {
 } from '../api/divisionEndpoints';
 import CreateDivision from '../components/CreateDivision';
 import UpdateDivision from '../components/UpdateDivision';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const DivisionList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('DIVISION');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetDivisionListQuery(query);
@@ -34,6 +36,7 @@ const DivisionList = () => {
         )
       }
       title='Division List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -58,6 +61,7 @@ const DivisionList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -70,6 +74,7 @@ const DivisionList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

@@ -13,8 +13,10 @@ import {
 import CreateCourse from '../components/CreateCourse';
 import UpdateCourse from '../components/UpdateCourse';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const CourseList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('COURSE');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetCourseListQuery(query);
@@ -33,6 +35,7 @@ const CourseList = () => {
         )
       }
       title='Course List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -57,6 +60,7 @@ const CourseList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -69,6 +73,7 @@ const CourseList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

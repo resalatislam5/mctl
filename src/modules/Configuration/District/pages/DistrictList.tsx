@@ -14,8 +14,11 @@ import {
 } from '../api/districtEndpoints';
 import CreateDistrict from '../components/CreateDistrict';
 import UpdateDistrict from '../components/UpdateDistrict';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const DistrictList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('DISTRICT');
+
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetDistrictListQuery(query);
@@ -34,6 +37,7 @@ const DistrictList = () => {
         )
       }
       title='District List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data}
@@ -58,6 +62,7 @@ const DistrictList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -70,6 +75,7 @@ const DistrictList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
                 />

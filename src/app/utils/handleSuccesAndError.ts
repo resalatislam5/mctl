@@ -3,7 +3,7 @@ import {
   isRejectedWithValue,
   type Middleware,
 } from '@reduxjs/toolkit';
-import { message } from 'antd';
+import { notify } from '../../common/utils/notify';
 import { closeModal } from '../features/modalSlice';
 
 type RtkQueryMetaArg = {
@@ -24,7 +24,7 @@ export const handleSuccessAndError: Middleware =
         payload?.message || meta?.endpointName + ' success';
 
       if (meta?.type === 'mutation') {
-        message.success(successMessage);
+        notify('success', successMessage);
         store.dispatch(closeModal());
       }
     }
@@ -38,7 +38,7 @@ export const handleSuccessAndError: Middleware =
       const errorMessage = payload?.data?.message || 'Something went wrong';
       console.log(payload);
 
-      message.error(errorMessage);
+      notify('error', errorMessage);
     }
 
     return next(action);

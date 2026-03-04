@@ -8,6 +8,7 @@ import { getStatusTag } from '../../../../common/utils/status';
 import DeleteButton from '../../../../common/Button/DeleteButton';
 import EditButton from '../../../../common/Button/EditButton';
 import ViewButton from '../../../../common/Button/ViewButton';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import ContainerLayout from '../../../../layout/components/ContainerLayout';
 import {
   useDeleteRoleMutation,
@@ -16,9 +17,10 @@ import {
 import CreateRole from '../components/CreateRole';
 import UpdateRole from '../components/UpdateRole';
 import ViewRole from '../components/ViewRole';
-import { useQueryParams } from '../../../../common/hooks/useQueryParams';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const RoleList = () => {
+  const { can_create, can_delete, can_update } = useCheckPermission('ROLE');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetRoleListQuery(query);
@@ -37,6 +39,7 @@ const RoleList = () => {
         )
       }
       title='Role List'
+      options={{ showButton: can_create }}
     >
       <AntTable
         dataSource={data?.data || []}
@@ -82,6 +85,7 @@ const RoleList = () => {
                   }
                 />
                 <EditButton
+                  can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
@@ -94,6 +98,7 @@ const RoleList = () => {
                   }
                 />
                 <DeleteButton
+                  can_delete={can_delete}
                   onClick={() => deleteItem(record._id)}
                   loading={isDeleting}
                 />

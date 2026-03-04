@@ -1,20 +1,16 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { ICheckPermission } from '../../auth/types/authTypes';
 
 type InitialStateType = {
-  token: string | null;
-  user: {
-    name: string | null;
-    email: string | null;
-    role_id: string | null;
-  };
+  user?: ICheckPermission;
 };
 
 const initialState: InitialStateType = {
-  token: null,
   user: {
-    name: null,
-    email: null,
-    role_id: null,
+    _id: '',
+    name: '',
+    email: '',
+    permissions: [],
   },
 };
 const authSlice = createSlice({
@@ -22,12 +18,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action: PayloadAction<InitialStateType>) => {
-      state.token = action.payload.token;
       state.user = action.payload.user;
     },
 
     logOut: (state) => {
-      state.token = initialState.token;
       state.user = initialState.user;
       localStorage.removeItem('mctl_token');
     },
