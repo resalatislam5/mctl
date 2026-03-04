@@ -3,21 +3,20 @@ import { openModal } from '../../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../../app/hooks/hooks';
 import DeleteButton from '../../../../common/Button/DeleteButton';
 import EditButton from '../../../../common/Button/EditButton';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import AntTable from '../../../../common/Table/AntTable';
 import { getStatusTag } from '../../../../common/utils/status';
 import ContainerLayout from '../../../../layout/components/ContainerLayout';
-import { useDeleteRoleMutation } from '../../Role/api/roleEndpoints';
-import { useUserListQuery } from '../api/userEndpoints';
+import { useDeleteUserMutation, useUserListQuery } from '../api/userEndpoints';
 import CreateUser from '../components/CreateUser';
 import UpdateUser from '../components/UpdateUser';
-import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 
 const UserList = () => {
   const { query } = useQueryParams({});
 
   const dispatch = useAppDispatch();
   const { data, isLoading, isFetching } = useUserListQuery(query);
-  const [deleteItem, { isLoading: isDeleting }] = useDeleteRoleMutation();
+  const [deleteItem, { isLoading: isDeleting }] = useDeleteUserMutation();
 
   return (
     <ContainerLayout

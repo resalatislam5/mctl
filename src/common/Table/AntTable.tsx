@@ -1,5 +1,7 @@
 import { Empty, Table, Typography, type TableProps } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
+import { useAppDispatch, useAppSelector } from '../../app/hooks/hooks';
+import { setQuery } from '../../app/features/filterSlice';
 
 interface Props<T> extends Omit<
   TableProps<T>,
@@ -26,6 +28,21 @@ const AntTable = <T extends object>({
   showSL = true,
   ...rest
 }: Props<T>) => {
+  const { limit, skip } = useAppSelector((state) => state.filter);
+
+  const dispatch = useAppDispatch();
+
+  const onChange = (pagination: TablePaginationConfig) => {
+    const current = pagination.current ?? 1;
+    const pageSize = pagination.pageSize ?? 100;
+
+    dispatch(
+      setQuery({
+        limit: pageSize,
+        skip: (current - 1) * pageSize,
+      }),
+    );
+  };
   return (
     <Table<T>
       bordered
@@ -37,7 +54,8 @@ const AntTable = <T extends object>({
           ? [
               {
                 title: 'SL.',
-                render: (_: string, __: object, index: number) => index + 1,
+                render: (_: string, __: object, index: number) =>
+                  skip + index + 1,
                 width: 60, // optional
               },
             ]
@@ -57,6 +75,12 @@ const AntTable = <T extends object>({
           : undefined
       }
       locale={{ emptyText: <Empty description='No Data' /> }}
+      pagination={{
+        current: Math.floor(skip / limit) + 1,
+        pageSize: limit,
+        total: total,
+      }}
+      onChange={onChange}
       {...rest}
     />
   );

@@ -3,7 +3,7 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 interface FilterState {
   limit: number;
   skip: number;
-  search: string;
+  search?: string;
 }
 
 const initialState: FilterState = {
@@ -20,7 +20,7 @@ const filterSlice = createSlice({
     setQuery(state, action: PayloadAction<FilterState>) {
       state.limit = action.payload.limit;
       state.skip = action.payload.skip;
-      state.search = action.payload.search;
+      state.search = action?.payload?.search;
     },
   },
 });
