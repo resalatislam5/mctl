@@ -36,7 +36,6 @@ export const handleSuccessAndError: Middleware =
       };
 
       const errorMessage = payload?.data?.message || 'Something went wrong';
-      console.log(payload);
 
       notify('error', errorMessage);
     }
