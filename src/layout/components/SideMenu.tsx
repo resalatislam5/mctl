@@ -1,8 +1,10 @@
 import { Divider, Image, Layout, Menu, theme, Typography } from 'antd';
 import type { SliderProps } from 'antd/es/slider';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
+import { useCheckPermissionQuery } from '../../auth/api/authEndpoint';
 import { useBreakpoint } from '../../common/utils/constant';
+import type { INavItem } from '../types/layoutTypes';
 import { navItems, renderItems } from '../utils/navItems';
 import HeaderTime from './HeaderTime';
 
@@ -42,10 +44,29 @@ const SideMenu = ({
   const screens = useBreakpoint();
 
   const onOpenChange = useCallback((keys: string[]) => setOpenKeys(keys), []);
+  const { data } = useCheckPermissionQuery();
 
-  const filteredMenuItems = () => {
-    return navItems;
-  };
+  const menuItems = useMemo(() => {
+    if (!data?.data?.permissions) return [];
+
+    return navItems
+      .map((item) => {
+        if (item.children) {
+          const children = item.children.filter((child) =>
+            data?.data?.permissions.some((p) => p.name === child.name),
+          );
+
+          if (children.length) return { ...item, children };
+          return null;
+        }
+
+        return data?.data?.permissions.some((p) => p.name === item.name)
+          ? item
+          : null;
+      })
+      .filter((item): item is INavItem => item !== null)
+      .map(renderItems);
+  }, [data?.data?.permissions]);
 
   useEffect(() => {
     const matchingKeys: string[] = navItems
@@ -114,7 +135,7 @@ const SideMenu = ({
         selectedKeys={[normalizePath(location.pathname)]}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
-        items={[...filteredMenuItems()].map(renderItems)}
+        items={menuItems}
         style={{ height: '100%', borderRight: 0 }}
       />
     </Sider>

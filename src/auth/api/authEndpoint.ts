@@ -1,6 +1,10 @@
 import { api } from '../../app/api/api';
 import type { Response } from '../../common/types/common.type';
-import type { LoginResponseType, LoginTypes } from '../types/authTypes';
+import {
+  type ICheckPermission,
+  type LoginResponseType,
+  type LoginTypes,
+} from '../types/authTypes';
 
 export const authEndpoint = api.injectEndpoints({
   endpoints: (build) => ({
@@ -11,8 +15,8 @@ export const authEndpoint = api.injectEndpoints({
         body,
       }),
     }),
-    checkPermission: build.query({
-      query: () => '/check-permission',
+    checkPermission: build.query<Response<ICheckPermission>, void>({
+      query: () => '/check',
     }),
   }),
 });
