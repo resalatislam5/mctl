@@ -1,4 +1,4 @@
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 
 /**
  * Format date & time using dayjs
@@ -19,4 +19,11 @@ export const dateAndTimeFormat = (
 export const capitalizeFirstLetter = (value: string) => {
   if (!value) return '';
   return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+};
+
+export const dateForPost = (
+  date: string | number | Date | undefined | Dayjs | null,
+): string => {
+  if (!date) return '';
+  return dayjs(date).format('YYYY-MM-DD');
 };

@@ -1,43 +1,45 @@
 import { useMemo } from 'react';
 import { useSearchParams } from 'react-router';
-import { cleanQuery } from '../utils/cleanQuery';
 import { useAppSelector } from '../../app/hooks/hooks';
+import { cleanQuery } from '../utils/cleanQuery';
 
 type QueryParams = Record<string, any>;
 
-export const useQueryParams = (params?: QueryParams) => {
+export const useQueryParams = <T extends QueryParams = QueryParams>() => {
   const [searchParams, setSearchParams] = useSearchParams();
   const filterValue = useAppSelector((store) => store.filter);
-  /* ---------------- MERGE DEFAULT + PASS PARAMS ---------------- */
-  const mergedParams = useMemo(() => {
-    return cleanQuery({
-      ...filterValue,
-      ...params,
-    });
-  }, [params, filterValue]);
 
-  /* ---------------- UPDATE URL ---------------- */
-  const setQuery = (newParams: QueryParams) => {
-    const updated = cleanQuery({
-      ...mergedParams,
-      ...newParams,
-    });
+  const setQuery = (newParams: Partial<T>) => {
+    setSearchParams((prev) => {
+      const prevObj: Record<string, string> = {};
+      prev.forEach((value, key) => {
+        prevObj[key] = value;
+      });
 
-    setSearchParams(updated);
+      const updated = cleanQuery({
+        ...prevObj,
+        ...newParams,
+      });
+
+      return updated;
+    });
   };
 
   /* ---------------- GET QUERY DATA ---------------- */
   const queryObject = useMemo(() => {
-    const obj: QueryParams = {};
+    const obj: Partial<T> = {};
 
+    // searchParams.forEach((value, key) => {
+    //   obj[key] = value;
+    // });
     searchParams.forEach((value, key) => {
-      obj[key] = value;
+      (obj as any)[key] = value;
     });
 
     return {
       ...filterValue,
       ...obj,
-    };
+    } as unknown as T;
   }, [searchParams, filterValue]);
 
   return {

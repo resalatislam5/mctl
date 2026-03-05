@@ -14,7 +14,7 @@ import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 
 const UserList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('USER');
-  const { query } = useQueryParams({});
+  const { query } = useQueryParams();
   const dispatch = useAppDispatch();
   const { data, isLoading, isFetching } = useUserListQuery(query);
   const [deleteItem, { isLoading: isDeleting }] = useDeleteUserMutation();

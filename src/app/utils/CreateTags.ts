@@ -11,6 +11,7 @@ export const tags = [
   'BATCH',
   'COURSE',
   'AGENT',
+  'AUDIT_LOG',
 ] as const;
 
 type tagTypes = (typeof tags)[number];

@@ -75,6 +75,21 @@ export const navItems: INavItem[] = [
     ],
   },
   {
+    key: '/report',
+    to: '/report',
+    label: 'Report',
+    icon: 'oui:nav-administration',
+    children: [
+      {
+        key: '/report/audit-log',
+        to: '/report/audit-log',
+        label: 'Audit Log',
+        icon: 'ic:twotone-list',
+        name: 'ROLE',
+      },
+    ],
+  },
+  {
     key: '/administration',
     to: '/administration',
     label: 'Administration',

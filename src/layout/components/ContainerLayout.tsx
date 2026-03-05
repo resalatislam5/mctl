@@ -47,7 +47,7 @@ const ContainerLayout = ({
         style={{ margin: '24px 16px 0px 24px' }}
         wrap
       >
-        <Typography.Title style={{ margin: 0 }} level={1}>
+        <Typography.Title style={{ margin: 0 }} level={2}>
           {title}
         </Typography.Title>
         <DynamicBreadcrumb />
@@ -65,14 +65,14 @@ const ContainerLayout = ({
         {/* <h1>{title}</h1> */}
 
         <Row align={'middle'} gutter={[12, 12]}>
-          <Col>
-            {showButton && (
+          {showButton && (
+            <Col>
               <Button onClick={onClick} type='primary' size='middle'>
                 <Iconify icon='ic:baseline-plus' />
                 {buttonText}
               </Button>
-            )}
-          </Col>
+            </Col>
+          )}
 
           {showSearch && (
             <Col xs={24} sm={8} lg={6}>

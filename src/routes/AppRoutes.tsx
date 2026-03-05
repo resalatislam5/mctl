@@ -7,6 +7,7 @@ import CourseList from '../modules/Configuration/Course/pages/CourseList';
 import DistrictList from '../modules/Configuration/District/pages/DistrictList';
 import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
+import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
 
 export const AppRoutes = [
   {
@@ -57,6 +58,11 @@ export const AppRoutes = [
   {
     path: '/configuration/agent',
     element: <AgentList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/report/audit-log',
+    element: <AuditLogReport />,
     name: 'DASHBOARD',
   },
 ];

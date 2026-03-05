@@ -80,3 +80,26 @@ html.light .modal-container {
 .custom-scroll .ant-table-body::-webkit-scrollbar-track {
   background: transparent; /* hide track */
 }
+
+@media print {
+  @page {
+    margin: 30px;
+  }
+  .ant-table thead {
+    display: table-header-group;
+  }
+
+  .ant-table tbody {
+    display: table-row-group;
+  }
+
+  .ant-table tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  .ant-table-body {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+}

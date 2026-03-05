@@ -64,7 +64,7 @@ const AntTable = <T extends object>({
       ]}
       dataSource={dataSource}
       scroll={{ x: 'max-content', y: 600 }}
-      className='custom-scroll'
+      className='custom-scroll print-table'
       title={
         showTotal
           ? () => (

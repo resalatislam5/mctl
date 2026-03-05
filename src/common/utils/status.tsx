@@ -35,6 +35,9 @@ const STATUS_COLOR = {
   INACTIVE: 'red',
   TRUE: 'blue',
   FALSE: 'orange',
+  CREATE: 'green',
+  UPDATE: 'orange',
+  DELETE: 'red',
 } as const;
 
 import { Tag } from 'antd';
