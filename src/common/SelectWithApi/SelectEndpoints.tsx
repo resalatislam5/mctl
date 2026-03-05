@@ -3,6 +3,7 @@ import { CREATE_TAG } from '../../app/utils/CreateTags';
 import type { Response } from '../types/common.type';
 import type {
   ICountrySelect,
+  ICourseSelect,
   IDistrictSelect,
   IDivisionSelect,
   IRoleSelect,
@@ -49,6 +50,13 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('DISTRICT')],
     }),
+    getCourseSelect: build.query<Response<ICourseSelect[]>, object>({
+      query: (params) => ({
+        url: '/config/course/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('COURSE')],
+    }),
   }),
 });
 
@@ -58,4 +66,5 @@ export const {
   useGetCountrySelectQuery,
   useGetDistrictSelectQuery,
   useGetDivisionSelectQuery,
+  useGetCourseSelectQuery,
 } = selectEndpoints;

@@ -4,7 +4,7 @@ type ModalStateType = {
   open: boolean;
   title: string;
   content: React.ReactNode;
-  width?: 500 | 600 | 800 | 1000;
+  width?: 500 | 600 | 700 | 800 | 1000;
 };
 
 const initialState: ModalStateType = {

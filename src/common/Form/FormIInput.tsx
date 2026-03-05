@@ -25,6 +25,7 @@ type Props = {
   size?: 'small' | 'middle' | 'large';
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   allowClear?: boolean;
+  readOnly?: boolean;
 } & FormItemProps;
 
 export const FormInputEmail = ({
@@ -183,6 +184,7 @@ export const FormInputNumber = ({
   onChange,
   value,
   allowClear = true,
+  readOnly,
   ...rest
 }: Props & { value?: string | null }) => {
   return (
@@ -206,6 +208,7 @@ export const FormInputNumber = ({
           onChange={onChange}
           value={value || ''}
           allowClear={allowClear}
+          readOnly={readOnly}
         />
       </Form.Item>
     </Col>

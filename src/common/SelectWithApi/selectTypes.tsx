@@ -22,3 +22,8 @@ export type IDivisionSelect = {
   name: string;
   code: string;
 };
+export type ICourseSelect = {
+  _id: string;
+  name: string;
+  price: number;
+};

@@ -66,6 +66,13 @@ export const navItems: INavItem[] = [
         name: 'COURSE',
       },
       {
+        key: '/configuration/package',
+        to: '/configuration/package',
+        label: 'Package List',
+        icon: 'ic:twotone-list',
+        name: 'COURSE',
+      },
+      {
         key: '/configuration/agent',
         to: '/configuration/agent',
         label: 'Agent List',

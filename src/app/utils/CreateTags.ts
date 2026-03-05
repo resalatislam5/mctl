@@ -12,6 +12,7 @@ export const tags = [
   'COURSE',
   'AGENT',
   'AUDIT_LOG',
+  'PACKAGE',
 ] as const;
 
 type tagTypes = (typeof tags)[number];
