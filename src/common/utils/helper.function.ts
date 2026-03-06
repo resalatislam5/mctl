@@ -8,7 +8,7 @@ import dayjs, { Dayjs } from 'dayjs';
  */
 
 export const dateAndTimeFormat = (
-  date: string | number | Date,
+  date: string | number | Date | undefined,
   format: 'DD MMM YYYY, hh:mm A' | 'DD MMM YYYY' | 'DD-MM-YYYY' = 'DD-MM-YYYY',
 ): string => {
   if (!date) return '';

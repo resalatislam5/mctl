@@ -11,8 +11,8 @@ export const navItems: INavItem[] = [
     name: 'DASHBOARD',
   },
   {
-    key: '/students',
-    to: '/students',
+    key: '/student',
+    to: '/student',
     label: 'Student List',
     icon: 'ph:student-fill',
     name: 'STUDENT',
@@ -85,7 +85,7 @@ export const navItems: INavItem[] = [
     key: '/report',
     to: '/report',
     label: 'Report',
-    icon: 'oui:nav-administration',
+    icon: 'carbon:report',
     children: [
       {
         key: '/report/audit-log',

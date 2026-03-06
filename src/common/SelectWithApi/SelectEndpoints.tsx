@@ -7,6 +7,7 @@ import type {
   IDistrictSelect,
   IDivisionSelect,
   IRoleSelect,
+  IUpazilaSelect,
   IUserSelect,
 } from './selectTypes';
 
@@ -50,6 +51,16 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('DISTRICT')],
     }),
+    getUpazilaSelect: build.query<
+      Response<IUpazilaSelect[]>,
+      { district_id?: string }
+    >({
+      query: (params) => ({
+        url: '/config/upazila/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('UPAZILA')],
+    }),
     getCourseSelect: build.query<Response<ICourseSelect[]>, object>({
       query: (params) => ({
         url: '/config/course/select',
@@ -67,4 +78,5 @@ export const {
   useGetDistrictSelectQuery,
   useGetDivisionSelectQuery,
   useGetCourseSelectQuery,
+  useGetUpazilaSelectQuery,
 } = selectEndpoints;

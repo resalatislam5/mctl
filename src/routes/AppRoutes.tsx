@@ -9,11 +9,12 @@ import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
+import StudentList from '../modules/Student/pages/StudentList';
 
 export const AppRoutes = [
   {
-    path: '/students',
-    element: <div>Dashboard</div>,
+    path: '/student',
+    element: <StudentList />,
     name: 'DASHBOARD',
   },
   {

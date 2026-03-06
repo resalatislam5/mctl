@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // utils/sanitizeFormData.ts
 import dayjs, { Dayjs } from 'dayjs';
 
@@ -89,7 +88,7 @@ const pushFile = (fd: FormData, key: string, file: File | Blob) => {
 /* ----------------------------------------------------
  *  Main helper
  * -------------------------------------------------- */
-export const sanitizeFormData_V2 = <T extends Record<string, any>>(
+export const sanitizeFormData = <T extends Record<string, any>>(
   values: T,
   options: SanitizeOptions<T> = {},
 ): FormData => {
