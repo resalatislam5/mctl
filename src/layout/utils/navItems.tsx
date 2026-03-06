@@ -70,7 +70,7 @@ export const navItems: INavItem[] = [
         to: '/configuration/package',
         label: 'Package List',
         icon: 'ic:twotone-list',
-        name: 'COURSE',
+        name: 'PACKAGE',
       },
       {
         key: '/configuration/agent',
@@ -92,7 +92,7 @@ export const navItems: INavItem[] = [
         to: '/report/audit-log',
         label: 'Audit Log',
         icon: 'ic:twotone-list',
-        name: 'ROLE',
+        name: 'AUDIT',
       },
     ],
   },

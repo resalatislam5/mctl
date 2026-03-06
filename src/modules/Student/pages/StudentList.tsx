@@ -19,8 +19,7 @@ import UpdateStudent from '../components/UpdateStudent';
 import ViewStudent from '../components/ViewStudent';
 
 const StudentList = () => {
-  const { can_create, can_delete, can_update } =
-    useCheckPermission('DASHBOARD');
+  const { can_create, can_delete, can_update } = useCheckPermission('STUDENT');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetStudentListQuery(query);

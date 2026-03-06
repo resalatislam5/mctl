@@ -11,7 +11,9 @@ export type permissionTags =
   | 'UPAZILA'
   | 'BATCH'
   | 'COURSE'
-  | 'AGENT';
+  | 'AGENT'
+  | 'AUDIT'
+  | 'PACKAGE';
 
 const DEFAULT_PERMISSION = {
   can_read: false,

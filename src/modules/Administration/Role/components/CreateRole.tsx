@@ -12,17 +12,15 @@ const CreateRole = () => {
     const { permissions, ...rest } = values;
     const body = sanitizeObjectValue({
       ...rest,
-      permissions: permissions?.map((item) => {
-        return item?.selected
-          ? {
-              module_id: item.module_id,
-              can_create: item.can_create || false,
-              can_read: item.can_read || false,
-              can_update: item.can_update || false,
-              can_delete: item.can_delete || false,
-            }
-          : undefined;
-      }),
+      permissions: permissions
+        ?.filter((item) => item?.selected && item?.module_id)
+        .map((item) => ({
+          module_id: item?.module_id || '',
+          can_create: item?.can_create || false,
+          can_read: item?.can_read || false,
+          can_update: item?.can_update || false,
+          can_delete: item?.can_delete || false,
+        })),
     });
 
     createRole(body)

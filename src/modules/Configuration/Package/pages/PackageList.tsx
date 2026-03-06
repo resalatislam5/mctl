@@ -18,8 +18,7 @@ import ViewButton from '../../../../common/Button/ViewButton';
 import ViewPackage from '../components/ViewPackage';
 
 const PackageList = () => {
-  const { can_create, can_delete, can_update } =
-    useCheckPermission('DASHBOARD');
+  const { can_create, can_delete, can_update } = useCheckPermission('PACKAGE');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetPackageListQuery(query);
