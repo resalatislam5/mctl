@@ -44,6 +44,7 @@ export interface IViewEnrollment {
   course_ids: string[];
   course_mode: string;
   course_type: string;
+  package_id: string;
   total_amount: string;
   total_price: string;
   total_paid: string;

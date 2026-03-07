@@ -95,7 +95,6 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
             { label: 'OTHER', value: 'OTHER' },
           ]}
         />
-        <FormImageUpload_V1 maxCount={1} name={'image'} label={'Photo'} />
         {editMode && (
           <FormInputSelect
             name={'status'}
@@ -107,6 +106,7 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
             ]}
           />
         )}
+        <FormImageUpload_V1 maxCount={1} name={'image'} label={'Photo'} />
       </Row>
       <FromSubmit text={editMode ? 'Update' : 'Create'} loading={loading} />
     </Form>
