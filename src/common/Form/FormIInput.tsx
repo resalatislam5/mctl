@@ -18,7 +18,7 @@ import { useState, type ChangeEvent } from 'react';
 
 type Props = {
   label: string;
-  name: string;
+  name: string | (string | number)[];
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
@@ -146,8 +146,9 @@ export const FormInputText = ({
   onChange,
   value,
   allowClear = true,
+  noStyleLabel,
   ...rest
-}: Props & { value?: string | null }) => {
+}: Props & { value?: string | null; noStyleLabel?: string }) => {
   return (
     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
       <Form.Item
@@ -155,7 +156,10 @@ export const FormInputText = ({
         label={label}
         layout={layout}
         rules={[
-          { required: required, message: `${label} is required` },
+          {
+            required: required,
+            message: `${noStyleLabel ? noStyleLabel : label} is required`,
+          },
 
           ...(rules || []),
         ]}
@@ -191,10 +195,11 @@ export const FormInputDate = ({
   rules,
   size = 'middle',
   // onChange,
+  noStyleLabel,
   value,
   allowClear = true,
   ...rest
-}: Props & { value?: string | null }) => {
+}: Props & { value?: string | null; noStyleLabel?: string }) => {
   return (
     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
       <Form.Item
@@ -202,7 +207,10 @@ export const FormInputDate = ({
         label={label}
         layout={layout}
         rules={[
-          { required: required, message: `${label} is required` },
+          {
+            required: required,
+            message: `${noStyleLabel ? noStyleLabel : label} is required`,
+          },
 
           ...(rules || []),
         ]}

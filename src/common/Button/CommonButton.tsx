@@ -3,15 +3,15 @@ import Iconify from '../Table/Iconify';
 
 interface Props extends ButtonProps {
   text?: string;
-
+  type?: ButtonProps['type'];
   icon?: string;
 }
-const CommonButton = ({ icon, text, ...rest }: Props) => {
+const CommonButton = ({ icon, text, type, ...rest }: Props) => {
   return (
     <Button
       icon={<Iconify icon={icon || ''} />}
       {...rest}
-      type='primary'
+      type={type ? type : 'primary'}
       size='middle'
     >
       {text}

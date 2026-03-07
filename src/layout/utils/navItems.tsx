@@ -18,6 +18,13 @@ export const navItems: INavItem[] = [
     name: 'STUDENT',
   },
   {
+    key: '/enrollment',
+    to: '/enrollment',
+    label: 'Enrollment List',
+    icon: 'fluent-mdl2:open-enrollment',
+    name: 'ENROLLMENT',
+  },
+  {
     key: '/configuration',
     to: '/configuration',
     label: 'Configuration',

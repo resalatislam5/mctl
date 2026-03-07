@@ -8,6 +8,8 @@ import DistrictList from '../modules/Configuration/District/pages/DistrictList';
 import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
+import ViewEnrollment from '../modules/Enrollment/components/ViewEnrollment';
+import EnrollmentList from '../modules/Enrollment/pages/EnrollmentList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
 import StudentList from '../modules/Student/pages/StudentList';
 
@@ -15,6 +17,16 @@ export const AppRoutes = [
   {
     path: '/student',
     element: <StudentList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/enrollment',
+    element: <EnrollmentList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/enrollment/:_id',
+    element: <ViewEnrollment />,
     name: 'DASHBOARD',
   },
   {

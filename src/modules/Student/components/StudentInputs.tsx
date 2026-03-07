@@ -100,7 +100,7 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           <FormInputSelect
             name={'status'}
             label={'Status'}
-            lg={24}
+            lg={8}
             options={[
               { label: 'ACTIVE', value: 'ACTIVE' },
               { label: 'INACTIVE', value: 'INACTIVE' },

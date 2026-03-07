@@ -2,11 +2,14 @@ import { api } from '../../app/api/api';
 import { CREATE_TAG } from '../../app/utils/CreateTags';
 import type { Response } from '../types/common.type';
 import type {
+  IBatchSelect,
   ICountrySelect,
   ICourseSelect,
   IDistrictSelect,
   IDivisionSelect,
+  IPackageSelect,
   IRoleSelect,
+  IStudentSelect,
   IUpazilaSelect,
   IUserSelect,
 } from './selectTypes';
@@ -68,6 +71,27 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('COURSE')],
     }),
+    getBatchSelect: build.query<Response<IBatchSelect[]>, object>({
+      query: (params) => ({
+        url: '/config/batch/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('BATCH')],
+    }),
+    getPackageSelect: build.query<Response<IPackageSelect[]>, object>({
+      query: (params) => ({
+        url: '/config/package/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('PACKAGE')],
+    }),
+    getStudentSelect: build.query<Response<IStudentSelect[]>, object>({
+      query: (params) => ({
+        url: '/student/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('STUDENT')],
+    }),
   }),
 });
 
@@ -79,4 +103,7 @@ export const {
   useGetDivisionSelectQuery,
   useGetCourseSelectQuery,
   useGetUpazilaSelectQuery,
+  useGetStudentSelectQuery,
+  useGetBatchSelectQuery,
+  useGetPackageSelectQuery,
 } = selectEndpoints;

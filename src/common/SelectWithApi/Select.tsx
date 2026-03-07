@@ -1,11 +1,14 @@
 import type { SelectProps } from 'antd';
 import { Col, Empty, Form, Select, Space, Spin, Typography } from 'antd';
 import {
+  useGetBatchSelectQuery,
   useGetCountrySelectQuery,
   useGetCourseSelectQuery,
   useGetDistrictSelectQuery,
   useGetDivisionSelectQuery,
+  useGetPackageSelectQuery,
   useGetRoleSelectQuery,
+  useGetStudentSelectQuery,
   useGetUpazilaSelectQuery,
   useGetUserSelectQuery,
 } from './SelectEndpoints';
@@ -402,6 +405,211 @@ export const SelectUpazila = ({
   option?: Record<string, string | boolean>;
 }) => {
   const { data, isLoading } = useGetUpazilaSelectQuery({ district_id }, option);
+
+  // If API returns empty array or undefined
+
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        rules={[{ required, message: `${label} is required` }]}
+        layout={layout}
+      >
+        <Select
+          placeholder={`Select ${label}`}
+          disabled={disabled || isLoading}
+          loading={isLoading}
+          size={size}
+          options={
+            data?.data?.length
+              ? data.data.map(({ name, code, _id }) => ({
+                  label: (
+                    <Space size='small' title={`${name}- ${code}`}>
+                      <Typography.Text style={{ fontSize: 14 }} strong>
+                        {name}
+                      </Typography.Text>
+
+                      <Typography.Text
+                        style={{ fontSize: 12 }}
+                        type='secondary'
+                      >
+                        - {code}
+                      </Typography.Text>
+                    </Space>
+                  ),
+                  value: _id,
+                  searchText: `${name}- ${code}`,
+                }))
+              : []
+          }
+          mode={mode}
+          allowClear
+          showSearch
+          filterOption={(input, option) =>
+            (option?.searchText ?? '')
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
+          onChange={onChange}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+export const SelectBatch = ({
+  label,
+  name,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  size = 'middle',
+  mode,
+
+  onChange,
+}: Props) => {
+  const { data, isLoading } = useGetBatchSelectQuery({});
+
+  // If API returns empty array or undefined
+
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        rules={[{ required, message: `${label} is required` }]}
+        layout={layout}
+      >
+        <Select
+          placeholder={`Select ${label}`}
+          disabled={disabled || isLoading}
+          loading={isLoading}
+          size={size}
+          options={
+            data?.data?.length
+              ? data.data.map(({ batch_no, _id }) => ({
+                  label: (
+                    <Space size='small' title={`${batch_no}`}>
+                      <Typography.Text style={{ fontSize: 14 }} strong>
+                        {batch_no}
+                      </Typography.Text>
+                    </Space>
+                  ),
+                  value: _id,
+                  searchText: `${batch_no}`,
+                }))
+              : []
+          }
+          mode={mode}
+          allowClear
+          showSearch
+          filterOption={(input, option) =>
+            (option?.searchText ?? '')
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
+          onChange={onChange}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+export const SelectPackage = ({
+  label,
+  name,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  size = 'middle',
+  mode,
+
+  onChange,
+}: Props) => {
+  const { data, isLoading } = useGetPackageSelectQuery({});
+
+  // If API returns empty array or undefined
+
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        rules={[{ required, message: `${label} is required` }]}
+        layout={layout}
+      >
+        <Select
+          placeholder={`Select ${label}`}
+          disabled={disabled || isLoading}
+          loading={isLoading}
+          size={size}
+          options={
+            data?.data?.length
+              ? data.data.map(({ name, net_price, _id }) => ({
+                  label: (
+                    <Space size='small' title={`${name} -${net_price}`}>
+                      <Typography.Text style={{ fontSize: 14 }} strong>
+                        {name}
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{ fontSize: 12 }}
+                        type='secondary'
+                      >
+                        - {net_price}
+                      </Typography.Text>
+                    </Space>
+                  ),
+                  value: _id,
+                  searchText: `${name} - ${net_price}`,
+                }))
+              : []
+          }
+          mode={mode}
+          allowClear
+          showSearch
+          filterOption={(input, option) =>
+            (option?.searchText ?? '')
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
+          onChange={onChange}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+export const SelectStudent = ({
+  label,
+  name,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  size = 'middle',
+  mode,
+
+  onChange,
+}: Props) => {
+  const { data, isLoading } = useGetStudentSelectQuery({});
 
   // If API returns empty array or undefined
 
