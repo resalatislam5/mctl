@@ -25,7 +25,7 @@ const UpdateEnrollment = ({ _id }: Props) => {
     code,
     course_mode,
     course_type,
-    courses,
+
     discount,
     installment_date,
     student_id,
@@ -55,7 +55,7 @@ const UpdateEnrollment = ({ _id }: Props) => {
         code,
         course_mode,
         course_type,
-        courses,
+
         discount,
         installment_date: installment_date?.map((item) => ({
           name: item.name,
@@ -77,7 +77,7 @@ const UpdateEnrollment = ({ _id }: Props) => {
     code,
     course_mode,
     course_type,
-    courses,
+
     discount,
     installment_date,
     student_id,

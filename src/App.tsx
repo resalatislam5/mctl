@@ -28,12 +28,11 @@ function App() {
             paddingMD: 10,
           },
           components: {
-            Table:
-              mode === 'light'
-                ? {
-                    headerBg: '#6ce7b3',
-                  }
-                : {},
+            Table: {
+              ...(mode === 'light' && {
+                headerBg: '#6ce7b3',
+              }),
+            },
           },
         }}
       >
