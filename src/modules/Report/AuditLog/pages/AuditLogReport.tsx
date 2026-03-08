@@ -1,5 +1,6 @@
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import AntTable from '../../../../common/Table/AntTable';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 import { getStatusTag } from '../../../../common/utils/status';
 import ReportContainer from '../../../../layout/components/ReportContainer';
 import { useAuditLogListQuery } from '../api/auditLogEndpoints';
@@ -19,6 +20,12 @@ const AuditLogReport = () => {
         total={data?.total}
         pagination={false}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'user_name', key: 'user_name', title: 'Name' },
           {
             dataIndex: 'action',

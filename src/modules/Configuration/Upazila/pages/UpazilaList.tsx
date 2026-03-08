@@ -15,6 +15,7 @@ import {
 import CreateUpazila from '../components/CreateUpazila';
 import UpdateUpazila from '../components/UpdateUpazila';
 import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const UpazilaList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('UPAZILA');
@@ -46,6 +47,12 @@ const UpazilaList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'code', key: 'code', title: 'Code' },
           {

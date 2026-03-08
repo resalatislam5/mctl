@@ -14,6 +14,7 @@ import CreateCountry from '../components/CreateCountry';
 import UpdateCountry from '../components/UpdateCountry';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const CountryList = () => {
   const { can_delete, can_create, can_update } = useCheckPermission('COUNTRY');
@@ -45,6 +46,12 @@ const CountryList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'code', key: 'code', title: 'Code' },
           {

@@ -17,6 +17,7 @@ import {
 import CreateStudent from '../components/CreateStudent';
 import UpdateStudent from '../components/UpdateStudent';
 import ViewStudent from '../components/ViewStudent';
+import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 
 const StudentList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('STUDENT');
@@ -48,6 +49,12 @@ const StudentList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'email', key: 'email', title: 'Email' },
           { dataIndex: 'code', key: 'code', title: 'Code' },

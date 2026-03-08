@@ -16,6 +16,7 @@ import CreatePackage from '../components/CreatePackage';
 import UpdatePackage from '../components/UpdatePackage';
 import ViewButton from '../../../../common/Button/ViewButton';
 import ViewPackage from '../components/ViewPackage';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const PackageList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('PACKAGE');
@@ -47,6 +48,12 @@ const PackageList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'price', key: 'price', title: 'Price' },
           {

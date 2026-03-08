@@ -17,6 +17,7 @@ import { getStatusTag } from '../../../common/utils/status';
 import ViewButton from '../../../common/Button/ViewButton';
 import EditButton from '../../../common/Button/EditButton';
 import DeleteButton from '../../../common/Button/DeleteButton';
+import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 
 const AccountList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('ACCOUNT');
@@ -48,6 +49,12 @@ const AccountList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           {
             dataIndex: 'account_type',
             key: 'account_type',

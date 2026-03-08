@@ -17,6 +17,7 @@ import UpdateAgent from '../components/UpdateAgent';
 import ViewAgent from '../components/ViewAgent';
 import ViewButton from '../../../../common/Button/ViewButton';
 import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const AgentList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('AGENT');
@@ -48,6 +49,12 @@ const AgentList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'email', key: 'email', title: 'Email' },
           { dataIndex: 'mobile_no', key: 'mobile_no', title: 'Mobile' },

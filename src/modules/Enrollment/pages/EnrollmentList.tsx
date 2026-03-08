@@ -15,6 +15,7 @@ import {
 } from '../api/enrollmentEndpoints';
 import CreateEnrollment from '../components/CreateEnrollment';
 import UpdateEnrollment from '../components/UpdateEnrollment';
+import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 
 const EnrollmentList = () => {
   const { can_create, can_delete, can_update } =
@@ -48,10 +49,17 @@ const EnrollmentList = () => {
         total={data?.total}
         columns={[
           {
+            dataIndex: 'admission_date',
+            key: 'admission_date',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
+          {
             dataIndex: 'student_name',
             key: 'student_name',
             title: 'Student Name',
           },
+
           { dataIndex: 'batch_no', key: 'batch_no', title: 'Batch No' },
           { dataIndex: 'code', key: 'code', title: 'Code' },
           {

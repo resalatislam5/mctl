@@ -14,6 +14,7 @@ import CreateBatch from '../components/CreateBatch';
 import UpdateBatch from '../components/UpdateBatch';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const BatchList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('BATCH');
@@ -45,6 +46,12 @@ const BatchList = () => {
         loading={isFetching || isLoading}
         total={data?.total}
         columns={[
+          {
+            dataIndex: 'createdAt',
+            key: 'createdAt',
+            title: 'Date',
+            render: (text) => dateAndTimeFormat(text),
+          },
           { dataIndex: 'batch_no', key: 'batch_no', title: 'Batch No' },
           {
             dataIndex: 'status',
