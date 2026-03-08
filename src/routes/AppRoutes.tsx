@@ -1,3 +1,4 @@
+import AccountList from '../modules/Account/pages/AccountList';
 import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
 import AgentList from '../modules/Configuration/Agent/pages/AgentList';
@@ -27,6 +28,11 @@ export const AppRoutes = [
   {
     path: '/enrollment/:_id',
     element: <ViewEnrollment />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/account/account',
+    element: <AccountList />,
     name: 'DASHBOARD',
   },
   {

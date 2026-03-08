@@ -188,6 +188,7 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           lg={8}
           name='installment_type'
           label={'Installment'}
+          required
           options={[
             { label: 'YES', value: 'YES' },
             { label: 'NO', value: 'NO' },

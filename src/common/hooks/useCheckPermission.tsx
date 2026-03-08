@@ -14,7 +14,8 @@ export type permissionTags =
   | 'AGENT'
   | 'AUDIT'
   | 'PACKAGE'
-  | 'ENROLLMENT';
+  | 'ENROLLMENT'
+  | 'ACCOUNT';
 
 const DEFAULT_PERMISSION = {
   can_read: false,

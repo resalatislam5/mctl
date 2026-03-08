@@ -25,6 +25,21 @@ export const navItems: INavItem[] = [
     name: 'ENROLLMENT',
   },
   {
+    key: '/account',
+    to: '/account',
+    label: 'Account',
+    icon: 'material-symbols:account-balance',
+    children: [
+      {
+        key: '/account/account',
+        to: '/account/account',
+        label: 'Account List',
+        icon: 'ic:twotone-list',
+        name: 'ACCOUNT',
+      },
+    ],
+  },
+  {
     key: '/configuration',
     to: '/configuration',
     label: 'Configuration',
