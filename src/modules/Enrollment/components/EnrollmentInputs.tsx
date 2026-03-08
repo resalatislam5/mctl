@@ -20,6 +20,7 @@ import {
   FormInputText,
 } from '../../../common/Form/FormIInput';
 import {
+  SelectAgent,
   SelectBatch,
   SelectCourse,
   SelectPackage,
@@ -44,6 +45,7 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
   const additional_discount = useWatch('additional_discount', form);
   const course_type = useWatch('course_type', form);
   const package_id = useWatch('package_id', form);
+  const installment_type = useWatch('installment_type', form);
 
   const { data: courseData } = useGetCourseListQuery(
     {},
@@ -96,9 +98,14 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
       layout='vertical'
       onFinish={onFinish}
       form={form}
-      initialValues={{ admission_date: dayjs(), course_type: 'SPECIFIC' }}
+      initialValues={{
+        admission_date: dayjs(),
+        course_type: 'SPECIFIC',
+        installment_type: 'YES',
+      }}
     >
       <Row gutter={[8, 8]}>
+        <SelectAgent lg={8} name={'agent_id'} label={'Agent'} />
         <SelectStudent lg={8} name={'student_id'} label={'Student'} required />
         <SelectBatch lg={8} name={'batch_id'} label={'Batch'} required />
         <FormInputDate
@@ -177,82 +184,95 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           required
           readOnly
         />
+        <FormInputSelect
+          lg={8}
+          name='installment_type'
+          label={'Installment'}
+          options={[
+            { label: 'YES', value: 'YES' },
+            { label: 'NO', value: 'NO' },
+          ]}
+        />
+        {installment_type === 'YES' && (
+          <Col span={24}>
+            <Form.List name='installment_date' initialValue={[{ name: '' }]}>
+              {(fields: FormListFieldData[], { add, remove }) => {
+                const columns = [
+                  {
+                    title: 'Installment Name',
+                    render: (_: string, field: FormListFieldData) => (
+                      <FormInputText
+                        name={[field.name, 'name']}
+                        style={{ margin: 0 }}
+                        label={''}
+                        noStyleLabel={'Name'}
+                        placeholder='Enter Installment Name'
+                        required
+                      />
+                    ),
+                  },
+                  {
+                    title: 'Installment Data',
+                    render: (_: string, field: FormListFieldData) => (
+                      <FormInputDate
+                        name={[field.name, 'date']}
+                        style={{ margin: 0 }}
+                        label={''}
+                        placeholder='Enter Installment Date'
+                        noStyleLabel={'Date'}
+                        required
+                      />
+                    ),
+                  },
+                  {
+                    title: 'Action',
+                    render: (_: any, field: FormListFieldData) => (
+                      <CommonButton
+                        disabled={fields.length === 1}
+                        onClick={() => remove(field.name)}
+                        danger
+                        size='small'
+                        type='dashed'
+                        icon='ic:baseline-minus'
+                      />
+                    ),
+                  },
+                ];
 
-        <Col span={24}>
-          <Form.List name='installment_date' initialValue={[{ name: '' }]}>
-            {(fields: FormListFieldData[], { add, remove }) => {
-              const columns = [
-                {
-                  title: 'Installment Name',
-                  render: (_: string, field: FormListFieldData) => (
-                    <FormInputText
-                      name={[field.name, 'name']}
-                      style={{ margin: 0 }}
-                      label={''}
-                      noStyleLabel={'Name'}
-                      placeholder='Enter Installment Name'
-                      required
+                return (
+                  <>
+                    <AntTable
+                      columns={columns}
+                      dataSource={fields}
+                      pagination={false}
+                      showTotal={false}
+                      rowKey='key'
+                      summary={() => (
+                        <Table.Summary.Row>
+                          <Table.Summary.Cell index={0} colSpan={4}>
+                            <Flex justify='end'>
+                              <CommonButton
+                                onClick={() => add()}
+                                icon={'ic:round-plus'}
+                                text='Add Date'
+                              />
+                            </Flex>
+                          </Table.Summary.Cell>
+                        </Table.Summary.Row>
+                      )}
                     />
-                  ),
-                },
-                {
-                  title: 'Installment Data',
-                  render: (_: string, field: FormListFieldData) => (
-                    <FormInputDate
-                      name={[field.name, 'date']}
-                      style={{ margin: 0 }}
-                      label={''}
-                      placeholder='Enter Installment Date'
-                      noStyleLabel={'Date'}
-                      required
-                    />
-                  ),
-                },
-                {
-                  title: 'Action',
-                  render: (_: any, field: FormListFieldData) => (
-                    <CommonButton
-                      disabled={fields.length === 1}
-                      onClick={() => remove(field.name)}
-                      danger
-                      size='small'
-                      type='dashed'
-                      icon='ic:baseline-minus'
-                    />
-                  ),
-                },
-              ];
-
-              return (
-                <>
-                  <AntTable
-                    columns={columns}
-                    dataSource={fields}
-                    pagination={false}
-                    showTotal={false}
-                    rowKey='key'
-                    summary={() => (
-                      <Table.Summary.Row>
-                        <Table.Summary.Cell index={0} colSpan={4}>
-                          <Flex justify='end'>
-                            <CommonButton
-                              onClick={() => add()}
-                              icon={'ic:round-plus'}
-                              style={{ marginTop: 16 }}
-                              text='Add Date'
-                            />
-                          </Flex>
-                        </Table.Summary.Cell>
-                      </Table.Summary.Row>
-                    )}
-                  />
-                </>
-              );
-            }}
-          </Form.List>
-        </Col>
+                  </>
+                );
+              }}
+            </Form.List>
+          </Col>
+        )}
       </Row>
-      <FromSubmit text={editMode ? 'Update' : 'Create'} loading={loading} />
+      <FromSubmit
+        text={editMode ? 'Update' : 'Create'}
+        loading={loading}
+        style={{ marginTop: 16 }}
+      />
     </Form>
   );
 };

@@ -56,6 +56,8 @@ export interface IViewEnrollment {
   course_names: string[];
   batch_no: string;
   package_id: string;
+  agent_id: string;
+  installment_type: string;
 }
 
 export interface InstallmentDate {
@@ -74,6 +76,10 @@ export interface StudentInfo {
   district_id: string;
   upazila_id: string;
   village: string;
+  country_name: string;
+  division_name: string;
+  district_name: string;
+  upazila_name: string;
   nationality: string;
   office_address: string;
   dob: Date;

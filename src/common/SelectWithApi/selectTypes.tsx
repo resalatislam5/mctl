@@ -46,3 +46,8 @@ export type IPackageSelect = {
   name: string;
   net_price: string;
 };
+export type IAgentSelect = {
+  _id: string;
+  name: string;
+  email: string;
+};

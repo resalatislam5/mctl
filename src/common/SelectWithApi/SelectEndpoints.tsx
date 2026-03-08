@@ -2,6 +2,7 @@ import { api } from '../../app/api/api';
 import { CREATE_TAG } from '../../app/utils/CreateTags';
 import type { Response } from '../types/common.type';
 import type {
+  IAgentSelect,
   IBatchSelect,
   ICountrySelect,
   ICourseSelect,
@@ -85,6 +86,13 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('PACKAGE')],
     }),
+    getAgentSelect: build.query<Response<IAgentSelect[]>, object>({
+      query: (params) => ({
+        url: '/config/agent/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('AGENT')],
+    }),
     getStudentSelect: build.query<Response<IStudentSelect[]>, object>({
       query: (params) => ({
         url: '/student/select',
@@ -106,4 +114,5 @@ export const {
   useGetStudentSelectQuery,
   useGetBatchSelectQuery,
   useGetPackageSelectQuery,
+  useGetAgentSelectQuery,
 } = selectEndpoints;

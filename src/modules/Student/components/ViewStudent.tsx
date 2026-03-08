@@ -34,7 +34,7 @@ const ViewStudent = ({ _id }: { _id: string }) => {
       <Descriptions
         bordered
         size='small'
-        column={{ xs: 1, sm: 1, md: 2, lg: 2 }}
+        column={{ xs: 1, sm: 1, md: 2, lg: 2, xl: 2, xxl: 2 }}
         items={[
           { key: 'name', label: 'Name', children: name },
           { key: 'email', label: 'Email', children: email },
