@@ -51,3 +51,13 @@ export type IAgentSelect = {
   name: string;
   email: string;
 };
+export type IEnrollmentSelect = {
+  _id: string;
+  code: string;
+  total_amount: string;
+  paid_amount: string;
+};
+export type IAccountSelect = {
+  _id: string;
+  name: string;
+};

@@ -2,12 +2,14 @@ import { api } from '../../app/api/api';
 import { CREATE_TAG } from '../../app/utils/CreateTags';
 import type { Response } from '../types/common.type';
 import type {
+  IAccountSelect,
   IAgentSelect,
   IBatchSelect,
   ICountrySelect,
   ICourseSelect,
   IDistrictSelect,
   IDivisionSelect,
+  IEnrollmentSelect,
   IPackageSelect,
   IRoleSelect,
   IStudentSelect,
@@ -100,6 +102,20 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('STUDENT')],
     }),
+    getEnrollmentSelect: build.query<Response<IEnrollmentSelect[]>, object>({
+      query: (params) => ({
+        url: '/enrollment/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('ENROLLMENT')],
+    }),
+    getAccountSelect: build.query<Response<IAccountSelect[]>, object>({
+      query: (params) => ({
+        url: '/account/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('ACCOUNT')],
+    }),
   }),
 });
 
@@ -115,4 +131,6 @@ export const {
   useGetBatchSelectQuery,
   useGetPackageSelectQuery,
   useGetAgentSelectQuery,
+  useGetEnrollmentSelectQuery,
+  useGetAccountSelectQuery,
 } = selectEndpoints;

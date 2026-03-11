@@ -25,6 +25,13 @@ export const navItems: INavItem[] = [
     name: 'ENROLLMENT',
   },
   {
+    key: '/money-receipt',
+    to: '/money-receipt',
+    label: 'Money Receipt List',
+    icon: 'streamline:receipt-remix',
+    name: 'MONEY_RECEIPT',
+  },
+  {
     key: '/account',
     to: '/account',
     label: 'Account',

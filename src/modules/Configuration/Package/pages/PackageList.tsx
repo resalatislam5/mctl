@@ -55,7 +55,7 @@ const PackageList = () => {
             render: (text) => dateAndTimeFormat(text),
           },
           { dataIndex: 'name', key: 'name', title: 'Name' },
-          { dataIndex: 'price', key: 'price', title: 'Price' },
+          { dataIndex: 'net_price', key: 'net_price', title: 'Price' },
           {
             dataIndex: 'status',
             key: 'status',

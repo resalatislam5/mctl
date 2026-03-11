@@ -11,6 +11,7 @@ import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
 import ViewEnrollment from '../modules/Enrollment/components/ViewEnrollment';
 import EnrollmentList from '../modules/Enrollment/pages/EnrollmentList';
+import MoneyReceiptList from '../modules/MoneyReceipt/pages/MoneyReceiptList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
 import StudentList from '../modules/Student/pages/StudentList';
 
@@ -23,6 +24,11 @@ export const AppRoutes = [
   {
     path: '/enrollment',
     element: <EnrollmentList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/money-receipt',
+    element: <MoneyReceiptList />,
     name: 'DASHBOARD',
   },
   {
