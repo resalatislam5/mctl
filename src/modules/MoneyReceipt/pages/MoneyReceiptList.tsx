@@ -30,7 +30,7 @@ const MoneyReceiptList = () => {
       onClick={() =>
         dispatch(
           openModal({
-            title: 'Create MoneyReceipt',
+            title: 'Create Money Receipt',
             content: <CreateMoneyReceipt />,
             open: true,
             width: 1000,
@@ -79,14 +79,14 @@ const MoneyReceiptList = () => {
             width: 200,
             render: (_text, record) => (
               <Space size='middle'>
-                <ViewButton path={`/MoneyReceipt/${record?._id}`} />
+                <ViewButton path={`/money-receipt/${record?._id}`} />
 
                 <EditButton
                   can_update={can_update}
                   onClick={() =>
                     dispatch(
                       openModal({
-                        title: 'Edit MoneyReceipt',
+                        title: 'Edit Money Receipt',
                         content: <UpdateMoneyReceipt _id={record._id} />,
                         open: true,
                         width: 1000,

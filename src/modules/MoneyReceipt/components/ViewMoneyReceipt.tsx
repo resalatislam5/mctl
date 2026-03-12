@@ -1,4 +1,4 @@
-import { Flex, Image, Tabs, Typography } from 'antd';
+import { Col, Flex, Image, Row, Tabs, Typography } from 'antd';
 import type React from 'react';
 import { useParams } from 'react-router';
 import Iconify from '../../../common/Table/Iconify';
@@ -47,7 +47,7 @@ const ViewMoneyReceipt = () => {
 
   return (
     <ContainerLayout
-      title='MoneyReceipt View'
+      title='Money Receipt View'
       options={{ showButton: false, showSearch: false }}
     >
       <>
@@ -74,19 +74,48 @@ td, th {
         items={[
           {
             key: '1',
-            label: 'MoneyReceipt From',
+            label: 'Money Receipt',
             children: (
               <A4PageContainer
                 content={
                   <>
-                    <Flex justify='space-between'>
-                      <Image src={logo} width={120} height={120} />
-                      <Image
-                        src={student_info?.image}
-                        width={120}
-                        height={120}
-                      />
-                    </Flex>
+                    <Row gutter={[8, 8]}>
+                      <Col span={10}>
+                        <Image src={logo} width={120} height={120} />
+                      </Col>
+                      <Col span={14}>
+                        <Row gutter={[8, 8]}>
+                          <Col span={24}>
+                            <Typography.Title level={2} type='danger'>
+                              MCTL GLOBAL PRIVATE LIMITED
+                            </Typography.Title>
+                          </Col>
+                          <Col span={10}>
+                            <Flex gap={2} style={{ fontSize: '12px' }}>
+                              <Iconify icon='material-symbols:mail' />{' '}
+                              info@mctlglobal.com
+                            </Flex>
+                          </Col>
+                          <Col span={12}>
+                            <Flex gap={2} style={{ fontSize: '12px' }}>
+                              <Iconify icon='mingcute:whatsapp-fill' />{' '}
+                              +8801781242251,
+                            </Flex>
+                          </Col>
+                          <Col span={10}>
+                            <Flex gap={2} style={{ fontSize: '12px' }}>
+                              <Iconify icon='iconoir:internet' /> mctlglobal.com
+                            </Flex>
+                          </Col>
+                          <Col span={12}>
+                            <Flex gap={2} style={{ fontSize: '12px' }}>
+                              <Iconify icon='mdi:location' /> Building-46,
+                              Nikunja-2, khilkhet,Dhaka-1229,
+                            </Flex>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
                     <Typography.Title
                       style={{
                         textTransform: 'uppercase',
