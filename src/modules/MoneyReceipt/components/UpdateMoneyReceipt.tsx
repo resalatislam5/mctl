@@ -17,24 +17,8 @@ const UpdateMoneyReceipt = ({ _id }: Props) => {
   const [form] = useForm();
   const { data } = useGetSingleMoneyReceiptQuery(_id, { skip: !_id });
 
-  const {
-    additional_discount,
-    admission_date,
-    batch_id,
-    course_ids,
-    code,
-    course_mode,
-    course_type,
-    agent_id,
-    installment_type,
-    discount,
-    installment_date,
-    student_id,
-    total_amount,
-    total_paid,
-    total_price,
-    package_id,
-  } = data?.data || {};
+  const { acc_id, date, student_id, enrollment_id, payment_method, amount } =
+    data?.data || {};
   const [update, { isLoading }] = useUpdateMoneyReceiptMutation();
 
   const onFinish = (values: ICreateMoneyReceipt) => {
@@ -49,45 +33,22 @@ const UpdateMoneyReceipt = ({ _id }: Props) => {
   useEffect(() => {
     if (data?.data) {
       form.setFieldsValue({
-        additional_discount,
-        admission_date: dayjs(admission_date),
-        batch_id,
-        course_ids,
-        code,
-        course_mode,
-        course_type,
-        agent_id,
-        installment_type,
-        discount,
-        installment_date: installment_date?.map((item) => ({
-          name: item.name,
-          date: dayjs(item.date),
-        })),
+        acc_id,
+        date: dayjs(date),
         student_id,
-        total_amount,
-        total_paid,
-        total_price,
-        package_id,
+        enrollment_id,
+        payment_method,
+        amount,
       });
     }
   }, [
     form,
-    additional_discount,
-    admission_date,
-    batch_id,
-    course_ids,
-    code,
-    course_mode,
-    course_type,
-    agent_id,
-    installment_type,
-    discount,
-    installment_date,
+    acc_id,
+    date,
     student_id,
-    total_amount,
-    total_paid,
-    total_price,
-    package_id,
+    enrollment_id,
+    payment_method,
+    amount,
     data,
   ]);
 

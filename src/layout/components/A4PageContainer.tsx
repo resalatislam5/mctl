@@ -6,12 +6,16 @@ import generatePDF, { Margin } from 'react-to-pdf';
 
 type Props = {
   content: ReactNode;
+  document_title: string;
+  showDownload?: boolean;
+  showPrint?: boolean;
 };
-const A4PageContainer = ({ content }: Props) => {
+const A4PageContainer = ({ content, document_title }: Props) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   const handlePrint = useReactToPrint({
     contentRef,
+    documentTitle: document_title,
   });
 
   return (
@@ -38,7 +42,7 @@ const A4PageContainer = ({ content }: Props) => {
           <CommonButton
             onClick={() =>
               generatePDF(contentRef, {
-                filename: 'enrollment.pdf',
+                filename: `${document_title}.pdf`,
                 page: {
                   margin: Margin.SMALL,
                 },

@@ -77,6 +77,7 @@ td, th {
             label: 'Enrollment From',
             children: (
               <A4PageContainer
+                document_title={`${student_info?.name}_enrollment`}
                 content={
                   <>
                     <Flex justify='space-between'>

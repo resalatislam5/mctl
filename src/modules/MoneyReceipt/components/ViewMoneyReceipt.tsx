@@ -189,11 +189,11 @@ td, th {
             label: 'Money Receipt',
             children: (
               <A4PageContainer
+                document_title={`${data?.data?.student_name}_money_receipt`}
                 content={
                   <>
                     <MoneyReceipt data={data?.data} />
                     <div style={{ marginTop: '16px' }} />
-                    {/* <Divider variant='dotted' /> */}
                     <MoneyReceipt data={data?.data} />
                   </>
                 }
