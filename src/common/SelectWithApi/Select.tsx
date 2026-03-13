@@ -781,17 +781,18 @@ export const SelectEnrollment = ({
           size={size}
           options={
             data?.data?.length
-              ? data.data.map(({ code, paid_amount, total_amount, _id }) => ({
+              ? data.data.map(({ code, total_paid, total_amount, _id }) => ({
                   label: (
                     <Space
                       size='small'
-                      title={`${code} - ${Number(total_amount || 0) - Number(paid_amount || 0)}`}
+                      title={`${code} - ${Number(total_amount || 0) - Number(total_paid || 0)}`}
                     >
                       <Typography.Text style={{ fontSize: 14 }} strong>
                         {code}
                       </Typography.Text>
+                      -
                       <Typography.Text style={{ fontSize: 12, color: 'red' }}>
-                        - {Number(total_amount || 0) - Number(paid_amount || 0)}
+                        {Number(total_amount || 0) - Number(total_paid || 0)}
                       </Typography.Text>
                     </Space>
                   ),

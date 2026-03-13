@@ -1,49 +1,161 @@
-import { Col, Flex, Image, Row, Tabs, Typography } from 'antd';
+import { Flex, Image, Space, Tabs, theme, Typography } from 'antd';
 import type React from 'react';
 import { useParams } from 'react-router';
-import Iconify from '../../../common/Table/Iconify';
 import { logo } from '../../../common/ui/image';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 import A4PageContainer from '../../../layout/components/A4PageContainer';
 import ContainerLayout from '../../../layout/components/ContainerLayout';
 import { useGetSingleMoneyReceiptQuery } from '../api/moneyReceiptEndpoints';
+import type { IViewMoneyReceipt } from '../types/moneyReceiptTypes';
 
-type TdWithBgProps = {
+type TTwoItemProps = {
   title: React.ReactNode;
+  value: React.ReactNode;
   style?: React.CSSProperties;
 } & React.TdHTMLAttributes<HTMLTableCellElement>;
 
-const TdWithBg = ({ title, style, ...rest }: TdWithBgProps) => {
+const TwoItem = ({ title, value, style }: TTwoItemProps) => {
   return (
-    <td
-      style={{
-        background: '#59757B',
-        color: 'white',
-        // padding: 5,
-        textTransform: 'uppercase',
-        width: 200,
-        ...style,
-      }}
-      {...rest}
-    >
-      {title}
-    </td>
+    <Flex gap={10} style={{ ...style }}>
+      <Typography.Text
+        style={{
+          // flex: '0 0 120px', // fixed 200px
+          display: 'inline-block',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {title}
+      </Typography.Text>
+      <Typography.Text>:</Typography.Text>
+      <Typography.Text
+        style={{
+          borderBottom: '1px dotted #000',
+          width: '100%',
+          marginTop: value ? 0 : 20,
+        }}
+      >
+        {value}
+      </Typography.Text>
+    </Flex>
+  );
+};
+
+const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
+  const { token } = theme.useToken();
+  const {
+    amount,
+    course_type,
+    date,
+    enrollment_code,
+    paid_amount,
+    payment_method,
+    student_code,
+    student_name,
+    voucher_no,
+    total_amount,
+  } = data || {};
+  return (
+    <div style={{ border: '2px solid #000', padding: '16px' }}>
+      <Flex align='center'>
+        <Image src={logo} width={100} height={100} preview={false} />
+        <Flex vertical>
+          <Typography.Title
+            level={1}
+            color='primary'
+            style={{ marginBottom: 0, color: token.colorPrimary }}
+          >
+            <span style={{ fontWeight: 900 }}>MCTL GLOBAL</span> PRIVATE LIMITED
+          </Typography.Title>
+
+          <Flex align='center' justify='center' gap={8}>
+            <Typography.Text style={{ fontSize: '12px' }}>
+              Ground Floor, Building No: 46, Road No: 11, Nikunjo, Dhaka-1229,
+              Tel: +880 1792608242, +880 1781242251
+            </Typography.Text>
+          </Flex>
+        </Flex>
+      </Flex>
+      <Flex vertical gap={16} style={{ width: '100%', marginTop: '8px' }}>
+        <Flex justify='space-between' gap={8}>
+          <Space>
+            <Typography.Text>Voucher No: </Typography.Text>{' '}
+            <Typography.Text
+              style={{
+                borderBottom: '1px dotted #000',
+                minWidth: '100px',
+                display: 'inline-block',
+              }}
+            >
+              {voucher_no}
+            </Typography.Text>
+          </Space>
+          <Space>
+            <Typography.Text>Date: </Typography.Text>{' '}
+            <Typography.Text
+              style={{
+                borderBottom: '1px dotted #000',
+                minWidth: '100px',
+                display: 'inline-block',
+              }}
+            >
+              {dateAndTimeFormat(date)}
+            </Typography.Text>
+          </Space>
+        </Flex>
+        <TwoItem title={'Student Name'} value={student_name} />
+        <Flex gap={16} style={{ width: '100%' }}>
+          <TwoItem
+            style={{ width: '50%' }}
+            title={'Student ID'}
+            value={student_code}
+          />
+          <TwoItem
+            style={{ width: '50%' }}
+            title={'Enrollment ID'}
+            value={enrollment_code}
+          />
+        </Flex>
+        <TwoItem title={'Payment For'} value={course_type} />
+        <Flex gap={16} style={{ width: '100%' }}>
+          <TwoItem
+            style={{ width: '50%' }}
+            title={'Paid Amount'}
+            value={paid_amount}
+          />
+          <TwoItem
+            style={{ width: '50%' }}
+            title={'Due Payment'}
+            value={Number(total_amount || 0) - Number(paid_amount || 0)}
+          />
+        </Flex>
+        <Flex gap={16} style={{ width: '100%' }}>
+          <TwoItem
+            style={{ width: '50%' }}
+            title={'Payment Method'}
+            value={payment_method}
+          />
+          <TwoItem style={{ width: '50%' }} title={'Amount'} value={amount} />
+        </Flex>
+        <Flex justify='end'>
+          <Typography.Text
+            style={{
+              borderTop: '1px dotted #000',
+              width: 'fit-content',
+              marginTop: 30,
+            }}
+          >
+            Authorized Signature
+          </Typography.Text>
+        </Flex>
+      </Flex>
+    </div>
   );
 };
 const ViewMoneyReceipt = () => {
-  const { _id } = useParams();
-  const { data } = useGetSingleMoneyReceiptQuery(_id as string, { skip: !_id });
+  const { id } = useParams();
+  console.log(id);
 
-  const {
-    student_info,
-    course_names,
-    course_mode,
-    admission_date,
-    batch_no,
-    total_amount,
-    total_paid,
-  } = data?.data || {};
-  console.log(data);
+  const { data } = useGetSingleMoneyReceiptQuery(id as string, { skip: !id });
 
   return (
     <ContainerLayout
@@ -79,243 +191,10 @@ td, th {
               <A4PageContainer
                 content={
                   <>
-                    <Row gutter={[8, 8]}>
-                      <Col span={10}>
-                        <Image src={logo} width={120} height={120} />
-                      </Col>
-                      <Col span={14}>
-                        <Row gutter={[8, 8]}>
-                          <Col span={24}>
-                            <Typography.Title level={2} type='danger'>
-                              MCTL GLOBAL PRIVATE LIMITED
-                            </Typography.Title>
-                          </Col>
-                          <Col span={10}>
-                            <Flex gap={2} style={{ fontSize: '12px' }}>
-                              <Iconify icon='material-symbols:mail' />{' '}
-                              info@mctlglobal.com
-                            </Flex>
-                          </Col>
-                          <Col span={12}>
-                            <Flex gap={2} style={{ fontSize: '12px' }}>
-                              <Iconify icon='mingcute:whatsapp-fill' />{' '}
-                              +8801781242251,
-                            </Flex>
-                          </Col>
-                          <Col span={10}>
-                            <Flex gap={2} style={{ fontSize: '12px' }}>
-                              <Iconify icon='iconoir:internet' /> mctlglobal.com
-                            </Flex>
-                          </Col>
-                          <Col span={12}>
-                            <Flex gap={2} style={{ fontSize: '12px' }}>
-                              <Iconify icon='mdi:location' /> Building-46,
-                              Nikunja-2, khilkhet,Dhaka-1229,
-                            </Flex>
-                          </Col>
-                        </Row>
-                      </Col>
-                    </Row>
-                    <Typography.Title
-                      style={{
-                        textTransform: 'uppercase',
-                        fontWeight: 800,
-                        textAlign: 'center',
-                      }}
-                      level={3}
-                    >
-                      MoneyReceipt From
-                    </Typography.Title>
-                    <table>
-                      <tr>
-                        <TdWithBg title={'Course Name'} />
-                        <td colSpan={4}>
-                          {course_names?.map((item, index) => (
-                            <span key={item}>
-                              {item}
-                              {course_names?.length > index + 1 && ','}
-                            </span>
-                          ))}
-                        </td>
-                      </tr>
-                      <tr>
-                        <TdWithBg title={'Course Mode'} />
-                        <td colSpan={4}>{course_mode}</td>
-                      </tr>
-                      <tr>
-                        <TdWithBg title={'Admission Date'} />
-                        <td colSpan={4}>{dateAndTimeFormat(admission_date)}</td>
-                      </tr>
-                      <tr>
-                        <TdWithBg title={'Batch No'} />
-                        <td>{batch_no}</td>
-                        <TdWithBg title={'Student Id'} />
-                        <td>{student_info?.code}</td>
-                      </tr>
-                      <tr>
-                        <TdWithBg title={'Personal Details'} colSpan={4} />
-                      </tr>
-                      <tr>
-                        <td colSpan={4}>
-                          <strong>Personal Name:</strong> {student_info?.name}
-                        </td>
-                      </tr>
-                      <tr>
-                        {' '}
-                        <td colSpan={4}>
-                          <strong>Address:</strong> {student_info?.country_name}
-                          , {student_info?.division_name},{' '}
-                          {student_info?.district_name},{' '}
-                          {student_info?.upazila_name}, {student_info?.village}
-                        </td>
-                      </tr>
-                      <tr>
-                        {' '}
-                        <td colSpan={2}>
-                          <strong>Date of Birth:</strong>{' '}
-                          {dateAndTimeFormat(student_info?.dob)}{' '}
-                        </td>
-                        <td colSpan={2}>
-                          <strong>Nationality:</strong>{' '}
-                          {student_info?.nationality}
-                        </td>
-                      </tr>
-                      <tr>
-                        {' '}
-                        <td colSpan={2} width={'50%'}>
-                          <strong>Occupation:</strong>{' '}
-                          {student_info?.occupation}{' '}
-                        </td>
-                        <td colSpan={2}>
-                          <strong>Office Address:</strong>{' '}
-                          {student_info?.office_address}
-                        </td>
-                      </tr>
-                      <tr>
-                        {' '}
-                        <td colSpan={2}>
-                          <strong>Gender:</strong> {student_info?.gender}{' '}
-                        </td>
-                        <td colSpan={2}>
-                          <strong>NID/Passport:</strong> {student_info?.nid_no}
-                        </td>
-                      </tr>
-                      <tr>
-                        {' '}
-                        <td colSpan={2}>
-                          <strong>Email:</strong> {student_info?.email}{' '}
-                        </td>
-                        <td colSpan={2}>
-                          <strong>Mobile:</strong> {student_info?.mobile_no}
-                        </td>
-                      </tr>
-                      <tr>
-                        {' '}
-                        <td colSpan={2}>
-                          <strong>Co Mobile Number:</strong>{' '}
-                          {student_info?.co_mobile}{' '}
-                        </td>
-                        <td colSpan={2}>
-                          <strong>Relationship:</strong>{' '}
-                          {student_info?.relationship}
-                        </td>
-                      </tr>
-                      <tr>
-                        <TdWithBg
-                          title={'Educational Qualification details'}
-                          colSpan={4}
-                        />
-                      </tr>
-                      <tr>
-                        <td colSpan={4}>{student_info?.education}</td>
-                      </tr>
-                      <tr>
-                        <TdWithBg title={'Payment Details'} colSpan={4} />
-                      </tr>
-                      <tr>
-                        <td colSpan={4}>
-                          <strong>Total Payable Amount:</strong> {total_amount}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colSpan={4}>
-                          <strong>Paid Amount:</strong> {total_paid}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td colSpan={4}>
-                          <strong>Due Amount's (if any):</strong>{' '}
-                          {Number(total_amount) - Number(total_paid)}
-                        </td>
-                      </tr>
-                      <tr>
-                        <TdWithBg
-                          title={'Terms and conditions & return from'}
-                          colSpan={4}
-                        />
-                      </tr>
-                      <tr>
-                        <td colSpan={4}>
-                          Please note that all information provided on this
-                          application must be accurate and complete. Any
-                          discrepancies or false statement may result in the
-                          rejection of your application or withdrawal from the
-                          program if discovered after admission.
-                          <br />
-                          <p
-                            style={{
-                              margin: '10px 0',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 8,
-                            }}
-                          >
-                            <div
-                              style={{
-                                border: '1px solid #000',
-                                width: 16,
-                                height: 16,
-                              }}
-                            />{' '}
-                            Yes, I have read, understood, and accepted MCTL's
-                            Terms and Conditions
-                          </p>
-                          <p>
-                            Please return the completed enrolment form to: MCTL
-                            Global Private Limited
-                          </p>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td
-                          style={{
-                            textTransform: 'none',
-                            background: '#59757B',
-                            color: 'white',
-                            padding: 5,
-                          }}
-                          colSpan={4}
-                        >
-                          <Flex align='center' justify='center' gap={8}>
-                            <Flex gap={2} style={{ whiteSpace: 'nowrap' }}>
-                              <Iconify icon='mdi:location' /> Building-46,
-                              Nikunja-2, khilkhet,Dhaka-1229,
-                            </Flex>{' '}
-                            <Flex gap={2}>
-                              <Iconify icon='mingcute:whatsapp-fill' />{' '}
-                              +8801781242251,
-                            </Flex>
-                            <Flex gap={2}>
-                              <Iconify icon='iconoir:internet' /> mctlglobal.com
-                            </Flex>
-                            <Flex gap={2}>
-                              <Iconify icon='material-symbols:mail' />{' '}
-                              info@mctlglobal.com
-                            </Flex>
-                          </Flex>
-                        </td>
-                      </tr>
-                    </table>
+                    <MoneyReceipt data={data?.data} />
+                    <div style={{ marginTop: '16px' }} />
+                    {/* <Divider variant='dotted' /> */}
+                    <MoneyReceipt data={data?.data} />
                   </>
                 }
               />

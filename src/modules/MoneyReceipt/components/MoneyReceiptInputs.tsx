@@ -1,6 +1,7 @@
 import { Form, Row, type FormInstance } from 'antd';
 
 import { useWatch } from 'antd/es/form/Form';
+import dayjs from 'dayjs';
 import FromSubmit from '../../../common/Button/FromSubmit';
 import {
   FormInputDate,
@@ -13,8 +14,8 @@ import {
   SelectStudent,
 } from '../../../common/SelectWithApi/Select';
 import { ACCOUNT_TYPE_OPTIONS } from '../../Account/types/accountTypes';
+import { useGetSingleEnrollmentQuery } from '../../Enrollment/api/enrollmentEndpoints';
 import type { ICreateMoneyReceipt } from '../types/moneyReceiptTypes';
-import dayjs from 'dayjs';
 
 type Props = {
   onFinish: (arg: ICreateMoneyReceipt) => void;
@@ -25,8 +26,11 @@ type Props = {
 
 const MoneyReceiptInputs = ({ onFinish, form, loading, editMode }: Props) => {
   const student_id = useWatch('student_id', form);
+  const enrollment_id = useWatch('enrollment_id', form);
   const payment_method = useWatch('payment_method', form);
-
+  const { data } = useGetSingleEnrollmentQuery(enrollment_id, {
+    skip: !enrollment_id,
+  });
   return (
     <Form
       layout='vertical'
@@ -70,7 +74,27 @@ const MoneyReceiptInputs = ({ onFinish, form, loading, editMode }: Props) => {
           option={{ skip: !payment_method }}
         />
 
-        <FormInputNumber name={'amount'} lg={8} label={'Amount'} required />
+        <FormInputNumber
+          name={'amount'}
+          lg={8}
+          label={'Amount'}
+          required
+          rules={[
+            {
+              validator(_, value) {
+                const dueAmount =
+                  Number(data?.data?.total_amount || 0) -
+                  Number(data?.data?.total_paid || 0);
+                if (!value || value <= dueAmount) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error("Amount can't be greater than the due amount"),
+                );
+              },
+            },
+          ]}
+        />
       </Row>
       <FromSubmit
         text={editMode ? 'Update' : 'Create'}

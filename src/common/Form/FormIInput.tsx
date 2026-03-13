@@ -13,6 +13,7 @@ import {
   type UploadFile,
   type UploadProps,
 } from 'antd';
+import type { Rule } from 'antd/es/form';
 import type { RcFile } from 'antd/es/upload';
 import { useState, type ChangeEvent } from 'react';
 
@@ -23,7 +24,7 @@ type Props = {
   required?: boolean;
   disabled?: boolean;
   layout?: 'vertical' | 'horizontal';
-  rules?: Record<string, string>[];
+  rules?: Rule[];
   xs?: number;
   sm?: number;
   md?: number;
