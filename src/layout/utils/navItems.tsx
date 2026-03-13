@@ -47,6 +47,21 @@ export const navItems: INavItem[] = [
     ],
   },
   {
+    key: '/expense',
+    to: '/expense',
+    label: 'Expense',
+    icon: 'fa7-solid:money-bill',
+    children: [
+      {
+        key: '/expense/head',
+        to: '/expense/head',
+        label: 'Head List',
+        icon: 'ic:twotone-list',
+        name: 'HEAD',
+      },
+    ],
+  },
+  {
     key: '/configuration',
     to: '/configuration',
     label: 'Configuration',

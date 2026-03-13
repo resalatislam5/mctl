@@ -11,6 +11,7 @@ import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
 import ViewEnrollment from '../modules/Enrollment/components/ViewEnrollment';
 import EnrollmentList from '../modules/Enrollment/pages/EnrollmentList';
+import HeadList from '../modules/Expense/pages/HeadList';
 import ViewMoneyReceipt from '../modules/MoneyReceipt/components/ViewMoneyReceipt';
 import MoneyReceiptList from '../modules/MoneyReceipt/pages/MoneyReceiptList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
@@ -45,6 +46,11 @@ export const AppRoutes = [
   {
     path: '/account/account',
     element: <AccountList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/expense/head',
+    element: <HeadList />,
     name: 'DASHBOARD',
   },
   {

@@ -17,6 +17,7 @@ export const tags = [
   'ENROLLMENT',
   'ACCOUNT',
   'MONEY_RECEIPT',
+  'HEAD',
 ] as const;
 
 type tagTypes = (typeof tags)[number];

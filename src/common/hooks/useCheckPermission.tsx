@@ -16,6 +16,7 @@ export type permissionTags =
   | 'PACKAGE'
   | 'ENROLLMENT'
   | 'MONEY_RECEIPT'
+  | 'HEAD'
   | 'ACCOUNT';
 
 const DEFAULT_PERMISSION = {
