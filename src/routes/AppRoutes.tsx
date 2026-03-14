@@ -11,7 +11,9 @@ import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
 import ViewEnrollment from '../modules/Enrollment/components/ViewEnrollment';
 import EnrollmentList from '../modules/Enrollment/pages/EnrollmentList';
-import HeadList from '../modules/Expense/pages/HeadList';
+import ViewExpenseHistory from '../modules/Expense/ExpenseHistory/components/ViewExpenseHistory';
+import ExpenseHistoryList from '../modules/Expense/ExpenseHistory/pages/ExpenseHistoryList';
+import HeadList from '../modules/Expense/Head/pages/HeadList';
 import ViewMoneyReceipt from '../modules/MoneyReceipt/components/ViewMoneyReceipt';
 import MoneyReceiptList from '../modules/MoneyReceipt/pages/MoneyReceiptList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
@@ -51,6 +53,16 @@ export const AppRoutes = [
   {
     path: '/expense/head',
     element: <HeadList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/expense/expense-history',
+    element: <ExpenseHistoryList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/expense/expense-history/:id',
+    element: <ViewExpenseHistory />,
     name: 'DASHBOARD',
   },
   {

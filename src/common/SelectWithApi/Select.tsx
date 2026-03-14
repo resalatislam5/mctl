@@ -9,6 +9,7 @@ import {
   useGetDistrictSelectQuery,
   useGetDivisionSelectQuery,
   useGetEnrollmentSelectQuery,
+  useGetHeadSelectQuery,
   useGetPackageSelectQuery,
   useGetRoleSelectQuery,
   useGetStudentSelectQuery,
@@ -19,7 +20,8 @@ import type { ICreateAccount } from '../../modules/Account/types/accountTypes';
 
 type Props = {
   label: string;
-  name: string;
+  // name: string;
+  name: string | number | (string | number)[];
   required?: boolean;
   disabled?: boolean;
   layout?: 'horizontal' | 'vertical';
@@ -854,6 +856,78 @@ export const SelectAccount = ({
       >
         <Select
           placeholder={`Select ${label}`}
+          disabled={disabled || isLoading}
+          loading={isLoading}
+          size={size}
+          options={
+            data?.data?.length
+              ? data.data.map(({ name, _id }) => ({
+                  label: (
+                    <Space size='small' title={`${name}`}>
+                      <Typography.Text style={{ fontSize: 14 }} strong>
+                        {name}
+                      </Typography.Text>
+                    </Space>
+                  ),
+                  value: _id,
+                  searchText: `${name}`,
+                }))
+              : []
+          }
+          mode={mode}
+          allowClear
+          showSearch
+          filterOption={(input, option) =>
+            (option?.searchText ?? '')
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
+          onChange={onChange}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+
+export const SelectHead = ({
+  label,
+  name,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  size = 'middle',
+  mode,
+  noStyleLabel,
+  onChange,
+  placeholder,
+  ...rest
+}: Props & {
+  noStyleLabel?: string;
+}) => {
+  const { data, isLoading } = useGetHeadSelectQuery({});
+
+  // If API returns empty array or undefined
+
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        rules={[
+          { required, message: `${label ? label : noStyleLabel} is required` },
+        ]}
+        layout={layout}
+        {...rest}
+      >
+        <Select
+          placeholder={placeholder ? placeholder : `Select ${label}`}
           disabled={disabled || isLoading}
           loading={isLoading}
           size={size}

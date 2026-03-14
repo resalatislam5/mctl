@@ -71,7 +71,7 @@ const AccountList = () => {
           {
             title: 'Action',
             key: 'action',
-            width: 150,
+            width: 200,
             render: (_text, record) => (
               <Space size='middle'>
                 <ViewButton

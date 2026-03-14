@@ -1,6 +1,6 @@
 import { Card } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { sanitizeObjectValue } from '../../../common/utils/sanitizeObjectValue';
+import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 import { useCreateHeadMutation } from '../api/headEndpoints';
 import type { ICreateHead } from '../types/headTypes';
 import HeadInputs from './HeadInputs';

@@ -251,8 +251,9 @@ export const FormInputNumber = ({
   value,
   allowClear = true,
   readOnly,
+  noStyleLabel,
   ...rest
-}: Props & { value?: string | null }) => {
+}: Props & { value?: string | null; noStyleLabel?: string }) => {
   return (
     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
       <Form.Item
@@ -260,7 +261,10 @@ export const FormInputNumber = ({
         label={label}
         layout={layout}
         rules={[
-          { required: required, message: `${label} is required` },
+          {
+            required: required,
+            message: `${label ? label : noStyleLabel} is required`,
+          },
 
           ...(rules || []),
         ]}
@@ -515,6 +519,59 @@ export const FormImageUpload_V1 = ({
       >
         <img alt='example' style={{ width: '100%' }} src={previewImage} />
       </Modal>
+    </Col>
+  );
+};
+
+export const FormInputTextArea = ({
+  label,
+  name,
+  placeholder,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  rules,
+  size = 'middle',
+  onChange,
+  value,
+  allowClear = true,
+  readOnly,
+  rows = 2,
+  ...rest
+}: Props & {
+  value?: string | null;
+  rows?: number;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+}) => {
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        layout={layout}
+        rules={[
+          { required: required, message: `${label} is required` },
+          ...(rules || []),
+        ]}
+        {...rest}
+      >
+        <Input.TextArea
+          rows={rows}
+          placeholder={placeholder ? placeholder : `Enter Your ${label}`}
+          disabled={disabled}
+          size={size}
+          onChange={onChange}
+          value={value || ''}
+          allowClear={allowClear}
+          readOnly={readOnly}
+        />
+      </Form.Item>
     </Col>
   );
 };

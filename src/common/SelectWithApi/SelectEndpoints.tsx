@@ -10,6 +10,7 @@ import type {
   IDistrictSelect,
   IDivisionSelect,
   IEnrollmentSelect,
+  IHeadSelect,
   IPackageSelect,
   IRoleSelect,
   IStudentSelect,
@@ -116,6 +117,13 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('ACCOUNT')],
     }),
+    getHeadSelect: build.query<Response<IHeadSelect[]>, object>({
+      query: (params) => ({
+        url: '/head/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('HEAD')],
+    }),
   }),
 });
 
@@ -133,4 +141,5 @@ export const {
   useGetAgentSelectQuery,
   useGetEnrollmentSelectQuery,
   useGetAccountSelectQuery,
+  useGetHeadSelectQuery,
 } = selectEndpoints;

@@ -19,7 +19,7 @@ const A4PageContainer = ({ content, document_title }: Props) => {
   });
 
   return (
-    <div style={{}}>
+    <div style={{ overflow: 'auto' }}>
       <ConfigProvider theme={{ algorithm: theme.defaultAlgorithm }}>
         <div
           style={{

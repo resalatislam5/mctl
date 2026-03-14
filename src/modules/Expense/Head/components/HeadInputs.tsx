@@ -1,7 +1,7 @@
 import { Form, Row, type FormInstance } from 'antd';
 
-import FromSubmit from '../../../common/Button/FromSubmit';
-import { FormInputText } from '../../../common/Form/FormIInput';
+import FromSubmit from '../../../../common/Button/FromSubmit';
+import { FormInputText } from '../../../../common/Form/FormIInput';
 import type { ICreateHead } from '../types/headTypes';
 
 type Props = {

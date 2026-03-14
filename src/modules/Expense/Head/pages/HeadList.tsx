@@ -1,10 +1,10 @@
-import { openModal } from '../../../app/features/modalSlice';
-import { useAppDispatch } from '../../../app/hooks/hooks';
-import useCheckPermission from '../../../common/hooks/useCheckPermission';
-import { useQueryParams } from '../../../common/hooks/useQueryParams';
-import AntTable from '../../../common/Table/AntTable';
-import { dateAndTimeFormat } from '../../../common/utils/helper.function';
-import ContainerLayout from '../../../layout/components/ContainerLayout';
+import { openModal } from '../../../../app/features/modalSlice';
+import { useAppDispatch } from '../../../../app/hooks/hooks';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
+import AntTable from '../../../../common/Table/AntTable';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
+import ContainerLayout from '../../../../layout/components/ContainerLayout';
 import { useGetHeadListQuery } from '../api/headEndpoints';
 import CreateHead from '../components/CreateHead';
 

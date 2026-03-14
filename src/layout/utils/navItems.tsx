@@ -59,6 +59,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'HEAD',
       },
+      {
+        key: '/expense/expense-history',
+        to: '/expense/expense-history',
+        label: 'Expense History List',
+        icon: 'ic:twotone-list',
+        name: 'EXPENSE_HISTORY',
+      },
     ],
   },
   {

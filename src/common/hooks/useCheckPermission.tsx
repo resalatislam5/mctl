@@ -17,7 +17,8 @@ export type permissionTags =
   | 'ENROLLMENT'
   | 'MONEY_RECEIPT'
   | 'HEAD'
-  | 'ACCOUNT';
+  | 'ACCOUNT'
+  | 'EXPENSE_HISTORY';
 
 const DEFAULT_PERMISSION = {
   can_read: false,

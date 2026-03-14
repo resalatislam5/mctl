@@ -1,6 +1,6 @@
-import { api } from '../../../app/api/api';
-import { CREATE_TAG } from '../../../app/utils/CreateTags';
-import type { Response } from '../../../common/types/common.type';
+import { api } from '../../../../app/api/api';
+import { CREATE_TAG } from '../../../../app/utils/CreateTags';
+import type { Response } from '../../../../common/types/common.type';
 import type { ICreateHead, IHeadList, IHeadQuery } from '../types/headTypes';
 
 const headEndpoints = api.injectEndpoints({

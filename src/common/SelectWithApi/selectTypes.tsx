@@ -61,3 +61,7 @@ export type IAccountSelect = {
   _id: string;
   name: string;
 };
+export type IHeadSelect = {
+  _id: string;
+  name: string;
+};
