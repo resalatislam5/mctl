@@ -99,7 +99,7 @@ const MainLayout = () => {
           transition: resizing ? 'none' : 'width 0.12s ease-out',
         }}
       />
-      <Layout>
+      <Layout style={{ marginLeft: collapsed ? 80 : 260 }}>
         <Header
           style={{
             padding: 0,

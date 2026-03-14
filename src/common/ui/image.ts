@@ -3,5 +3,6 @@ import auth_2 from '../../assets/auth/auth_2.jpg';
 import auth_3 from '../../assets/auth/auth_3.jpg';
 import auth_4 from '../../assets/auth/auth_4.jpg';
 import logo from '../../../public/logo.png';
+import full_logo from '../../../public/full_logo.png';
 
-export { auth_1, auth_2, auth_3, auth_4, logo };
+export { auth_1, auth_2, auth_3, auth_4, logo, full_logo };

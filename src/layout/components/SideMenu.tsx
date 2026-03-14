@@ -102,7 +102,12 @@ const SideMenu = ({
       collapsible
       collapsed={collapsed}
       width={width}
-      style={{ ...style, background: colorBgContainer }}
+      style={{
+        ...style,
+        background: colorBgContainer,
+        position: 'fixed',
+        height: '100vh',
+      }}
     >
       <div
         onMouseDown={startResize}
