@@ -1,4 +1,4 @@
-import type { SelectProps } from 'antd';
+import type { FormItemProps, SelectProps } from 'antd';
 import { Col, Empty, Form, Select, Space, Spin, Typography } from 'antd';
 import {
   useGetAccountSelectQuery,
@@ -34,7 +34,9 @@ type Props = {
   size?: SelectProps['size'];
   mode?: SelectProps['mode'];
   onChange?: (value: any) => void;
-} & SelectProps;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  placeholder?: string;
+} & FormItemProps;
 
 export const SelectUser = ({
   label,
@@ -612,8 +614,8 @@ export const SelectStudent = ({
   xxl,
   size = 'middle',
   mode,
-
   onChange,
+  ...rest
 }: Props) => {
   const { data, isLoading } = useGetStudentSelectQuery({});
 
@@ -626,12 +628,14 @@ export const SelectStudent = ({
         label={label}
         rules={[{ required, message: `${label} is required` }]}
         layout={layout}
+        {...rest}
       >
         <Select
           placeholder={`Select ${label}`}
           disabled={disabled || isLoading}
           loading={isLoading}
           size={size}
+          style={{ width: '100%' }}
           options={
             data?.data?.length
               ? data.data.map(({ name, code, _id }) => ({

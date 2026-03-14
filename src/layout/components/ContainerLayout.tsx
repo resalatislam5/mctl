@@ -1,11 +1,11 @@
 import { Button, Col, Flex, Input, Row, theme, Typography } from 'antd';
 import { Content } from 'antd/es/layout/layout';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router';
+import { useQueryParams } from '../../common/hooks/useQueryParams';
 import Iconify from '../../common/Table/Iconify';
 import DynamicBreadcrumb from '../../common/ui/DynamicBreadcrumb';
 import useDebounce from '../../common/utils/debounced';
-import { cleanQuery } from '../../common/utils/cleanQuery';
 
 interface Props {
   children: ReactNode;
@@ -15,6 +15,7 @@ interface Props {
     showSearch?: boolean;
   };
   buttonText?: string;
+  additionalFilter?: ReactNode;
   onClick?: () => void;
 }
 const ContainerLayout = ({
@@ -23,17 +24,31 @@ const ContainerLayout = ({
   options,
   buttonText = 'Create',
   onClick,
+  additionalFilter,
 }: Props) => {
   const { showButton = true, showSearch = true } = options || {};
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
+  const { setQuery, query } = useQueryParams();
   const [search, seSearch] = useState(searchParams.get('search'));
   const debouncedValue = useDebounce(search);
 
+  const updateSearchQuery = useCallback(() => {
+    const value = debouncedValue?.trim();
+
+    if (!value) {
+      if (!query.search) return;
+      setQuery({ search: '' });
+      return;
+    }
+
+    if (query.search === value) return;
+
+    setQuery({ search: value });
+  }, [debouncedValue, query.search, setQuery]);
+
   useEffect(() => {
-    setSearchParams(
-      cleanQuery({ search: encodeURIComponent(debouncedValue || '') }),
-    );
-  }, [debouncedValue, setSearchParams]);
+    updateSearchQuery();
+  }, [updateSearchQuery]);
 
   const {
     token: { colorBgContainer, borderRadiusLG },
@@ -75,7 +90,7 @@ const ContainerLayout = ({
           )}
 
           {showSearch && (
-            <Col xs={24} sm={8} lg={6}>
+            <Col xs={24} sm={8} lg={4}>
               <Input
                 onChange={(e) => seSearch(e.target.value)}
                 name={'search'}
@@ -84,6 +99,7 @@ const ContainerLayout = ({
               />
             </Col>
           )}
+          {additionalFilter}
         </Row>
 
         <div style={{ marginTop: 20 }}>{children}</div>

@@ -18,11 +18,13 @@ import CreateStudent from '../components/CreateStudent';
 import UpdateStudent from '../components/UpdateStudent';
 import ViewStudent from '../components/ViewStudent';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
+import { SelectStudent } from '../../../common/SelectWithApi/Select';
+import type { IStudentQuery } from '../types/StudentTypes';
 
 const StudentList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('STUDENT');
   const dispatch = useAppDispatch();
-  const { query } = useQueryParams();
+  const { query, setQuery } = useQueryParams<IStudentQuery>();
   const { data, isLoading, isFetching } = useGetStudentListQuery(query);
   const [deleting, { isLoading: isDeleting }] = useDeleteStudentMutation();
 
@@ -40,6 +42,18 @@ const StudentList = () => {
       }
       title='Student List'
       options={{ showButton: can_create }}
+      additionalFilter={
+        <>
+          <SelectStudent
+            label='Student'
+            name='student_id'
+            sm={8}
+            lg={4}
+            onChange={(e) => setQuery({ student_id: e })}
+            noStyle
+          />
+        </>
+      }
     >
       <AntTable
         dataSource={data?.data}

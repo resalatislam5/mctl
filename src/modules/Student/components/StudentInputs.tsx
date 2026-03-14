@@ -32,10 +32,15 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
   return (
     <Form layout='vertical' onFinish={onFinish} form={form}>
       <Row gutter={[8, 8]}>
-        <FormInputText lg={8} name={'name'} label={'Name'} />
-        <FormInputEmail lg={8} name={'email'} label={'Email'} />
-        <FormInputText lg={8} name={'code'} label={'Code'} />
-        <FormInputMobile lg={8} name={'mobile_no'} label={'Mobile No'} />
+        <FormInputText lg={8} name={'name'} label={'Name'} required />
+        <FormInputEmail lg={8} name={'email'} label={'Email'} required />
+        <FormInputText lg={8} name={'code'} label={'Code'} required />
+        <FormInputMobile
+          lg={8}
+          name={'mobile_no'}
+          label={'Mobile No'}
+          required
+        />
         <SelectCountry
           lg={8}
           name={'country_id'}
@@ -43,6 +48,7 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           onChange={() =>
             form.resetFields(['division_id', 'district_id', 'upazila_id'])
           }
+          required
         />
         <SelectDivision
           lg={8}
@@ -52,6 +58,7 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           option={{ skip: !country_id }}
           disabled={!country_id}
           onClick={() => form.resetFields(['district_id', 'upazila_id'])}
+          required
         />
         <SelectDistrict
           lg={8}
@@ -61,6 +68,7 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           option={{ skip: !division_id }}
           disabled={!division_id}
           onClick={() => form.resetFields(['upazila_id'])}
+          required
         />
         <SelectUpazila
           lg={8}
@@ -72,13 +80,18 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
         />
 
         <FormInputText lg={8} name={'village'} label={'Village'} />
-        <FormInputText lg={8} name={'nationality'} label={'Nationality'} />
+        <FormInputText
+          lg={8}
+          name={'nationality'}
+          label={'Nationality'}
+          required
+        />
         <FormInputText
           lg={8}
           name={'office_address'}
           label={'Office Address'}
         />
-        <FormInputDate lg={8} name={'dob'} label={'Date of Birth'} />
+        <FormInputDate lg={8} name={'dob'} label={'Date of Birth'} required />
         <FormInputText lg={8} name={'occupation'} label={'Occupation'} />
         <FormInputText lg={8} name={'nid_no'} label={'NID'} />
         <FormInputMobile lg={8} name={'co_mobile'} label={'Co Mobile'} />

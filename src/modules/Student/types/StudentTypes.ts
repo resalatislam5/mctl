@@ -14,6 +14,7 @@ export type IStudentQuery = Partial<{
   limit: number;
   page: number;
   search: string;
+  student_id: string;
 }>;
 export interface ICreateStudent {
   _id?: string;
