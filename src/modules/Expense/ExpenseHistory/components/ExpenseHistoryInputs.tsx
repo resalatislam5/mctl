@@ -22,7 +22,7 @@ import {
   SelectHead,
 } from '../../../../common/SelectWithApi/Select';
 import AntTable from '../../../../common/Table/AntTable';
-import { ACCOUNT_TYPE_OPTIONS } from '../../../Account/types/accountTypes';
+import { ACCOUNT_TYPE_OPTIONS } from '../../../Account/Account/types/accountTypes';
 import type { ICreateExpenseHistory } from '../types/expenseHistoryTypes';
 import dayjs from 'dayjs';
 import { useEffect } from 'react';

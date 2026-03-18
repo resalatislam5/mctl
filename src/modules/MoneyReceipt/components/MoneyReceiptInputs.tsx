@@ -13,7 +13,7 @@ import {
   SelectEnrollment,
   SelectStudent,
 } from '../../../common/SelectWithApi/Select';
-import { ACCOUNT_TYPE_OPTIONS } from '../../Account/types/accountTypes';
+import { ACCOUNT_TYPE_OPTIONS } from '../../Account/Account/types/accountTypes';
 import { useGetSingleEnrollmentQuery } from '../../Enrollment/api/enrollmentEndpoints';
 import type { ICreateMoneyReceipt } from '../types/moneyReceiptTypes';
 
@@ -68,7 +68,6 @@ const MoneyReceiptInputs = ({ onFinish, form, loading, editMode }: Props) => {
           name={'acc_id'}
           label={'Account'}
           lg={8}
-          options={ACCOUNT_TYPE_OPTIONS}
           required
           payment_method={payment_method}
           option={{ skip: !payment_method }}

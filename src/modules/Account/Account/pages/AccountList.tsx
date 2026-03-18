@@ -7,17 +7,17 @@ import {
 import CreateAccount from '../components/CreateAccount';
 import UpdateAccount from '../components/UpdateAccount';
 import ViewAccount from '../components/ViewAccount';
-import useCheckPermission from '../../../common/hooks/useCheckPermission';
-import { useAppDispatch } from '../../../app/hooks/hooks';
-import { useQueryParams } from '../../../common/hooks/useQueryParams';
-import ContainerLayout from '../../../layout/components/ContainerLayout';
-import { openModal } from '../../../app/features/modalSlice';
-import AntTable from '../../../common/Table/AntTable';
-import { getStatusTag } from '../../../common/utils/status';
-import ViewButton from '../../../common/Button/ViewButton';
-import EditButton from '../../../common/Button/EditButton';
-import DeleteButton from '../../../common/Button/DeleteButton';
-import { dateAndTimeFormat } from '../../../common/utils/helper.function';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { useAppDispatch } from '../../../../app/hooks/hooks';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
+import ContainerLayout from '../../../../layout/components/ContainerLayout';
+import { openModal } from '../../../../app/features/modalSlice';
+import AntTable from '../../../../common/Table/AntTable';
+import { getStatusTag } from '../../../../common/utils/status';
+import ViewButton from '../../../../common/Button/ViewButton';
+import EditButton from '../../../../common/Button/EditButton';
+import DeleteButton from '../../../../common/Button/DeleteButton';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const AccountList = () => {
   const { can_create, can_delete, can_update } = useCheckPermission('ACCOUNT');

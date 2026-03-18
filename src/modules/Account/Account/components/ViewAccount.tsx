@@ -1,5 +1,5 @@
 import { Card, Descriptions } from 'antd';
-import { getStatusTag, type StatusType } from '../../../common/utils/status';
+import { getStatusTag, type StatusType } from '../../../../common/utils/status';
 import type { IAccountList } from '../types/accountTypes';
 
 const ViewAccount = ({ record }: { record: IAccountList }) => {

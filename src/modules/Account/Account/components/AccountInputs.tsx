@@ -8,8 +8,8 @@ import {
   FormInputNumber,
   FormInputSelect,
   FormInputText,
-} from '../../../common/Form/FormIInput';
-import FromSubmit from '../../../common/Button/FromSubmit';
+} from '../../../../common/Form/FormIInput';
+import FromSubmit from '../../../../common/Button/FromSubmit';
 import { useWatch } from 'antd/es/form/Form';
 
 type Props = {

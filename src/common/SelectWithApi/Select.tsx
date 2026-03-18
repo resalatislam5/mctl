@@ -16,7 +16,7 @@ import {
   useGetUpazilaSelectQuery,
   useGetUserSelectQuery,
 } from './SelectEndpoints';
-import type { ICreateAccount } from '../../modules/Account/types/accountTypes';
+import type { ICreateAccount } from '../../modules/Account/Account/types/accountTypes';
 
 type Props = {
   label: string;

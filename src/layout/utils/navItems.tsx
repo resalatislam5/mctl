@@ -44,6 +44,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'ACCOUNT',
       },
+      {
+        key: '/account/balance-transfer',
+        to: '/account/balance-transfer',
+        label: 'Balance Transfer List',
+        icon: 'ic:twotone-list',
+        name: 'BALANCE_TRANSFER',
+      },
     ],
   },
   {

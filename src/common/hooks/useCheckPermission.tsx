@@ -18,7 +18,8 @@ export type permissionTags =
   | 'MONEY_RECEIPT'
   | 'HEAD'
   | 'ACCOUNT'
-  | 'EXPENSE_HISTORY';
+  | 'EXPENSE_HISTORY'
+  | 'BALANCE_TRANSFER';
 
 const DEFAULT_PERMISSION = {
   can_read: false,

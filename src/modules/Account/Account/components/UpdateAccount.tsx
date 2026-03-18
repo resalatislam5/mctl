@@ -1,7 +1,7 @@
 import { Card } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { useEffect } from 'react';
-import { sanitizeObjectValue } from '../../../common/utils/sanitizeObjectValue';
+import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 import { useUpdateAccountMutation } from '../api/accountEndpoints';
 import type { IAccountList, ICreateAccount } from '../types/accountTypes';
 import AccountInputs from './AccountInputs';

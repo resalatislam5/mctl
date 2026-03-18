@@ -1,4 +1,6 @@
-import AccountList from '../modules/Account/pages/AccountList';
+import AccountList from '../modules/Account/Account/pages/AccountList';
+import ViewBalanceTransfer from '../modules/Account/BalanceTransfer/components/ViewBalanceTransfer';
+import BalanceTransferList from '../modules/Account/BalanceTransfer/pages/BalanceTransferList';
 import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
 import AgentList from '../modules/Configuration/Agent/pages/AgentList';
@@ -48,6 +50,16 @@ export const AppRoutes = [
   {
     path: '/account/account',
     element: <AccountList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/account/balance-transfer',
+    element: <BalanceTransferList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/account/balance-transfer/:id',
+    element: <ViewBalanceTransfer />,
     name: 'DASHBOARD',
   },
   {

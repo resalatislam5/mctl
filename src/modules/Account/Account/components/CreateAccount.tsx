@@ -1,6 +1,6 @@
 import { Card } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { sanitizeObjectValue } from '../../../common/utils/sanitizeObjectValue';
+import { sanitizeObjectValue } from '../../../../common/utils/sanitizeObjectValue';
 import { useCreateAccountMutation } from '../api/accountEndpoints';
 import type { ICreateAccount } from '../types/accountTypes';
 import AccountInputs from './AccountInputs';
