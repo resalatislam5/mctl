@@ -20,7 +20,7 @@ const StudentLedger = () => {
 
   return (
     <ReportContainer
-      title='Audit Log '
+      title='Student Ledger'
       options={{ showDateRange: false }}
       additionalFilter={
         <>

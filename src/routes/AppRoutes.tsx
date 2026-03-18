@@ -19,6 +19,7 @@ import HeadList from '../modules/Expense/Head/pages/HeadList';
 import ViewMoneyReceipt from '../modules/MoneyReceipt/components/ViewMoneyReceipt';
 import MoneyReceiptList from '../modules/MoneyReceipt/pages/MoneyReceiptList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
+import ExpenseReport from '../modules/Report/OnlyGetReport/pages/ExpenseReport';
 import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
 import StudentList from '../modules/Student/pages/StudentList';
 
@@ -136,6 +137,11 @@ export const AppRoutes = [
   {
     path: '/report/student-ledger',
     element: <StudentLedger />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/report/expense',
+    element: <ExpenseReport />,
     name: 'DASHBOARD',
   },
 ];

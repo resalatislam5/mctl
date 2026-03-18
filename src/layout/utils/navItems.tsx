@@ -159,6 +159,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'STUDENT_LEDGER',
       },
+      {
+        key: '/report/expense',
+        to: '/report/expense',
+        label: 'Expense Report',
+        icon: 'ic:twotone-list',
+        name: 'EXPENSE_REPORT',
+      },
     ],
   },
   {
