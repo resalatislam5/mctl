@@ -36,6 +36,7 @@ type Props = {
   onChange?: (value: any) => void;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   placeholder?: string;
+  defaultValue?: string | number;
 } & FormItemProps;
 
 export const SelectUser = ({
@@ -53,6 +54,7 @@ export const SelectUser = ({
   size = 'middle',
   mode,
   onChange,
+  defaultValue,
   ...rest
 }: Props) => {
   const { data, isLoading } = useGetUserSelectQuery();
@@ -89,6 +91,7 @@ export const SelectUser = ({
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
           style={{ width: '100%' }}
+          defaultValue={defaultValue}
         />
       </Form.Item>
     </Col>
@@ -483,8 +486,9 @@ export const SelectBatch = ({
   xxl,
   size = 'middle',
   mode,
-
   onChange,
+  defaultValue,
+  ...rest
 }: Props) => {
   const { data, isLoading } = useGetBatchSelectQuery({});
 
@@ -497,6 +501,7 @@ export const SelectBatch = ({
         label={label}
         rules={[{ required, message: `${label} is required` }]}
         layout={layout}
+        {...rest}
       >
         <Select
           placeholder={`Select ${label}`}
@@ -528,6 +533,7 @@ export const SelectBatch = ({
           }
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
+          defaultValue={defaultValue}
         />
       </Form.Item>
     </Col>

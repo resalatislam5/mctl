@@ -213,7 +213,7 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
                     ),
                   },
                   {
-                    title: 'Installment Data',
+                    title: 'Installment Date',
                     render: (_: string, field: FormListFieldData) => (
                       <FormInputDate
                         name={[field.name, 'date']}

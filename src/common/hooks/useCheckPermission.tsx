@@ -19,6 +19,7 @@ export type permissionTags =
   | 'HEAD'
   | 'ACCOUNT'
   | 'EXPENSE_HISTORY'
+  | 'STUDENT_LEDGER'
   | 'BALANCE_TRANSFER';
 
 const DEFAULT_PERMISSION = {

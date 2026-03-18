@@ -32,7 +32,7 @@ const AuditLogReport = () => {
             md={8}
             lg={5}
             onChange={(e) => setQuery({ user_id: e })}
-            noStyle
+            defaultValue={query.user_id}
           />
         </>
       }

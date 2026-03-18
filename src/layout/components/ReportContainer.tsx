@@ -1,4 +1,13 @@
-import { Col, DatePicker, Flex, Input, Row, theme, Typography } from 'antd';
+import {
+  Col,
+  DatePicker,
+  Flex,
+  Form,
+  Input,
+  Row,
+  theme,
+  Typography,
+} from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import dayjs from 'dayjs';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
@@ -107,20 +116,27 @@ const ReportContainer = ({
             )}
             {showDateRange && (
               <Col xs={24} sm={8} lg={6}>
-                <DatePicker.RangePicker
-                  onChange={(e) =>
-                    setQuery({
-                      from_date: dateForPost(e?.[0]),
-                      to_date: dateForPost(e?.[1]),
-                    })
-                  }
-                  value={[
-                    query.from_date ? dayjs(query.from_date) : null,
-                    query.to_date ? dayjs(query.to_date) : null,
-                  ]}
-                  presets={datePresets}
+                <Form.Item
                   name={'date'}
-                />
+                  label={'Date'}
+                  rules={[{ required: true, message: `Date is required` }]}
+                  layout='vertical'
+                >
+                  <DatePicker.RangePicker
+                    onChange={(e) =>
+                      setQuery({
+                        from_date: dateForPost(e?.[0]),
+                        to_date: dateForPost(e?.[1]),
+                      })
+                    }
+                    defaultValue={[
+                      query.from_date ? dayjs(query.from_date) : null,
+                      query.to_date ? dayjs(query.to_date) : null,
+                    ]}
+                    presets={datePresets}
+                    name={'date'}
+                  />
+                </Form.Item>
               </Col>
             )}
             {additionalFilter}
