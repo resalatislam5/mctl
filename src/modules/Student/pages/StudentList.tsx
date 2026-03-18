@@ -48,6 +48,7 @@ const StudentList = () => {
             label='Student'
             name='student_id'
             sm={8}
+            md={8}
             lg={4}
             onChange={(e) => setQuery({ student_id: e })}
             noStyle

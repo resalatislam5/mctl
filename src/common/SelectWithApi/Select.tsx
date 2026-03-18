@@ -53,6 +53,7 @@ export const SelectUser = ({
   size = 'middle',
   mode,
   onChange,
+  ...rest
 }: Props) => {
   const { data, isLoading } = useGetUserSelectQuery();
 
@@ -71,6 +72,7 @@ export const SelectUser = ({
         label={label}
         rules={[{ required, message: `${label} is required` }]}
         layout={layout}
+        {...rest}
       >
         <Select
           placeholder={`Select ${label}`}
@@ -86,6 +88,7 @@ export const SelectUser = ({
           }
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
+          style={{ width: '100%' }}
         />
       </Form.Item>
     </Col>

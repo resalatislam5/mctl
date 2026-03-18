@@ -18,4 +18,7 @@ export type IAuditLogQuery = Partial<{
   limit: number;
   skip: number;
   search: string;
+  from_date: string;
+  to_date: string;
+  user_id: string;
 }>;

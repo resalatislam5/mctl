@@ -2,13 +2,13 @@ import { Divider, Image, Layout, Menu, theme, Typography } from 'antd';
 import type { SliderProps } from 'antd/es/slider';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
+import { addUser } from '../../app/features/authSlice';
+import { useAppDispatch } from '../../app/hooks/hooks';
 import { useCheckPermissionQuery } from '../../auth/api/authEndpoint';
 import { useBreakpoint } from '../../common/utils/constant';
 import type { INavItem } from '../types/layoutTypes';
 import { navItems, renderItems } from '../utils/navItems';
 import HeaderTime from './HeaderTime';
-import { useAppDispatch } from '../../app/hooks/hooks';
-import { addUser } from '../../app/features/authSlice';
 
 interface Props extends SliderProps {
   handleCollapse: (value: boolean) => void;
@@ -107,6 +107,7 @@ const SideMenu = ({
         background: colorBgContainer,
         position: 'fixed',
         height: '100vh',
+        overflow: 'auto',
       }}
     >
       <div
@@ -145,7 +146,7 @@ const SideMenu = ({
         openKeys={openKeys}
         onOpenChange={onOpenChange}
         items={menuItems}
-        style={{ height: '100%', borderRight: 0 }}
+        style={{ borderRight: 0 }}
       />
     </Sider>
   );

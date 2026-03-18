@@ -10,6 +10,7 @@ import { cleanQuery } from '../../common/utils/cleanQuery';
 import useDebounce from '../../common/utils/debounced';
 import { dateForPost } from '../../common/utils/helper.function';
 import { useReactToPrint } from 'react-to-print';
+import { datePresets } from '../../common/utils/constant';
 
 interface Props {
   children: ReactNode;
@@ -20,6 +21,7 @@ interface Props {
   };
   buttonText?: string;
   onClick?: () => void;
+  additionalFilter?: ReactNode;
 }
 
 type AuditQuery = {
@@ -30,7 +32,12 @@ type AuditQuery = {
   to_date?: string;
 };
 
-const ReportContainer = ({ children, title, options }: Props) => {
+const ReportContainer = ({
+  children,
+  title,
+  options,
+  additionalFilter,
+}: Props) => {
   const { showSearch = false, showDateRange = true } = options || {};
   const [searchParams, setSearchParams] = useSearchParams();
   const { query, setQuery } = useQueryParams<AuditQuery>();
@@ -111,10 +118,12 @@ const ReportContainer = ({ children, title, options }: Props) => {
                     query.from_date ? dayjs(query.from_date) : null,
                     query.to_date ? dayjs(query.to_date) : null,
                   ]}
+                  presets={datePresets}
                   name={'date'}
                 />
               </Col>
             )}
+            {additionalFilter}
           </Row>
 
           <CommonButton
