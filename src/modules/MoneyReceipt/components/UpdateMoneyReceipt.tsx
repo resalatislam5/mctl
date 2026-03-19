@@ -59,6 +59,7 @@ const UpdateMoneyReceipt = ({ _id }: Props) => {
         form={form}
         loading={isLoading}
         editMode={true}
+        oldAmount={amount}
       />
     </Card>
   );

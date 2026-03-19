@@ -1,8 +1,23 @@
+import { Space } from 'antd';
+import { openModal } from '../../../app/features/modalSlice';
+import { useAppDispatch } from '../../../app/hooks/hooks';
+import DeleteButton from '../../../common/Button/DeleteButton';
+import EditButton from '../../../common/Button/EditButton';
+import ViewButton from '../../../common/Button/ViewButton';
+import useCheckPermission from '../../../common/hooks/useCheckPermission';
 import AntTable from '../../../common/Table/AntTable';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
-import { useGetMoneyReceiptListQuery } from '../../MoneyReceipt/api/moneyReceiptEndpoints';
+import {
+  useDeleteMoneyReceiptMutation,
+  useGetMoneyReceiptListQuery,
+} from '../../MoneyReceipt/api/moneyReceiptEndpoints';
+import UpdateMoneyReceipt from '../../MoneyReceipt/components/UpdateMoneyReceipt';
 
 const StudentMoneyReceipt = ({ id }: { id: string | undefined }) => {
+  const { can_delete, can_update } = useCheckPermission('MONEY_RECEIPT');
+  const dispatch = useAppDispatch();
+  const [deleting, { isLoading: isDeleting }] = useDeleteMoneyReceiptMutation();
+
   const { data, isFetching, isLoading } = useGetMoneyReceiptListQuery({
     student_id: id,
   });
@@ -43,6 +58,35 @@ const StudentMoneyReceipt = ({ id }: { id: string | undefined }) => {
             dataIndex: 'amount',
             key: 'amount',
             title: 'Amount',
+          },
+          {
+            title: 'Action',
+            key: 'action',
+            width: 200,
+            render: (_text, record) => (
+              <Space size='middle'>
+                <ViewButton path={`/money-receipt/${record?._id}`} />
+
+                <EditButton
+                  can_update={can_update}
+                  onClick={() =>
+                    dispatch(
+                      openModal({
+                        title: 'Edit Money Receipt',
+                        content: <UpdateMoneyReceipt _id={record._id} />,
+                        open: true,
+                        width: 1000,
+                      }),
+                    )
+                  }
+                />
+                <DeleteButton
+                  can_delete={can_delete}
+                  loading={isDeleting}
+                  onClick={() => deleting(record._id)}
+                />
+              </Space>
+            ),
           },
         ]}
       />

@@ -2,6 +2,7 @@ import { Tabs } from 'antd';
 import { useParams } from 'react-router';
 import SingleContainer from '../../../layout/components/SingleContainer';
 import StudentBasicInfo from './StudentBasicInfo';
+import StudentEnrollment from './StudentEnrollment';
 import StudentMoneyReceipt from './StudentMoneyReceipt';
 
 const ViewStudent = () => {
@@ -20,6 +21,11 @@ const ViewStudent = () => {
           },
           {
             key: '2',
+            label: 'Enrollment',
+            children: <StudentEnrollment id={id} />,
+          },
+          {
+            key: '3',
             label: 'Money Receipt',
             children: <StudentMoneyReceipt id={id} />,
           },

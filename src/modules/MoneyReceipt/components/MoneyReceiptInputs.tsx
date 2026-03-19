@@ -22,9 +22,16 @@ type Props = {
   form: FormInstance<ICreateMoneyReceipt>;
   loading: boolean;
   editMode?: boolean;
+  oldAmount?: string;
 };
 
-const MoneyReceiptInputs = ({ onFinish, form, loading, editMode }: Props) => {
+const MoneyReceiptInputs = ({
+  onFinish,
+  form,
+  loading,
+  editMode,
+  oldAmount,
+}: Props) => {
   const student_id = useWatch('student_id', form);
   const enrollment_id = useWatch('enrollment_id', form);
   const payment_method = useWatch('payment_method', form);
@@ -87,6 +94,10 @@ const MoneyReceiptInputs = ({ onFinish, form, loading, editMode }: Props) => {
                 if (!value || value <= dueAmount) {
                   return Promise.resolve();
                 }
+                if (editMode && Number(oldAmount) + dueAmount >= value) {
+                  return Promise.resolve();
+                }
+
                 return Promise.reject(
                   new Error("Amount can't be greater than the due amount"),
                 );
