@@ -26,8 +26,8 @@ const AuditLogReport = () => {
       additionalFilter={
         <>
           <SelectUser
-            label='Student'
-            name='student_id'
+            label='User'
+            name='user_id'
             sm={8}
             md={8}
             lg={5}

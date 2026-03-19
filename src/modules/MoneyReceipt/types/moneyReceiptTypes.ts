@@ -18,6 +18,7 @@ export type IMoneyReceiptQuery = Partial<{
   limit: number;
   page: number;
   search: string;
+  student_id: string;
 }>;
 export interface ICreateMoneyReceipt {
   payment_method: 'CASH' | 'BANK' | 'MOBILE_BANKING';

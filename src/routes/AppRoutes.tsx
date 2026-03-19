@@ -21,12 +21,18 @@ import MoneyReceiptList from '../modules/MoneyReceipt/pages/MoneyReceiptList';
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
 import ExpenseReport from '../modules/Report/OnlyGetReport/pages/ExpenseReport';
 import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
+import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
 
 export const AppRoutes = [
   {
     path: '/student',
     element: <StudentList />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/student/:id',
+    element: <ViewStudent />,
     name: 'DASHBOARD',
   },
   {

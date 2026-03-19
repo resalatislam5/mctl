@@ -7,7 +7,9 @@ import EditButton from '../../../common/Button/EditButton';
 import ViewButton from '../../../common/Button/ViewButton';
 import useCheckPermission from '../../../common/hooks/useCheckPermission';
 import { useQueryParams } from '../../../common/hooks/useQueryParams';
+import { SelectStudent } from '../../../common/SelectWithApi/Select';
 import AntTable from '../../../common/Table/AntTable';
+import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 import { getStatusTag } from '../../../common/utils/status';
 import ContainerLayout from '../../../layout/components/ContainerLayout';
 import {
@@ -16,9 +18,6 @@ import {
 } from '../api/StudentEndpoints';
 import CreateStudent from '../components/CreateStudent';
 import UpdateStudent from '../components/UpdateStudent';
-import ViewStudent from '../components/ViewStudent';
-import { dateAndTimeFormat } from '../../../common/utils/helper.function';
-import { SelectStudent } from '../../../common/SelectWithApi/Select';
 import type { IStudentQuery } from '../types/StudentTypes';
 
 const StudentList = () => {
@@ -87,18 +86,7 @@ const StudentList = () => {
             width: 150,
             render: (_text, record) => (
               <Space size='middle'>
-                <ViewButton
-                  onClick={() =>
-                    dispatch(
-                      openModal({
-                        title: 'View Student',
-                        content: <ViewStudent _id={record._id} />,
-                        open: true,
-                        width: 800,
-                      }),
-                    )
-                  }
-                />
+                <ViewButton path={`/student/${record?._id}`} />
 
                 <EditButton
                   can_update={can_update}
