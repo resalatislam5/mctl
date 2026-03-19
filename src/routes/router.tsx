@@ -3,7 +3,7 @@ import AuthLayout from '../auth/layout/AuthLayout';
 import Login from '../auth/pages/Login';
 import MainLayout from '../layout/pages/MainLayout';
 import { AppRoutes } from './AppRoutes';
-import AccessDenied from '../common/ui/AccessDenied';
+import PermissionRoutes from './PermissionRoutes';
 import ProtectedRoute from './ProtectedRoute';
 
 export const router = createBrowserRouter([
@@ -14,15 +14,13 @@ export const router = createBrowserRouter([
         <MainLayout />
       </ProtectedRoute>
     ),
-    children: AppRoutes.map((item) =>
-      item.name === 'DASHBOARD'
-        ? item
-        : {
-            path: item.path,
-            element: <AccessDenied />,
-            name: item.name,
-          },
-    ),
+    children: AppRoutes.map((item) => {
+      return {
+        path: item.path,
+        element: <PermissionRoutes item={item} />,
+        name: item.name,
+      };
+    }),
   },
   {
     path: '/auth',

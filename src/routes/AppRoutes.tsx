@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+import type { permissionTags } from '../common/hooks/useCheckPermission';
 import AccountList from '../modules/Account/Account/pages/AccountList';
 import ViewBalanceTransfer from '../modules/Account/BalanceTransfer/components/ViewBalanceTransfer';
 import BalanceTransferList from '../modules/Account/BalanceTransfer/pages/BalanceTransferList';
@@ -24,11 +26,17 @@ import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
 import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
 
-export const AppRoutes = [
+export interface IAppRoutes {
+  path: string;
+  element: ReactNode;
+  name: permissionTags;
+}
+
+export const AppRoutes: IAppRoutes[] = [
   {
     path: '/student',
     element: <StudentList />,
-    name: 'DASHBOARD',
+    name: 'STUDENT',
   },
   {
     path: '/student/:id',
@@ -38,116 +46,116 @@ export const AppRoutes = [
   {
     path: '/enrollment',
     element: <EnrollmentList />,
-    name: 'DASHBOARD',
+    name: 'ENROLLMENT',
   },
   {
     path: '/enrollment/:_id',
     element: <ViewEnrollment />,
-    name: 'DASHBOARD',
+    name: 'ENROLLMENT',
   },
   {
     path: '/money-receipt',
     element: <MoneyReceiptList />,
-    name: 'DASHBOARD',
+    name: 'MONEY_RECEIPT',
   },
   {
     path: '/money-receipt/:id',
     element: <ViewMoneyReceipt />,
-    name: 'DASHBOARD',
+    name: 'MONEY_RECEIPT',
   },
   {
     path: '/account/account',
     element: <AccountList />,
-    name: 'DASHBOARD',
+    name: 'ACCOUNT',
   },
   {
     path: '/account/balance-transfer',
     element: <BalanceTransferList />,
-    name: 'DASHBOARD',
+    name: 'BALANCE_TRANSFER',
   },
   {
     path: '/account/balance-transfer/:id',
     element: <ViewBalanceTransfer />,
-    name: 'DASHBOARD',
+    name: 'BALANCE_TRANSFER',
   },
   {
     path: '/expense/head',
     element: <HeadList />,
-    name: 'DASHBOARD',
+    name: 'HEAD',
   },
   {
     path: '/expense/expense-history',
     element: <ExpenseHistoryList />,
-    name: 'DASHBOARD',
+    name: 'EXPENSE_HISTORY',
   },
   {
     path: '/expense/expense-history/:id',
     element: <ViewExpenseHistory />,
-    name: 'DASHBOARD',
+    name: 'EXPENSE_HISTORY',
   },
   {
     path: '/administration/roles',
     element: <RoleList />,
-    name: 'DASHBOARD',
+    name: 'ROLE',
   },
   {
     path: '/administration/user',
     element: <UserList />,
-    name: 'DASHBOARD',
+    name: 'USER',
   },
   {
     path: '/configuration/country',
     element: <CountryList />,
-    name: 'DASHBOARD',
+    name: 'COUNTRY',
   },
   {
     path: '/configuration/division',
     element: <DivisionList />,
-    name: 'DASHBOARD',
+    name: 'DIVISION',
   },
   {
     path: '/configuration/district',
     element: <DistrictList />,
-    name: 'DASHBOARD',
+    name: 'DISTRICT',
   },
   {
     path: '/configuration/upazila',
     element: <UpazilaList />,
-    name: 'DASHBOARD',
+    name: 'UPAZILA',
   },
   {
     path: '/configuration/batch',
     element: <BatchList />,
-    name: 'DASHBOARD',
+    name: 'BATCH',
   },
   {
     path: '/configuration/course',
     element: <CourseList />,
-    name: 'DASHBOARD',
+    name: 'COURSE',
   },
   {
     path: '/configuration/package',
     element: <PackageList />,
-    name: 'DASHBOARD',
+    name: 'PACKAGE',
   },
   {
     path: '/configuration/agent',
     element: <AgentList />,
-    name: 'DASHBOARD',
+    name: 'AGENT',
   },
   {
     path: '/report/audit-log',
     element: <AuditLogReport />,
-    name: 'DASHBOARD',
+    name: 'AUDIT',
   },
   {
     path: '/report/student-ledger',
     element: <StudentLedger />,
-    name: 'DASHBOARD',
+    name: 'STUDENT_LEDGER',
   },
   {
     path: '/report/expense',
     element: <ExpenseReport />,
-    name: 'DASHBOARD',
+    name: 'EXPENSE_REPORT',
   },
 ];

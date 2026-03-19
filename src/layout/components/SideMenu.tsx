@@ -1,4 +1,12 @@
-import { Divider, Image, Layout, Menu, theme, Typography } from 'antd';
+import {
+  Divider,
+  Image,
+  Layout,
+  Menu,
+  Skeleton,
+  theme,
+  Typography,
+} from 'antd';
 import type { SliderProps } from 'antd/es/slider';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
@@ -46,7 +54,7 @@ const SideMenu = ({
   const screens = useBreakpoint();
 
   const onOpenChange = useCallback((keys: string[]) => setOpenKeys(keys), []);
-  const { data } = useCheckPermissionQuery();
+  const { data, isLoading } = useCheckPermissionQuery();
 
   const dispatch = useAppDispatch();
   const menuItems = useMemo(() => {
@@ -95,6 +103,24 @@ const SideMenu = ({
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const skeletonItems = Array.from({ length: 6 }).map((_, i) => ({
+    key: `skeleton-${i}`,
+    label: (
+      <div style={{ width: '100%' }}>
+        <Skeleton.Input
+          active
+          size='small'
+          block
+          style={{
+            height: 16,
+            borderRadius: 4,
+          }}
+        />
+      </div>
+    ),
+    disabled: true,
+  }));
 
   return (
     <Sider
@@ -145,7 +171,7 @@ const SideMenu = ({
         selectedKeys={[normalizePath(location.pathname)]}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
-        items={menuItems}
+        items={isLoading ? skeletonItems : menuItems}
         style={{ borderRight: 0 }}
       />
     </Sider>
