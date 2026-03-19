@@ -25,6 +25,7 @@ import ExpenseReport from '../modules/Report/OnlyGetReport/pages/ExpenseReport';
 import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
 import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
+import Dashboard from '../modules/Dashboard/pages/Dashboard';
 
 export interface IAppRoutes {
   path: string;
@@ -34,6 +35,11 @@ export interface IAppRoutes {
 
 export const AppRoutes: IAppRoutes[] = [
   {
+    path: '/',
+    element: <Dashboard />,
+    name: 'DASHBOARD',
+  },
+  {
     path: '/student',
     element: <StudentList />,
     name: 'STUDENT',
@@ -41,7 +47,7 @@ export const AppRoutes: IAppRoutes[] = [
   {
     path: '/student/:id',
     element: <ViewStudent />,
-    name: 'DASHBOARD',
+    name: 'STUDENT',
   },
   {
     path: '/enrollment',

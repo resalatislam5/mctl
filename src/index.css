@@ -3,6 +3,9 @@
   margin: 0;
 }
 
+/* body {
+  font-family: 'Times New Roman', Times, serif;
+} */
 /* global CSS */
 .ant-modal-mask {
   backdrop-filter: none !important;
