@@ -24,3 +24,23 @@ export interface IExpenseReportQuery {
   to_date: string;
   head_id: string;
 }
+
+export interface IUpcomingInstallment {
+  _id: string;
+  total_amount: string;
+  total_paid: string;
+  installment_date: InstallmentDate[];
+  matched_installments: InstallmentDate[];
+  student_name: string;
+  student_code: string;
+  code: string;
+  admission_date: string;
+}
+
+export interface InstallmentDate {
+  name: string;
+  date: Date;
+}
+export interface IUpcomingInstallmentQuery {
+  date: string;
+}

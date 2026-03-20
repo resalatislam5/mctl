@@ -6,6 +6,8 @@ import type {
   IExpenseReportQuery,
   IStudentLedger,
   IStudentLedgerQuery,
+  IUpcomingInstallment,
+  IUpcomingInstallmentQuery,
 } from '../types/OnlyGetReportTypes';
 
 const onlyGetReportEndpoints = api.injectEndpoints({
@@ -30,8 +32,21 @@ const onlyGetReportEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('EXPENSE_HISTORY')],
     }),
+    getUpcomingInstallment: build.query<
+      Response<IUpcomingInstallment[]>,
+      IUpcomingInstallmentQuery
+    >({
+      query: (query) => ({
+        url: '/report/upcoming-installment',
+        params: query,
+      }),
+      providesTags: () => [CREATE_TAG('ENROLLMENT')],
+    }),
   }),
 });
 
-export const { useGetStudentLedgerQuery, useGetExpenseReportQuery } =
-  onlyGetReportEndpoints;
+export const {
+  useGetStudentLedgerQuery,
+  useGetExpenseReportQuery,
+  useGetUpcomingInstallmentQuery,
+} = onlyGetReportEndpoints;

@@ -191,7 +191,6 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           name={'meal_accommodation'}
           lg={8}
           label={'Meal & Accommodation Fee'}
-          required
         />
         <FormInputNumber
           name={'total_amount'}

@@ -15,6 +15,7 @@ import {
 } from 'antd';
 import type { Rule } from 'antd/es/form';
 import type { RcFile } from 'antd/es/upload';
+import type { Dayjs } from 'dayjs';
 import { useState, type ChangeEvent } from 'react';
 
 type Props = {
@@ -195,12 +196,18 @@ export const FormInputDate = ({
   xxl,
   rules,
   size = 'middle',
-  // onChange,
+  onChange,
   noStyleLabel,
-  value,
+  // value,
   allowClear = true,
+  defaultValue,
   ...rest
-}: Props & { value?: string | null; noStyleLabel?: string }) => {
+}: Omit<Props, 'onChange' | 'defaultValue'> & {
+  value?: string | null;
+  noStyleLabel?: string;
+  onChange?: (date: Dayjs | null) => void;
+  defaultValue?: Dayjs | null;
+}) => {
   return (
     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
       <Form.Item
@@ -223,9 +230,10 @@ export const FormInputDate = ({
           placeholder={placeholder ? placeholder : `Enter Your ${label}`}
           disabled={disabled}
           size={size}
-          // onChange={onChange}
-          value={value || ''}
+          onChange={onChange}
+          // value={value || ''}
           allowClear={allowClear}
+          defaultValue={defaultValue}
         />
       </Form.Item>
     </Col>
