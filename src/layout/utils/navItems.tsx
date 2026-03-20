@@ -171,7 +171,7 @@ export const navItems: INavItem[] = [
         to: '/report/upcoming-installment',
         label: 'Upcoming Installment',
         icon: 'ic:twotone-list',
-        name: 'EXPENSE_REPORT',
+        name: 'UPCOMING_INSTALLMENT',
       },
     ],
   },

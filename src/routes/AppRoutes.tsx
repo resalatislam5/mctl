@@ -168,6 +168,6 @@ export const AppRoutes: IAppRoutes[] = [
   {
     path: '/report/upcoming-installment',
     element: <UpcomingInstallment />,
-    name: 'EXPENSE_REPORT',
+    name: 'UPCOMING_INSTALLMENT',
   },
 ];
