@@ -43,6 +43,7 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
   const total_price = useWatch('total_price', form);
   const discount = useWatch('discount', form);
   const additional_discount = useWatch('additional_discount', form);
+  const meal_accommodation = useWatch('meal_accommodation', form);
   const course_type = useWatch('course_type', form);
   const package_id = useWatch('package_id', form);
   const installment_type = useWatch('installment_type', form);
@@ -75,11 +76,20 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
         Number(total_price) -
         (Number(total_price) * Number(discount || 0)) / 100;
       const totalAmount =
-        Number(discountPrice) - Number(additional_discount || 0);
+        Number(discountPrice) -
+        Number(additional_discount || 0) +
+        Number(meal_accommodation || 0);
 
       form.setFieldValue('total_amount', totalAmount);
     }
-  }, [total_price, discount, additional_discount, form, course_type]);
+  }, [
+    total_price,
+    discount,
+    additional_discount,
+    form,
+    course_type,
+    meal_accommodation,
+  ]);
 
   useEffect(() => {
     if (packageData) {
@@ -176,6 +186,12 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           label={'Additional Discount'}
           required
           readOnly={course_type === 'PACKAGE'}
+        />
+        <FormInputNumber
+          name={'meal_accommodation'}
+          lg={8}
+          label={'Meal & Accommodation Fee'}
+          required
         />
         <FormInputNumber
           name={'total_amount'}

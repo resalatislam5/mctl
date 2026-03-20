@@ -29,6 +29,7 @@ export interface ICreateEnrollment {
   total_paid: number;
   discount: number;
   additional_discount: number;
+  meal_accommodation: number;
   installment_date: { name: string; date: Date }[];
 
   // frontend
@@ -49,6 +50,7 @@ export interface IViewEnrollment {
   total_paid: string;
   discount: string;
   additional_discount: string;
+  meal_accommodation: string;
   installment_date: InstallmentDate[];
   createdAt: Date;
   updatedAt: Date;

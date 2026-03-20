@@ -34,6 +34,7 @@ const UpdateEnrollment = ({ _id }: Props) => {
     total_paid,
     total_price,
     package_id,
+    meal_accommodation,
   } = data?.data || {};
   const [update, { isLoading }] = useUpdateEnrollmentMutation();
 
@@ -68,6 +69,7 @@ const UpdateEnrollment = ({ _id }: Props) => {
         total_paid,
         total_price,
         package_id,
+        meal_accommodation,
       });
     }
   }, [
@@ -88,6 +90,7 @@ const UpdateEnrollment = ({ _id }: Props) => {
     total_paid,
     total_price,
     package_id,
+    meal_accommodation,
     data,
   ]);
 

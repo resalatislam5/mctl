@@ -37,7 +37,7 @@ const MoneyReceiptList = () => {
           }),
         )
       }
-      title='MoneyReceipt List'
+      title='Money Receipt List'
       options={{ showButton: can_create }}
     >
       <AntTable
