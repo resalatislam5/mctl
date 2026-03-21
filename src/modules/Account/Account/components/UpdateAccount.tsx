@@ -20,6 +20,7 @@ const UpdateAccount = ({ record }: Props) => {
     bank_name,
     branch_name,
     opening_balance,
+    charge_percent,
   } = record;
   const [update, { isLoading }] = useUpdateAccountMutation();
 
@@ -43,6 +44,7 @@ const UpdateAccount = ({ record }: Props) => {
         bank_name,
         branch_name,
         opening_balance,
+        charge_percent,
       });
     }
   }, [
@@ -55,6 +57,7 @@ const UpdateAccount = ({ record }: Props) => {
     bank_name,
     branch_name,
     opening_balance,
+    charge_percent,
     record,
   ]);
 

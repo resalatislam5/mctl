@@ -61,6 +61,17 @@ const AccountInputs = ({ onFinish, form, loading, editMode }: Props) => {
             />
           </>
         )}
+        {account_type === ACCOUNT_TYPE.MOBILE_BANKING && (
+          <>
+            <FormInputNumber
+              lg={12}
+              name={'charge_percent'}
+              label={'Charge (%)'}
+              required
+              step={0.1}
+            />
+          </>
+        )}
         <FormInputNumber
           lg={12}
           name={'opening_balance'}

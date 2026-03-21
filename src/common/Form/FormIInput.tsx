@@ -260,8 +260,9 @@ export const FormInputNumber = ({
   allowClear = true,
   readOnly,
   noStyleLabel,
+  step,
   ...rest
-}: Props & { value?: string | null; noStyleLabel?: string }) => {
+}: Props & { value?: string | null; noStyleLabel?: string; step?: number }) => {
   return (
     <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
       <Form.Item
@@ -287,6 +288,7 @@ export const FormInputNumber = ({
           value={value || ''}
           allowClear={allowClear}
           readOnly={readOnly}
+          step={step}
         />
       </Form.Item>
     </Col>

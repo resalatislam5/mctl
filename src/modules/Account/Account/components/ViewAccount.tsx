@@ -12,6 +12,7 @@ const ViewAccount = ({ record }: { record: IAccountList }) => {
     branch_name,
     opening_balance,
     available_balance,
+    charge_percent,
   } = record || {};
   return (
     <Card className='modal-container'>
@@ -49,6 +50,15 @@ const ViewAccount = ({ record }: { record: IAccountList }) => {
                   key: 'acc_number',
                   label: 'Acc Number',
                   children: acc_number,
+                },
+              ]
+            : []),
+          ...(charge_percent
+            ? [
+                {
+                  key: 'charge_percent',
+                  label: 'Charge (%)',
+                  children: charge_percent,
                 },
               ]
             : []),

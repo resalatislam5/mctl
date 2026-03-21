@@ -3,6 +3,7 @@ export interface IAccountList {
   account_type: 'CASH' | 'BANK' | 'MOBILE_BANKING';
   name: string;
   acc_number: string;
+  charge_percent: string;
   bank_name: string;
   branch_name: string;
   opening_balance: string;
@@ -22,6 +23,7 @@ export interface ICreateAccount {
   account_type: 'CASH' | 'BANK' | 'MOBILE_BANKING';
   name: string;
   acc_number: string;
+  charge_percent: string;
   bank_name: string;
   branch_name: string;
   opening_balance: string;
