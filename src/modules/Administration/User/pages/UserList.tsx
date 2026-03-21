@@ -50,6 +50,7 @@ const UserList = () => {
             render: (text) => dateAndTimeFormat(text),
           },
           { dataIndex: 'name', key: 'name', title: 'Name' },
+          { dataIndex: 'role_name', key: 'role_name', title: 'Role' },
           { dataIndex: 'email', key: 'email', title: 'Email' },
           {
             dataIndex: 'status',

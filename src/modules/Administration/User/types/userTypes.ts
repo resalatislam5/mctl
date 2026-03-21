@@ -4,6 +4,7 @@ export interface IUserList {
   email: string;
   password: string;
   role_id: string;
+  role_name: string;
   status: string;
   createdAt: Date;
   updatedAt: Date;
