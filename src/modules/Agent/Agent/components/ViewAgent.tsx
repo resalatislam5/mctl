@@ -9,9 +9,8 @@ const ViewAgent = ({ record }: { record: IAgentList }) => {
     min_limit,
     mobile_no,
     name,
-    paid_amount,
+    min_payment_percent,
     status,
-    total_amount,
   } = record || {};
   return (
     <Card className='modal-container'>
@@ -24,17 +23,12 @@ const ViewAgent = ({ record }: { record: IAgentList }) => {
           { key: 'mobile', label: 'Mobile', children: mobile_no },
           { key: 'commission', label: 'Commission', children: commission },
           { key: 'min_limit', label: 'Min Limit', children: min_limit },
-          { key: 'paid_amount', label: 'Paid Amount', children: paid_amount },
           {
-            key: 'total_amount',
-            label: 'Total Amount',
-            children: total_amount,
+            key: 'min_payment_percent',
+            label: 'Min Payment',
+            children: min_payment_percent,
           },
-          {
-            key: 'payable_amount',
-            label: 'Payable Amount',
-            children: Number(total_amount) - Number(paid_amount),
-          },
+
           {
             key: 'status',
             label: 'Status',

@@ -20,19 +20,25 @@ const AgentInputs = ({ onFinish, form, loading, editMode }: Props) => {
   return (
     <Form onFinish={onFinish} form={form}>
       <Row gutter={[8, 8]}>
-        <FormInputText lg={24} name={'name'} label={'Name'} required />
-        <FormInputEmail lg={24} name={'email'} label={'Email'} required />
-        <FormInputMobile lg={24} name={'mobile_no'} label={'Mobile'} required />
+        <FormInputText lg={12} name={'name'} label={'Name'} required />
+        <FormInputEmail lg={12} name={'email'} label={'Email'} required />
+        <FormInputMobile lg={12} name={'mobile_no'} label={'Mobile'} required />
         <FormInputNumber
-          lg={24}
+          lg={12}
           name={'min_limit'}
           label={'Min Limit'}
           required
         />
         <FormInputNumber
-          lg={24}
+          lg={12}
           name={'commission'}
           label={'Commission (%)'}
+          required
+        />
+        <FormInputNumber
+          lg={12}
+          name={'min_payment_percent'}
+          label={'Min payment (%)'}
           required
         />
 
@@ -40,7 +46,7 @@ const AgentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           <FormInputSelect
             name={'status'}
             label={'Status'}
-            lg={24}
+            lg={12}
             options={[
               { label: 'ACTIVE', value: 'ACTIVE' },
               { label: 'INACTIVE', value: 'INACTIVE' },

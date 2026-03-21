@@ -34,7 +34,7 @@ const AgentList = () => {
             title: 'Create Agent',
             content: <CreateAgent />,
             open: true,
-            width: 600,
+            width: 700,
           }),
         )
       }
@@ -77,7 +77,7 @@ const AgentList = () => {
                         title: 'View Agent',
                         content: <ViewAgent record={record} />,
                         open: true,
-                        width: 600,
+                        width: 700,
                       }),
                     )
                   }
@@ -90,7 +90,7 @@ const AgentList = () => {
                         title: 'Edit Agent',
                         content: <UpdateAgent record={record} />,
                         open: true,
-                        width: 600,
+                        width: 700,
                       }),
                     )
                   }

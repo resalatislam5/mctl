@@ -54,6 +54,21 @@ export const navItems: INavItem[] = [
     ],
   },
   {
+    key: '/agent',
+    to: '/agent',
+    label: 'Agent',
+    icon: 'mdi:face-agent',
+    children: [
+      {
+        key: '/agent/agent',
+        to: '/agent/agent',
+        label: 'Agent List',
+        icon: 'ic:twotone-list',
+        name: 'AGENT',
+      },
+    ],
+  },
+  {
     key: '/expense',
     to: '/expense',
     label: 'Expense',
@@ -129,13 +144,6 @@ export const navItems: INavItem[] = [
         label: 'Package List',
         icon: 'ic:twotone-list',
         name: 'PACKAGE',
-      },
-      {
-        key: '/configuration/agent',
-        to: '/configuration/agent',
-        label: 'Agent List',
-        icon: 'ic:twotone-list',
-        name: 'AGENT',
       },
     ],
   },

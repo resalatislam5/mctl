@@ -11,7 +11,16 @@ type Props = {
 };
 const UpdateAgent = ({ record }: Props) => {
   const [form] = useForm();
-  const { name, status, _id, commission, email, min_limit, mobile_no } = record;
+  const {
+    name,
+    status,
+    _id,
+    commission,
+    email,
+    min_limit,
+    mobile_no,
+    min_payment_percent,
+  } = record;
   const [update, { isLoading }] = useUpdateAgentMutation();
 
   const onFinish = (values: ICreateAgent) => {
@@ -32,9 +41,20 @@ const UpdateAgent = ({ record }: Props) => {
         email,
         min_limit,
         mobile_no,
+        min_payment_percent,
       });
     }
-  }, [form, name, status, commission, email, min_limit, mobile_no, record]);
+  }, [
+    form,
+    name,
+    status,
+    commission,
+    email,
+    min_limit,
+    mobile_no,
+    min_payment_percent,
+    record,
+  ]);
 
   return (
     <Card size='small' className='modal-container'>

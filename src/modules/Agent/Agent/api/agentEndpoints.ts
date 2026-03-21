@@ -11,7 +11,7 @@ const AgentEndpoints = api.injectEndpoints({
   endpoints: (build) => ({
     getAgentList: build.query<Response<IAgentList[]>, IAgentQuery>({
       query: (params) => ({
-        url: '/config/agent',
+        url: '/agent',
         params,
       }),
       providesTags: () => [CREATE_TAG('AGENT')],
@@ -19,7 +19,7 @@ const AgentEndpoints = api.injectEndpoints({
 
     createAgent: build.mutation<Response<string>, ICreateAgent>({
       query: (body) => ({
-        url: '/config/agent',
+        url: '/agent',
         method: 'POST',
         body,
       }),
@@ -30,7 +30,7 @@ const AgentEndpoints = api.injectEndpoints({
       { body: ICreateAgent; id: string }
     >({
       query: ({ body, id }) => ({
-        url: `/config/agent/${id}`,
+        url: `/agent/${id}`,
         method: 'PATCH',
         body,
       }),
@@ -39,7 +39,7 @@ const AgentEndpoints = api.injectEndpoints({
 
     deleteAgent: build.mutation<Response<string>, string>({
       query: (id) => ({
-        url: `/config/agent/${id}`,
+        url: `/agent/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: () => [CREATE_TAG('AGENT')],

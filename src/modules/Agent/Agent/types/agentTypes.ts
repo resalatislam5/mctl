@@ -5,8 +5,7 @@ export interface IAgentList {
   mobile_no: string;
   min_limit: number;
   commission: number;
-  total_amount: number;
-  paid_amount: number;
+  min_payment_percent: number;
   status: string;
   createdAt: string;
   updatedAt: string;
@@ -20,7 +19,10 @@ export type IAgentQuery = Partial<{
 }>;
 export interface ICreateAgent {
   name: string;
-  code: string;
-  country_id: string;
+  email: string;
+  mobile_no: string;
+  min_limit: number;
+  commission: number;
+  min_payment_percent: number;
   status: 'ACTIVE' | 'INACTIVE';
 }

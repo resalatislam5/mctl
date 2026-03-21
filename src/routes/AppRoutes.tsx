@@ -5,7 +5,7 @@ import ViewBalanceTransfer from '../modules/Account/BalanceTransfer/components/V
 import BalanceTransferList from '../modules/Account/BalanceTransfer/pages/BalanceTransferList';
 import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
-import AgentList from '../modules/Configuration/Agent/pages/AgentList';
+import AgentList from '../modules/Agent/Agent/pages/AgentList';
 import BatchList from '../modules/Configuration/BatchNo/pages/BatchList';
 import CountryList from '../modules/Configuration/Country/pages/CountryList';
 import CourseList from '../modules/Configuration/Course/pages/CourseList';
@@ -146,7 +146,7 @@ export const AppRoutes: IAppRoutes[] = [
     name: 'PACKAGE',
   },
   {
-    path: '/configuration/agent',
+    path: '/agent/agent',
     element: <AgentList />,
     name: 'AGENT',
   },
