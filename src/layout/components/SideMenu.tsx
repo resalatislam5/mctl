@@ -80,17 +80,40 @@ const SideMenu = ({
       .map(renderItems);
   }, [data?.data, dispatch]);
 
-  useEffect(() => {
-    const matchingKeys: string[] = navItems
-      .filter((item) =>
-        item.children?.some((child) =>
-          location.pathname.startsWith(String(child.to)),
-        ),
-      )
-      .map((item) => item.key);
+  // useEffect(() => {
+  //   const matchingKeys: string[] = navItems
+  //     .filter((item) =>
+  //       item.children?.some((child) =>
+  //         location.pathname.startsWith(String(child.to)),
+  //       ),
+  //     )
+  //     .map((item) => item.key);
 
-    setOpenKeys(matchingKeys);
-  }, [location.pathname]);
+  //   setOpenKeys(matchingKeys);
+  // }, [location.pathname]);
+
+  useEffect(() => {
+    if (!menuItems.length) return;
+
+    const findParentKeys = (items: any[], path: string): string[] => {
+      for (const item of items) {
+        if (item.children) {
+          const matchedChild = item.children.find((child: any) =>
+            path.startsWith(child.key),
+          );
+
+          if (matchedChild) {
+            return [item.key];
+          }
+        }
+      }
+      return [];
+    };
+
+    const keys = findParentKeys(menuItems, normalizePath(location.pathname));
+
+    setOpenKeys(keys);
+  }, [location.pathname, menuItems]);
 
   useEffect(() => {
     if (!screens.md) {
