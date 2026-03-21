@@ -91,7 +91,7 @@ const selectEndpoints = api.injectEndpoints({
     }),
     getAgentSelect: build.query<Response<IAgentSelect[]>, object>({
       query: (params) => ({
-        url: '/config/agent/select',
+        url: '/agent/select',
         params,
       }),
       providesTags: () => [CREATE_TAG('AGENT')],

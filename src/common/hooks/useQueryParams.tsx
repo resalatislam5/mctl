@@ -5,7 +5,9 @@ import { cleanQuery } from '../utils/cleanQuery';
 
 type QueryParams = Record<string, any>;
 
-export const useQueryParams = <T extends QueryParams = QueryParams>() => {
+export const useQueryParams = <T extends QueryParams = QueryParams>(
+  pagination: boolean = true,
+) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const filterValue = useAppSelector((store) => store.filter);
 
@@ -35,12 +37,17 @@ export const useQueryParams = <T extends QueryParams = QueryParams>() => {
     searchParams.forEach((value, key) => {
       (obj as any)[key] = value;
     });
-
-    return {
-      ...filterValue,
-      ...obj,
-    } as unknown as T;
-  }, [searchParams, filterValue]);
+    if (pagination) {
+      return {
+        ...filterValue,
+        ...obj,
+      } as unknown as T;
+    } else {
+      return {
+        ...obj,
+      } as unknown as T;
+    }
+  }, [searchParams, filterValue, pagination]);
 
   return {
     query: queryObject,

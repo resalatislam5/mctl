@@ -27,6 +27,7 @@ import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
 import Dashboard from '../modules/Dashboard/pages/Dashboard';
 import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
+import AgentCommissionList from '../modules/Agent/AgentCommission/pages/AgentCommissionList';
 
 export interface IAppRoutes {
   path: string;
@@ -149,6 +150,11 @@ export const AppRoutes: IAppRoutes[] = [
     path: '/agent/agent',
     element: <AgentList />,
     name: 'AGENT',
+  },
+  {
+    path: '/agent/agent-commission',
+    element: <AgentCommissionList />,
+    name: 'AGENT_COMMISSION',
   },
   {
     path: '/report/audit-log',

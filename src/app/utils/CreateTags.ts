@@ -11,6 +11,7 @@ export const tags = [
   'BATCH',
   'COURSE',
   'AGENT',
+  'AGENT_COMMISSION',
   'AUDIT_LOG',
   'PACKAGE',
   'STUDENT',

@@ -22,6 +22,7 @@ export type permissionTags =
   | 'STUDENT_LEDGER'
   | 'EXPENSE_REPORT'
   | 'UPCOMING_INSTALLMENT'
+  | 'AGENT_COMMISSION'
   | 'BALANCE_TRANSFER';
 
 const DEFAULT_PERMISSION = {

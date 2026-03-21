@@ -66,6 +66,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'AGENT',
       },
+      {
+        key: '-commission',
+        to: '/agent/agent-commission',
+        label: 'Agent Commission List',
+        icon: 'ic:twotone-list',
+        name: 'AGENT_COMMISSION',
+      },
     ],
   },
   {

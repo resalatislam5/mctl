@@ -534,6 +534,7 @@ export const SelectBatch = ({
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
           defaultValue={defaultValue}
+          style={{ width: '100%' }}
         />
       </Form.Item>
     </Col>
@@ -696,8 +697,9 @@ export const SelectAgent = ({
   xxl,
   size = 'middle',
   mode,
-
   onChange,
+  defaultValue,
+  ...rest
 }: Props) => {
   const { data, isLoading } = useGetAgentSelectQuery({});
 
@@ -710,6 +712,7 @@ export const SelectAgent = ({
         label={label}
         rules={[{ required, message: `${label} is required` }]}
         layout={layout}
+        {...rest}
       >
         <Select
           placeholder={`Select ${label}`}
@@ -748,6 +751,8 @@ export const SelectAgent = ({
           }
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
+          style={{ width: '100%' }}
+          defaultValue={defaultValue}
         />
       </Form.Item>
     </Col>
