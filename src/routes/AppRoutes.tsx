@@ -29,6 +29,8 @@ import Dashboard from '../modules/Dashboard/pages/Dashboard';
 import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
 import AgentCommissionList from '../modules/Agent/AgentCommission/pages/AgentCommissionList';
 import AccountLedger from '../modules/Report/OnlyGetReport/pages/AccountLedger';
+import AgentPaymentList from '../modules/Agent/AgentPayment/pages/AgentPaymentList';
+import ViewAgentPayment from '../modules/Agent/AgentPayment/components/ViewAgentPayment';
 
 export interface IAppRoutes {
   path: string;
@@ -156,6 +158,16 @@ export const AppRoutes: IAppRoutes[] = [
     path: '/agent/agent-commission',
     element: <AgentCommissionList />,
     name: 'AGENT_COMMISSION',
+  },
+  {
+    path: '/agent/agent-payment',
+    element: <AgentPaymentList />,
+    name: 'AGENT_PAYMENT',
+  },
+  {
+    path: '/agent/agent-payment/:id',
+    element: <ViewAgentPayment />,
+    name: 'AGENT_PAYMENT',
   },
   {
     path: '/report/audit-log',

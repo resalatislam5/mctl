@@ -3,6 +3,7 @@ import { CREATE_TAG } from '../../app/utils/CreateTags';
 import type { Response } from '../types/common.type';
 import type {
   IAccountSelect,
+  IAgentCommissionSelect,
   IAgentSelect,
   IBatchSelect,
   ICountrySelect,
@@ -124,6 +125,16 @@ const selectEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('HEAD')],
     }),
+    getAgentCommissionSelect: build.query<
+      Response<IAgentCommissionSelect[]>,
+      object
+    >({
+      query: (params) => ({
+        url: '/agent-commission/select',
+        params,
+      }),
+      providesTags: () => [CREATE_TAG('AGENT_COMMISSION')],
+    }),
   }),
 });
 
@@ -142,4 +153,5 @@ export const {
   useGetEnrollmentSelectQuery,
   useGetAccountSelectQuery,
   useGetHeadSelectQuery,
+  useGetAgentCommissionSelectQuery,
 } = selectEndpoints;

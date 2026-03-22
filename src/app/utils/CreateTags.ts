@@ -20,6 +20,7 @@ export const tags = [
   'MONEY_RECEIPT',
   'HEAD',
   'EXPENSE_HISTORY',
+  'AGENT_PAYMENT',
   'BALANCE_TRANSFER',
 ] as const;
 

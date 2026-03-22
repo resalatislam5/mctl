@@ -24,6 +24,7 @@ export type permissionTags =
   | 'UPCOMING_INSTALLMENT'
   | 'AGENT_COMMISSION'
   | 'ACCOUNT_LEDGER'
+  | 'AGENT_PAYMENT'
   | 'BALANCE_TRANSFER';
 
 const DEFAULT_PERMISSION = {

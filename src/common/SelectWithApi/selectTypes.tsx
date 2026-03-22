@@ -65,3 +65,9 @@ export type IHeadSelect = {
   _id: string;
   name: string;
 };
+export type IAgentCommissionSelect = {
+  _id: string;
+  commission_amount: 1;
+  paid_amount: 1;
+  batch_no: 1;
+};

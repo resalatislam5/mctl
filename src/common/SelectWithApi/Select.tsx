@@ -1,7 +1,9 @@
 import type { FormItemProps, SelectProps } from 'antd';
 import { Col, Empty, Form, Select, Space, Spin, Typography } from 'antd';
+import type { ICreateAccount } from '../../modules/Account/Account/types/accountTypes';
 import {
   useGetAccountSelectQuery,
+  useGetAgentCommissionSelectQuery,
   useGetAgentSelectQuery,
   useGetBatchSelectQuery,
   useGetCountrySelectQuery,
@@ -16,7 +18,6 @@ import {
   useGetUpazilaSelectQuery,
   useGetUserSelectQuery,
 } from './SelectEndpoints';
-import type { ICreateAccount } from '../../modules/Account/Account/types/accountTypes';
 
 type Props = {
   label: string;
@@ -819,6 +820,87 @@ export const SelectEnrollment = ({
                   value: _id,
                   searchText: `${code}`,
                 }))
+              : []
+          }
+          mode={mode}
+          allowClear
+          showSearch
+          filterOption={(input, option) =>
+            (option?.searchText ?? '')
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
+          onChange={onChange}
+        />
+      </Form.Item>
+    </Col>
+  );
+};
+export const SelectAgentCommission = ({
+  label,
+  name,
+  required,
+  disabled,
+  layout = 'vertical',
+  xs = 24,
+  sm = 24,
+  md = 24,
+  lg = 12,
+  xl,
+  xxl,
+  size = 'middle',
+  mode,
+  agent_id,
+  onChange,
+  option,
+}: Props & {
+  agent_id?: string;
+  option?: Record<string, string | boolean>;
+}) => {
+  const { data, isLoading } = useGetAgentCommissionSelectQuery(
+    { agent_id },
+    option,
+  );
+
+  // If API returns empty array or undefined
+
+  return (
+    <Col xs={xs} sm={sm} md={md} lg={lg} xl={xl} xxl={xxl}>
+      <Form.Item
+        name={name}
+        label={label}
+        rules={[{ required, message: `${label} is required` }]}
+        layout={layout}
+      >
+        <Select
+          placeholder={`Select ${label}`}
+          disabled={disabled || isLoading}
+          loading={isLoading}
+          size={size}
+          options={
+            data?.data?.length
+              ? data.data.map(
+                  ({ batch_no, paid_amount, commission_amount, _id }) => ({
+                    label: (
+                      <Space
+                        size='small'
+                        title={`${batch_no} - ${Number(commission_amount || 0) - Number(paid_amount || 0)}`}
+                      >
+                        <Typography.Text style={{ fontSize: 14 }} strong>
+                          {batch_no}
+                        </Typography.Text>
+                        -
+                        <Typography.Text style={{ fontSize: 12, color: 'red' }}>
+                          {Number(commission_amount || 0) -
+                            Number(paid_amount || 0)}
+                        </Typography.Text>
+                      </Space>
+                    ),
+                    value: _id,
+                    searchText: `${batch_no}`,
+                  }),
+                )
               : []
           }
           mode={mode}

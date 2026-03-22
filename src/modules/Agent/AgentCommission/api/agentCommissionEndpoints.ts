@@ -19,6 +19,15 @@ const AgentCommissionEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('AGENT_COMMISSION')],
     }),
+    getSingleAgentCommission: build.query<
+      Response<IAgentCommissionList>,
+      string
+    >({
+      query: (id) => ({
+        url: `/agent-commission/${id}`,
+      }),
+      providesTags: () => [CREATE_TAG('AGENT_COMMISSION')],
+    }),
 
     createAgentCommission: build.mutation<
       Response<string>,
@@ -37,4 +46,5 @@ const AgentCommissionEndpoints = api.injectEndpoints({
 export const {
   useCreateAgentCommissionMutation,
   useGetAgentCommissionListQuery,
+  useGetSingleAgentCommissionQuery,
 } = AgentCommissionEndpoints;
