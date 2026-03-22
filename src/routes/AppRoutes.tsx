@@ -28,6 +28,7 @@ import StudentList from '../modules/Student/pages/StudentList';
 import Dashboard from '../modules/Dashboard/pages/Dashboard';
 import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
 import AgentCommissionList from '../modules/Agent/AgentCommission/pages/AgentCommissionList';
+import AccountLedger from '../modules/Report/OnlyGetReport/pages/AccountLedger';
 
 export interface IAppRoutes {
   path: string;
@@ -165,6 +166,11 @@ export const AppRoutes: IAppRoutes[] = [
     path: '/report/student-ledger',
     element: <StudentLedger />,
     name: 'STUDENT_LEDGER',
+  },
+  {
+    path: '/report/account-ledger',
+    element: <AccountLedger />,
+    name: 'ACCOUNT_LEDGER',
   },
   {
     path: '/report/expense',

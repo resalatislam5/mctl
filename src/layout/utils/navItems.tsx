@@ -168,6 +168,13 @@ export const navItems: INavItem[] = [
         name: 'AUDIT',
       },
       {
+        key: '/report/account-ledger',
+        to: '/report/account-ledger',
+        label: 'Account Ledger',
+        icon: 'ic:twotone-list',
+        name: 'ACCOUNT_LEDGER',
+      },
+      {
         key: '/report/student-ledger',
         to: '/report/student-ledger',
         label: 'Student Ledger',

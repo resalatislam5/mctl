@@ -2,6 +2,8 @@ import { api } from '../../../../app/api/api';
 import { CREATE_TAG } from '../../../../app/utils/CreateTags';
 import type { Response } from '../../../../common/types/common.type';
 import type {
+  IAccountLedger,
+  IAccountLedgerQuery,
   IExpenseReport,
   IExpenseReportQuery,
   IStudentLedger,
@@ -42,6 +44,19 @@ const onlyGetReportEndpoints = api.injectEndpoints({
       }),
       providesTags: () => [CREATE_TAG('ENROLLMENT')],
     }),
+    getAccountLedger: build.query<
+      Response<IAccountLedger[]>,
+      IAccountLedgerQuery
+    >({
+      query: (query) => ({
+        url: '/report/account-ledger',
+        params: query,
+      }),
+      providesTags: () => [
+        CREATE_TAG('MONEY_RECEIPT'),
+        CREATE_TAG('EXPENSE_HISTORY'),
+      ],
+    }),
   }),
 });
 
@@ -49,4 +64,5 @@ export const {
   useGetStudentLedgerQuery,
   useGetExpenseReportQuery,
   useGetUpcomingInstallmentQuery,
+  useGetAccountLedgerQuery,
 } = onlyGetReportEndpoints;

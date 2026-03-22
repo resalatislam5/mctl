@@ -44,3 +44,25 @@ export interface InstallmentDate {
 export interface IUpcomingInstallmentQuery {
   date: string;
 }
+
+export interface IAccountLedger {
+  _id: string;
+  account_id: string;
+  money_receipt_id: string;
+  agent_id: string;
+  expense_id: string;
+  type: string;
+  amount: string;
+  charge: string;
+  description: string;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+export interface IAccountLedgerQuery {
+  from_date: string;
+  to_date: string;
+  account_id: string;
+}

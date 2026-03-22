@@ -852,7 +852,9 @@ export const SelectAccount = ({
   mode,
   payment_method,
   onChange,
+  defaultValue,
   option,
+  ...rest
 }: Props & {
   payment_method?: ICreateAccount['account_type'];
   option?: Record<string, string | boolean>;
@@ -871,6 +873,7 @@ export const SelectAccount = ({
         label={label}
         rules={[{ required, message: `${label} is required` }]}
         layout={layout}
+        {...rest}
       >
         <Select
           placeholder={`Select ${label}`}
@@ -902,6 +905,7 @@ export const SelectAccount = ({
           }
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
+          defaultValue={defaultValue}
         />
       </Form.Item>
     </Col>
