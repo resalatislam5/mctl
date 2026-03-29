@@ -47,6 +47,7 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
   const course_type = useWatch('course_type', form);
   const package_id = useWatch('package_id', form);
   const installment_type = useWatch('installment_type', form);
+  const course_mode = useWatch('course_mode', form);
 
   const { data: courseData } = useGetCourseListQuery(
     {},
@@ -71,17 +72,16 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
   }, [course_ids, form, courseData]);
 
   useEffect(() => {
-    if (course_type === 'SPECIFIC') {
-      const discountPrice =
-        Number(total_price) -
-        (Number(total_price) * Number(discount || 0)) / 100;
-      const totalAmount =
-        Number(discountPrice) -
-        Number(additional_discount || 0) +
-        Number(meal_accommodation || 0);
+    // if (course_type === 'SPECIFIC') {
+    const discountPrice =
+      Number(total_price) - (Number(total_price) * Number(discount || 0)) / 100;
+    const totalAmount =
+      Number(discountPrice) -
+      Number(additional_discount || 0) +
+      Number(meal_accommodation || 0);
 
-      form.setFieldValue('total_amount', totalAmount);
-    }
+    form.setFieldValue('total_amount', totalAmount);
+    // }
   }, [
     total_price,
     discount,
@@ -132,6 +132,7 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
             { label: 'ONLINE', value: 'ONLINE' },
             { label: 'OFFLINE', value: 'OFFLINE' },
           ]}
+          onChange={() => form.resetFields(['meal_accommodation'])}
           required
         />
         <FormInputSelect
@@ -187,11 +188,13 @@ const EnrollmentInputs = ({ onFinish, form, loading, editMode }: Props) => {
           required
           readOnly={course_type === 'PACKAGE'}
         />
-        <FormInputNumber
-          name={'meal_accommodation'}
-          lg={8}
-          label={'Meal & Accommodation Fee'}
-        />
+        {course_mode === 'OFFLINE' && (
+          <FormInputNumber
+            name={'meal_accommodation'}
+            lg={8}
+            label={'Meal & Accommodation Fee'}
+          />
+        )}
         <FormInputNumber
           name={'total_amount'}
           lg={8}
