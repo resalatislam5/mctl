@@ -6,6 +6,9 @@ import BalanceTransferList from '../modules/Account/BalanceTransfer/pages/Balanc
 import RoleList from '../modules/Administration/Role/pages/RoleList';
 import UserList from '../modules/Administration/User/pages/UserList';
 import AgentList from '../modules/Agent/Agent/pages/AgentList';
+import AgentCommissionList from '../modules/Agent/AgentCommission/pages/AgentCommissionList';
+import ViewAgentPayment from '../modules/Agent/AgentPayment/components/ViewAgentPayment';
+import AgentPaymentList from '../modules/Agent/AgentPayment/pages/AgentPaymentList';
 import BatchList from '../modules/Configuration/BatchNo/pages/BatchList';
 import CountryList from '../modules/Configuration/Country/pages/CountryList';
 import CourseList from '../modules/Configuration/Course/pages/CourseList';
@@ -13,6 +16,7 @@ import DistrictList from '../modules/Configuration/District/pages/DistrictList';
 import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
+import Dashboard from '../modules/Dashboard/pages/Dashboard';
 import ViewEnrollment from '../modules/Enrollment/components/ViewEnrollment';
 import EnrollmentList from '../modules/Enrollment/pages/EnrollmentList';
 import ViewExpenseHistory from '../modules/Expense/ExpenseHistory/components/ViewExpenseHistory';
@@ -20,17 +24,18 @@ import ExpenseHistoryList from '../modules/Expense/ExpenseHistory/pages/ExpenseH
 import HeadList from '../modules/Expense/Head/pages/HeadList';
 import ViewMoneyReceipt from '../modules/MoneyReceipt/components/ViewMoneyReceipt';
 import MoneyReceiptList from '../modules/MoneyReceipt/pages/MoneyReceiptList';
+import ChangePassword from '../modules/Profile/pages/ChangePassword';
+import Themes from '../modules/Profile/pages/Themes';
+
 import AuditLogReport from '../modules/Report/AuditLog/pages/AuditLogReport';
+import AccountLedger from '../modules/Report/OnlyGetReport/pages/AccountLedger';
 import ExpenseReport from '../modules/Report/OnlyGetReport/pages/ExpenseReport';
 import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
+import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
 import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
-import Dashboard from '../modules/Dashboard/pages/Dashboard';
-import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
-import AgentCommissionList from '../modules/Agent/AgentCommission/pages/AgentCommissionList';
-import AccountLedger from '../modules/Report/OnlyGetReport/pages/AccountLedger';
-import AgentPaymentList from '../modules/Agent/AgentPayment/pages/AgentPaymentList';
-import ViewAgentPayment from '../modules/Agent/AgentPayment/components/ViewAgentPayment';
+import ProfileLayout from '../modules/Profile/layout/ProfileLayout';
+import ProfileSettings from '../modules/Profile/pages/ProfileSetting';
 
 export interface IAppRoutes {
   path: string;
@@ -42,6 +47,33 @@ export const AppRoutes: IAppRoutes[] = [
   {
     path: '/',
     element: <Dashboard />,
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/profile',
+    element: (
+      <ProfileLayout>
+        <ProfileSettings />
+      </ProfileLayout>
+    ),
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/profile/password',
+    element: (
+      <ProfileLayout>
+        <ChangePassword />
+      </ProfileLayout>
+    ),
+    name: 'DASHBOARD',
+  },
+  {
+    path: '/profile/themes',
+    element: (
+      <ProfileLayout>
+        <Themes />
+      </ProfileLayout>
+    ),
     name: 'DASHBOARD',
   },
   {

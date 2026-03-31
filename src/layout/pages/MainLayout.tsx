@@ -15,7 +15,7 @@ import {
   type MenuProps,
 } from 'antd';
 import { useCallback, useRef, useState } from 'react';
-import { Outlet } from 'react-router';
+import { Link, Outlet } from 'react-router';
 import { toggleTheme } from '../../app/features/themeSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks/hooks';
 import SideMenu from '../components/SideMenu';
@@ -23,6 +23,14 @@ import SideMenu from '../components/SideMenu';
 const { Header } = Layout;
 
 const items: MenuProps['items'] = [
+  {
+    label: (
+      <Link to='/profile'>
+        <Button>Profile</Button>
+      </Link>
+    ),
+    key: 'profile',
+  },
   {
     label: (
       <Button
