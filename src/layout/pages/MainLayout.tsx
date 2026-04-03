@@ -1,4 +1,5 @@
 import {
+  LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   UserOutlined,
@@ -22,29 +23,65 @@ import SideMenu from '../components/SideMenu';
 
 const { Header } = Layout;
 
+// const items: MenuProps['items'] = [
+//   {
+//     label: (
+//       <Link to='/profile'>
+//         <Button>Profile</Button>
+//       </Link>
+//     ),
+//     key: 'profile',
+//   },
+//   {
+//     label: (
+//       <Button
+//         onClick={() => {
+//           localStorage.removeItem('mctl_token');
+//           setTimeout(() => {
+//             window.location.href = '/auth/login';
+//           }, 50);
+//         }}
+//       >
+//         Logout
+//       </Button>
+//     ),
+//     key: 'logout',
+//   },
+// ];
+
 const items: MenuProps['items'] = [
   {
+    key: 'profile',
     label: (
-      <Link to='/profile'>
-        <Button>Profile</Button>
+      <Link
+        to='/profile'
+        style={{ display: 'flex', alignItems: 'center', gap: 8 }}
+      >
+        <UserOutlined style={{ fontSize: 13, color: '#6366f1' }} />
+        <span style={{ fontSize: 13, fontWeight: 500, color: '#1e1e2e' }}>
+          Profile
+        </span>
       </Link>
     ),
-    key: 'profile',
   },
   {
+    type: 'divider',
+  },
+  {
+    key: 'logout',
+    danger: true,
     label: (
-      <Button
+      <div
+        style={{ display: 'flex', alignItems: 'center', gap: 8 }}
         onClick={() => {
           localStorage.removeItem('mctl_token');
-          setTimeout(() => {
-            window.location.href = '/auth/login';
-          }, 50);
+          setTimeout(() => (window.location.href = '/auth/login'), 50);
         }}
       >
-        Logout
-      </Button>
+        <LogoutOutlined style={{ fontSize: 13 }} />
+        <span style={{ fontSize: 13, fontWeight: 500 }}>Logout</span>
+      </div>
     ),
-    key: 'logout',
   },
 ];
 
@@ -134,24 +171,36 @@ const MainLayout = () => {
             </Flex> */}
           </Space>
           <Flex gap={16} align='center' style={{ marginRight: 30 }}>
-            <Button size='small' onClick={() => dispatch(toggleTheme())}>
+            <Button
+              size='middle'
+              style={{ padding: '2px 8px' }}
+              onClick={() => dispatch(toggleTheme())}
+            >
               {mode === 'light' ? (
                 <Icon style={{}} icon={'material-symbols:dark-mode'} />
               ) : (
                 <Icon style={{}} icon={'material-symbols:light-mode'} />
               )}
             </Button>
-            {/* <Button size='small'> */}
-            <Dropdown menu={{ items }}>
+
+            <Dropdown
+              menu={{ items }}
+              trigger={['click']}
+              placement='bottomRight'
+              overlayStyle={{ minWidth: 160 }}
+            >
               <Avatar
-                style={{ cursor: 'pointer' }}
-                size='small'
+                size={30}
                 shape='square'
                 icon={<UserOutlined />}
+                style={{
+                  cursor: 'pointer',
+
+                  borderRadius: 6,
+                  fontSize: 13,
+                }}
               />
             </Dropdown>
-
-            {/* </Button> */}
           </Flex>
         </Header>
         <Outlet />
