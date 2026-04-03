@@ -16,6 +16,7 @@ import {
 } from '../api/moneyReceiptEndpoints';
 import CreateMoneyReceipt from '../components/CreateMoneyReceipt';
 import UpdateMoneyReceipt from '../components/UpdateMoneyReceipt';
+import { numberWithComma } from '../../../common/utils/numberFormate';
 
 const MoneyReceiptList = () => {
   const { can_create, can_delete, can_update } =
@@ -71,6 +72,7 @@ const MoneyReceiptList = () => {
             dataIndex: 'amount',
             key: 'amount',
             title: 'Amount',
+            render: (text) => numberWithComma(text),
           },
 
           {

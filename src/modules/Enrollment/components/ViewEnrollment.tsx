@@ -7,6 +7,11 @@ import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 import A4PageContainer from '../../../layout/components/A4PageContainer';
 import ContainerLayout from '../../../layout/components/ContainerLayout';
 import { useGetSingleEnrollmentQuery } from '../api/enrollmentEndpoints';
+import {
+  advanceNumberFormat,
+  dueNumberFormat,
+  numberWithComma,
+} from '../../../common/utils/numberFormate';
 
 type TdWithBgProps = {
   title: React.ReactNode;
@@ -206,18 +211,22 @@ td, th {
                       </tr>
                       <tr>
                         <td colSpan={4}>
-                          <strong>Total Payable Amount:</strong> {total_amount}
+                          <strong>Total Payable Amount:</strong>{' '}
+                          {numberWithComma(total_amount || '')}
                         </td>
                       </tr>
                       <tr>
                         <td colSpan={4}>
-                          <strong>Paid Amount:</strong> {total_paid}
+                          <strong>Paid Amount:</strong>{' '}
+                          {advanceNumberFormat(total_paid || '')}
                         </td>
                       </tr>
                       <tr>
                         <td colSpan={4}>
                           <strong>Due Amount's (if any):</strong>{' '}
-                          {Number(total_amount) - Number(total_paid)}
+                          {dueNumberFormat(
+                            Number(total_amount) - Number(total_paid),
+                          )}
                         </td>
                       </tr>
                       <tr>

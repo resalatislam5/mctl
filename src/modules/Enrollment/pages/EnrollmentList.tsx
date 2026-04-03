@@ -16,6 +16,11 @@ import {
 import CreateEnrollment from '../components/CreateEnrollment';
 import UpdateEnrollment from '../components/UpdateEnrollment';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
+import {
+  advanceNumberFormat,
+  dueNumberFormat,
+  numberWithComma,
+} from '../../../common/utils/numberFormate';
 
 const EnrollmentList = () => {
   const { can_create, can_delete, can_update } =
@@ -71,22 +76,22 @@ const EnrollmentList = () => {
             dataIndex: 'total_amount',
             key: 'total_amount',
             title: 'Total Amount',
+            render: (text) => numberWithComma(text),
           },
           {
             dataIndex: 'total_paid',
             key: 'total_paid',
             title: 'Paid Amount',
-            render: (text) => <p style={{ color: 'green' }}>{text}</p>,
+            render: (text) => advanceNumberFormat(text),
           },
           {
             dataIndex: 'due',
             key: 'due',
             title: 'Due',
-            render: (_, record) => (
-              <p style={{ color: 'red' }}>
-                {Number(record.total_amount) - Number(record?.total_paid)}
-              </p>
-            ),
+            render: (_, record) =>
+              dueNumberFormat(
+                Number(record.total_amount) - Number(record?.total_paid),
+              ),
           },
 
           {

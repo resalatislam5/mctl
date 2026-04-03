@@ -1,4 +1,4 @@
-import { Table } from 'antd';
+import { Table, Typography } from 'antd';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import { SelectAccount } from '../../../../common/SelectWithApi/Select';
 import AntTable from '../../../../common/Table/AntTable';
@@ -85,17 +85,34 @@ const AccountLedger = () => {
             }
           });
           return (
-            <Table.Summary.Row>
-              <Table.Summary.Cell index={0} colSpan={4}></Table.Summary.Cell>
+            <>
+              <Table.Summary.Row>
+                <Table.Summary.Cell index={0} colSpan={4}></Table.Summary.Cell>
 
-              <Table.Summary.Cell index={1}>
-                {dueNumberFormat(total.debit)}
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={2}>
-                {advanceNumberFormat(total?.credit)}
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={3}></Table.Summary.Cell>
-            </Table.Summary.Row>
+                <Table.Summary.Cell index={1}>
+                  {dueNumberFormat(total.debit)}
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={2}>
+                  {advanceNumberFormat(total?.credit)}
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={3}></Table.Summary.Cell>
+              </Table.Summary.Row>
+              <Table.Summary.Row>
+                <Table.Summary.Cell index={0} colSpan={4}>
+                  <Typography.Paragraph
+                    strong
+                    style={{ margin: 0, textAlign: 'right' }}
+                  >
+                    Available Balance:
+                  </Typography.Paragraph>
+                </Table.Summary.Cell>
+                <Table.Summary.Cell index={0} colSpan={4}>
+                  {total.credit > total.debit
+                    ? advanceNumberFormat(total.credit - total.debit)
+                    : dueNumberFormat(total.credit - total.debit)}
+                </Table.Summary.Cell>
+              </Table.Summary.Row>
+            </>
           );
         }}
       />
