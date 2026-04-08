@@ -42,7 +42,8 @@ export interface InstallmentDate {
   date: Date;
 }
 export interface IUpcomingInstallmentQuery {
-  date: string;
+  from_date: string;
+  to_date: string;
 }
 
 export interface IAccountLedger {

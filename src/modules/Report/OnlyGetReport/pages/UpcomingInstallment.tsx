@@ -1,9 +1,7 @@
 import { Card, Divider, Space } from 'antd';
-import dayjs from 'dayjs';
 import { openModal } from '../../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../../app/hooks/hooks';
 import ViewButton from '../../../../common/Button/ViewButton';
-import { FormInputDate } from '../../../../common/Form/FormIInput';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import AntTable from '../../../../common/Table/AntTable';
 import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
@@ -73,11 +71,11 @@ const InstallmentModal = ({ record }: { record: IUpcomingInstallment }) => {
   );
 };
 const UpcomingInstallment = () => {
-  const { query, setQuery } = useQueryParams<IUpcomingInstallmentQuery>();
+  const { query } = useQueryParams<IUpcomingInstallmentQuery>();
   const { data, isLoading, isFetching } = useGetUpcomingInstallmentQuery(
     query,
     {
-      skip: !query?.date,
+      skip: !query?.from_date || !query?.to_date,
     },
   );
 
@@ -86,10 +84,9 @@ const UpcomingInstallment = () => {
   return (
     <ReportContainer
       title='Upcoming Installment'
-      options={{ showDateRange: false }}
       additionalFilter={
         <>
-          <FormInputDate
+          {/* <FormInputDate
             label='Date'
             name='date'
             sm={8}
@@ -98,7 +95,7 @@ const UpcomingInstallment = () => {
             onChange={(e) => setQuery({ date: dayjs(e).format('YYYY-MM-DD') })}
             defaultValue={query.date ? dayjs(query?.date) : null}
             required
-          />
+          /> */}
         </>
       }
     >
