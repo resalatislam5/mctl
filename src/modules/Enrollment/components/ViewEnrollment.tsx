@@ -1,17 +1,17 @@
 import { Flex, Image, Tabs, Typography } from 'antd';
 import type React from 'react';
 import { useParams } from 'react-router';
+import { useAppSelector } from '../../../app/hooks/hooks';
 import Iconify from '../../../common/Table/Iconify';
-import { logo } from '../../../common/ui/image';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
-import A4PageContainer from '../../../layout/components/A4PageContainer';
-import ContainerLayout from '../../../layout/components/ContainerLayout';
-import { useGetSingleEnrollmentQuery } from '../api/enrollmentEndpoints';
 import {
   advanceNumberFormat,
   dueNumberFormat,
   numberWithComma,
 } from '../../../common/utils/numberFormate';
+import A4PageContainer from '../../../layout/components/A4PageContainer';
+import ContainerLayout from '../../../layout/components/ContainerLayout';
+import { useGetSingleEnrollmentQuery } from '../api/enrollmentEndpoints';
 
 type TdWithBgProps = {
   title: React.ReactNode;
@@ -39,6 +39,7 @@ const ViewEnrollment = () => {
   const { _id } = useParams();
   const { data } = useGetSingleEnrollmentQuery(_id as string, { skip: !_id });
 
+  const { user } = useAppSelector((state) => state.auth);
   const {
     student_info,
     course_names,
@@ -86,11 +87,17 @@ td, th {
                 content={
                   <>
                     <Flex justify='space-between'>
-                      <Image src={logo} width={120} height={120} />
+                      <Image
+                        src={user?.logo}
+                        width={300}
+                        height={100}
+                        preview={false}
+                      />
                       <Image
                         src={student_info?.image}
                         width={120}
                         height={120}
+                        preview={false}
                       />
                     </Flex>
                     <Typography.Title
@@ -261,6 +268,27 @@ td, th {
                             Yes, I have read, understood, and accepted MCTL's
                             Terms and Conditions
                           </p>
+                          <Flex
+                            justify='space-between'
+                            style={{ marginTop: 30, marginBottom: 10 }}
+                          >
+                            <Typography.Text
+                              style={{
+                                borderTop: '1px dotted #000',
+                                width: 'fit-content',
+                              }}
+                            >
+                              Student's Signature
+                            </Typography.Text>
+                            <Typography.Text
+                              style={{
+                                borderTop: '1px dotted #000',
+                                width: 'fit-content',
+                              }}
+                            >
+                              Authority's Signature
+                            </Typography.Text>
+                          </Flex>
                           <p>
                             Please return the completed enrolment form to: MCTL
                             Global Private Limited
@@ -279,19 +307,20 @@ td, th {
                         >
                           <Flex align='center' justify='center' gap={8}>
                             <Flex gap={2} style={{ whiteSpace: 'nowrap' }}>
-                              <Iconify icon='mdi:location' /> Building-46,
-                              Nikunja-2, khilkhet,Dhaka-1229,
+                              <Iconify icon='mdi:location' />
+                              {user?.address},
                             </Flex>{' '}
                             <Flex gap={2}>
                               <Iconify icon='mingcute:whatsapp-fill' />{' '}
-                              +8801781242251,
+                              {user?.phone || user?.phone_2},
                             </Flex>
                             <Flex gap={2}>
-                              <Iconify icon='iconoir:internet' /> mctlglobal.com
+                              <Iconify icon='iconoir:internet' />{' '}
+                              {user?.domain_name},
                             </Flex>
                             <Flex gap={2}>
                               <Iconify icon='material-symbols:mail' />{' '}
-                              info@mctlglobal.com
+                              {user?.support_email}
                             </Flex>
                           </Flex>
                         </td>

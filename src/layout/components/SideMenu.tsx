@@ -11,7 +11,7 @@ import type { SliderProps } from 'antd/es/slider';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router';
 import { addUser } from '../../app/features/authSlice';
-import { useAppDispatch } from '../../app/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks/hooks';
 import { useCheckPermissionQuery } from '../../auth/api/authEndpoint';
 import { useBreakpoint } from '../../common/utils/constant';
 import type { INavItem } from '../types/layoutTypes';
@@ -55,6 +55,8 @@ const SideMenu = ({
 
   const onOpenChange = useCallback((keys: string[]) => setOpenKeys(keys), []);
   const { data, isLoading } = useCheckPermissionQuery();
+
+  const { user } = useAppSelector((state) => state.auth);
 
   const dispatch = useAppDispatch();
   const menuItems = useMemo(() => {
@@ -177,12 +179,17 @@ const SideMenu = ({
         }}
       >
         {collapsed ? (
-          <Image src='/logo.png' width={35} height={35} alt='logo' />
+          <Image
+            src={user?.logo || '/no_image.png'}
+            width={35}
+            height={35}
+            alt='logo'
+          />
         ) : (
           <>
             <Divider style={{ margin: 0 }}>Admin Panel</Divider>
             <Typography.Title level={5} style={{ fontWeight: 700 }}>
-              MTCL Global Private Limited
+              {user?.company_name || 'Admin Panel'}
             </Typography.Title>
             <HeaderTime />
           </>

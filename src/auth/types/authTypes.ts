@@ -18,6 +18,14 @@ export interface ICheckPermission {
   name: string;
   email: string;
   permissions: Permission[];
+  logo: string;
+  favicon: string;
+  company_name: string;
+  domain_name: string;
+  support_email: string;
+  address: string;
+  phone: string;
+  phone_2: string;
 }
 
 export interface Permission {

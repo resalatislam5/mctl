@@ -159,6 +159,13 @@ export const navItems: INavItem[] = [
         icon: 'ic:twotone-list',
         name: 'PACKAGE',
       },
+      {
+        key: '/configuration/app-config',
+        to: '/configuration/app-config',
+        label: 'App Config List',
+        icon: 'ic:twotone-list',
+        name: 'APP_CONFIG',
+      },
     ],
   },
   {

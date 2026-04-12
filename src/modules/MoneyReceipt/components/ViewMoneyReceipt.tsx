@@ -1,7 +1,7 @@
-import { Flex, Image, Space, Tabs, theme, Typography } from 'antd';
+import { Flex, Space, Tabs, Typography } from 'antd';
 import type React from 'react';
 import { useParams } from 'react-router';
-import { logo } from '../../../common/ui/image';
+import PrintHeader from '../../../common/print/PrintHeader';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 import A4PageContainer from '../../../layout/components/A4PageContainer';
 import ContainerLayout from '../../../layout/components/ContainerLayout';
@@ -31,7 +31,8 @@ const TwoItem = ({ title, value, style }: TTwoItemProps) => {
         style={{
           borderBottom: '1px dotted #000',
           width: '100%',
-          marginTop: value ? 0 : 20,
+          // marginTop: value ? 0 : 20,
+          marginTop: value ? 0 : value === 0 ? 0 : 20,
         }}
       >
         {value}
@@ -41,7 +42,6 @@ const TwoItem = ({ title, value, style }: TTwoItemProps) => {
 };
 
 const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
-  const { token } = theme.useToken();
   const {
     amount,
     course_type,
@@ -56,7 +56,7 @@ const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
   } = data || {};
   return (
     <div style={{ border: '2px solid #000', padding: '16px' }}>
-      <Flex align='center'>
+      {/* <Flex align='center'>
         <Image src={logo} width={100} height={100} preview={false} />
         <Flex vertical>
           <Typography.Title
@@ -74,8 +74,9 @@ const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
             </Typography.Text>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex vertical gap={16} style={{ width: '100%', marginTop: '8px' }}>
+      </Flex> */}
+      <PrintHeader />
+      <Flex vertical gap={16} style={{ width: '100%', marginTop: '20px' }}>
         <Flex justify='space-between' gap={8}>
           <Space>
             <Typography.Text>Voucher No: </Typography.Text>{' '}

@@ -11,6 +11,11 @@ const initialState: InitialStateType = {
     name: '',
     email: '',
     permissions: [],
+    logo: '',
+    favicon: '',
+    company_name: '',
+    domain_name: '',
+    support_email: '',
   },
 };
 const authSlice = createSlice({

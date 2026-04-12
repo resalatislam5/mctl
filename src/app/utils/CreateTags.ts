@@ -23,6 +23,7 @@ export const tags = [
   'AGENT_PAYMENT',
   'BALANCE_TRANSFER',
   'PROFILE',
+  'APP_CONFIG',
 ] as const;
 
 type tagTypes = (typeof tags)[number];

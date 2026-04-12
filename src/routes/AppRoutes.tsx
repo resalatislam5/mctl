@@ -36,6 +36,7 @@ import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
 import ProfileLayout from '../modules/Profile/layout/ProfileLayout';
 import ProfileSettings from '../modules/Profile/pages/ProfileSetting';
+import AppConfigList from '../modules/AppConfig/pages/AppConfigList';
 
 export interface IAppRoutes {
   path: string;
@@ -180,6 +181,11 @@ export const AppRoutes: IAppRoutes[] = [
     path: '/configuration/package',
     element: <PackageList />,
     name: 'PACKAGE',
+  },
+  {
+    path: '/configuration/app-config',
+    element: <AppConfigList />,
+    name: 'APP_CONFIG',
   },
   {
     path: '/agent/agent',
