@@ -16,6 +16,9 @@ const initialState: InitialStateType = {
     company_name: '',
     domain_name: '',
     support_email: '',
+    address: '',
+    phone: '',
+    phone_2: '',
   },
 };
 const authSlice = createSlice({
