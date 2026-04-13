@@ -1,3 +1,8 @@
+export type IEnrollmentStatus =
+  | 'PENDING'
+  | 'APPROVED'
+  | 'REJECTED'
+  | 'CANCELLED';
 export interface IEnrollmentList {
   _id: string;
   student_id: string;
@@ -7,6 +12,7 @@ export interface IEnrollmentList {
   total_paid: string;
   student_name: string;
   batch_name: null;
+  status: IEnrollmentStatus;
 }
 
 export type IEnrollmentQuery = Partial<{

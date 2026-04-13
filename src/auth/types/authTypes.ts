@@ -26,6 +26,8 @@ export interface ICheckPermission {
   address: string;
   phone: string;
   phone_2: string;
+  enrollment_color: string;
+  short_company_name: string;
 }
 
 export interface Permission {

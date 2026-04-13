@@ -10,6 +10,8 @@ export interface IAppConfig {
   address: string;
   phone: string;
   phone_2: string;
+  enrollment_color: string;
+  short_company_name: string;
 }
 
 export interface ICreateAppConfig {
@@ -21,4 +23,6 @@ export interface ICreateAppConfig {
   address: string;
   phone: string;
   phone_2: string;
+  enrollment_color: string;
+  short_company_name: string;
 }

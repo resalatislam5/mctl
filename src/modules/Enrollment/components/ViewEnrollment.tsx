@@ -19,14 +19,15 @@ type TdWithBgProps = {
 } & React.TdHTMLAttributes<HTMLTableCellElement>;
 
 const TdWithBg = ({ title, style, ...rest }: TdWithBgProps) => {
+  const { user } = useAppSelector((state) => state.auth);
   return (
     <td
       style={{
-        background: '#59757B',
+        background: user?.enrollment_color || '#03645a',
         color: 'white',
         // padding: 5,
         textTransform: 'uppercase',
-        width: 200,
+        width: 100,
         ...style,
       }}
       {...rest}
@@ -35,6 +36,7 @@ const TdWithBg = ({ title, style, ...rest }: TdWithBgProps) => {
     </td>
   );
 };
+
 const ViewEnrollment = () => {
   const { _id } = useParams();
   const { data } = useGetSingleEnrollmentQuery(_id as string, { skip: !_id });
@@ -49,7 +51,7 @@ const ViewEnrollment = () => {
     total_amount,
     total_paid,
   } = data?.data || {};
-  console.log(data);
+  console.log(user?.enrollment_color);
 
   return (
     <ContainerLayout
@@ -68,7 +70,7 @@ const ViewEnrollment = () => {
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 7px;
+  padding: 5px;
   width: '100%'
 }
 
@@ -117,7 +119,7 @@ td, th {
                           {course_names?.map((item, index) => (
                             <span key={item}>
                               {item}
-                              {course_names?.length > index + 1 && ','}
+                              {course_names?.length > index + 1 && ', '}
                             </span>
                           ))}
                         </td>
@@ -299,24 +301,24 @@ td, th {
                         <td
                           style={{
                             textTransform: 'none',
-                            background: '#59757B',
+                            background: user?.enrollment_color || '#03645a',
                             color: 'white',
                             padding: 5,
                           }}
                           colSpan={4}
                         >
-                          <Flex align='center' justify='center' gap={8}>
+                          <Flex align='center' wrap justify='center' gap={8}>
                             <Flex gap={2} style={{ whiteSpace: 'nowrap' }}>
                               <Iconify icon='mdi:location' />
-                              {user?.address},
+                              {user?.address}
                             </Flex>{' '}
                             <Flex gap={2}>
                               <Iconify icon='mingcute:whatsapp-fill' />{' '}
-                              {user?.phone || user?.phone_2},
+                              {user?.phone || user?.phone_2}
                             </Flex>
                             <Flex gap={2}>
                               <Iconify icon='iconoir:internet' />{' '}
-                              {user?.domain_name},
+                              {user?.domain_name}
                             </Flex>
                             <Flex gap={2}>
                               <Iconify icon='material-symbols:mail' />{' '}

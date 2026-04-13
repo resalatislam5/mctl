@@ -10,6 +10,7 @@ import {
 import ReportContainer from '../../../../layout/components/ReportContainer';
 import { useGetAccountLedgerQuery } from '../api/OnlyGetReportEndpoints';
 import type { IAccountLedgerQuery } from '../types/OnlyGetReportTypes';
+import { FormInputSelect } from '../../../../common/Form/FormIInput';
 
 const AccountLedger = () => {
   const { query, setQuery } = useQueryParams<IAccountLedgerQuery>();
@@ -30,6 +31,21 @@ const AccountLedger = () => {
             lg={5}
             onChange={(e) => setQuery({ account_id: e })}
             defaultValue={query.account_id ? query?.account_id : undefined}
+          />
+          <FormInputSelect
+            label='With Balance Transfer'
+            name='is_balance_transfer'
+            sm={8}
+            md={8}
+            lg={5}
+            onChange={(e) => setQuery({ is_balance_transfer: e })}
+            defaultValue={
+              query.is_balance_transfer ? query?.is_balance_transfer : undefined
+            }
+            options={[
+              { label: 'Yes', value: 'true' },
+              { label: 'No', value: 'false' },
+            ]}
           />
         </>
       }

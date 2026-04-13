@@ -38,6 +38,12 @@ const STATUS_COLOR = {
   CREATE: 'green',
   UPDATE: 'orange',
   DELETE: 'red',
+  APPROVED: 'green',
+  PENDING: 'orange',
+  REJECTED: 'red',
+  COMPLETED: 'green',
+  ONGOING: 'orange',
+  CANCELLED: 'red',
 } as const;
 
 import { Tag } from 'antd';

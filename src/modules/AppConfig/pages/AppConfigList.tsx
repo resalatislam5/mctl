@@ -41,10 +41,6 @@ const cardStyle: React.CSSProperties = {
   marginBottom: 12,
 };
 
-const fieldLabel = (text: string) => (
-  <Text style={{ fontSize: 12, color: 'rgba(0,0,0,0.55)' }}>{text}</Text>
-);
-
 const AppConfigList = () => {
   const { can_update } = useCheckPermission('APP_CONFIG');
 
@@ -54,8 +50,16 @@ const AppConfigList = () => {
 
   const [form] = Form.useForm<ICreateAppConfig>();
 
-  const { company_name, domain_name, support_email, address, phone, phone_2 } =
-    data?.data || {};
+  const {
+    company_name,
+    domain_name,
+    support_email,
+    address,
+    phone,
+    phone_2,
+    enrollment_color,
+    short_company_name,
+  } = data?.data || {};
   const onFinish = (values: ICreateAppConfig) => {
     const body = sanitizeFormData(values, { fileKeys: ['logo', 'favicon'] });
     updateAppConfig(body);
@@ -72,6 +76,8 @@ const AppConfigList = () => {
         address,
         phone,
         phone_2,
+        enrollment_color,
+        short_company_name,
       });
     }
   }, [
@@ -83,6 +89,8 @@ const AppConfigList = () => {
     address,
     phone,
     phone_2,
+    enrollment_color,
+    short_company_name,
   ]);
 
   return (
@@ -115,11 +123,15 @@ const AppConfigList = () => {
           <div style={cardStyle}>
             <Row gutter={[8, 8]}>
               <FormInputText name={'company_name'} label={'Company Name'} />
+              <FormInputText
+                name={'short_company_name'}
+                label={'Short Company Name'}
+              />
               <FormInputText name={'domain_name'} label={'Domain Name'} />
               <FormInputText name={'support_email'} label={'Support Email'} />
               <FormInputText name={'address'} label={'Address'} />
               <FormInputText name={'phone'} label={'Phone'} />
-              <FormInputText name={'phone_2'} label={'Phone 2'} />
+              <FormInputText name={'phone_2'} label={'Secondary Phone'} />
             </Row>
           </div>
         </div>
@@ -135,34 +147,55 @@ const AppConfigList = () => {
                 gap: '0 16px',
               }}
             >
-              <Form.Item
-                label={fieldLabel('Primary color')}
-                name='primaryColor'
+              {/* <Form.Item
+                label={'Enrollment Form Color'}
+                name='enrollment_color'
                 style={{ marginBottom: 0 }}
               >
                 <Space>
-                  <ColorPicker size='middle' defaultValue='#1677ff' />
+                  <ColorPicker size='middle' />
                   <Input
                     size='middle'
-                    defaultValue='#1677ff'
+                    placeholder='#03645a'
                     style={{ width: 100 }}
                   />
                 </Space>
-              </Form.Item>
+              </Form.Item> */}
+              <Form.Item
+                label='Enrollment Form Color'
+                name='enrollment_color'
+                style={{ marginBottom: 0 }}
+              >
+                <Form.Item noStyle shouldUpdate>
+                  {({ getFieldValue, setFieldsValue }) => {
+                    const color = getFieldValue('enrollment_color');
 
-              <Form.Item
-                label={fieldLabel('Accent color')}
-                name='accentColor'
-                style={{ marginBottom: 0 }}
-              >
-                <Space>
-                  <ColorPicker size='middle' defaultValue='#52c41a' />
-                  <Input
-                    size='middle'
-                    defaultValue='#52c41a'
-                    style={{ width: 100 }}
-                  />
-                </Space>
+                    return (
+                      <Space>
+                        <ColorPicker
+                          value={color}
+                          onChange={(color) => {
+                            setFieldsValue({
+                              enrollment_color: color.toHexString(),
+                            });
+                          }}
+                        />
+
+                        <Input
+                          size='middle'
+                          placeholder='#03645a'
+                          style={{ width: 100 }}
+                          value={color}
+                          onChange={(e) => {
+                            setFieldsValue({
+                              enrollment_color: e.target.value,
+                            });
+                          }}
+                        />
+                      </Space>
+                    );
+                  }}
+                </Form.Item>
               </Form.Item>
             </div>
           </div>

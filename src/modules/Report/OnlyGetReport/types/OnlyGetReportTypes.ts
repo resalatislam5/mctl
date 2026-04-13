@@ -66,4 +66,5 @@ export interface IAccountLedgerQuery {
   from_date: string;
   to_date: string;
   account_id: string;
+  is_balance_transfer: boolean;
 }

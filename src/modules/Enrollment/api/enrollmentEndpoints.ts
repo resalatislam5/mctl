@@ -5,6 +5,7 @@ import type {
   ICreateEnrollment,
   IEnrollmentList,
   IEnrollmentQuery,
+  IEnrollmentStatus,
   IViewEnrollment,
 } from '../types/enrollmentTypes';
 
@@ -53,6 +54,17 @@ const enrollmentEndpoints = api.injectEndpoints({
       }),
       invalidatesTags: () => [CREATE_TAG('ENROLLMENT')],
     }),
+    updateEnrollmentStatus: build.mutation<
+      Response<string>,
+      { id: string; status: IEnrollmentStatus }
+    >({
+      query: ({ id, status }) => ({
+        url: `/enrollment/${id}/status`,
+        method: 'PATCH',
+        body: { status },
+      }),
+      invalidatesTags: () => [CREATE_TAG('ENROLLMENT')],
+    }),
   }),
 });
 
@@ -62,4 +74,5 @@ export const {
   useUpdateEnrollmentMutation,
   useDeleteEnrollmentMutation,
   useGetSingleEnrollmentQuery,
+  useUpdateEnrollmentStatusMutation,
 } = enrollmentEndpoints;

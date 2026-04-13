@@ -1,4 +1,4 @@
-import { Space } from 'antd';
+import { Dropdown, Space, Tag } from 'antd';
 
 import { openModal } from '../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../app/hooks/hooks';
@@ -8,19 +8,21 @@ import ViewButton from '../../../common/Button/ViewButton';
 import useCheckPermission from '../../../common/hooks/useCheckPermission';
 import { useQueryParams } from '../../../common/hooks/useQueryParams';
 import AntTable from '../../../common/Table/AntTable';
-import ContainerLayout from '../../../layout/components/ContainerLayout';
-import {
-  useDeleteEnrollmentMutation,
-  useGetEnrollmentListQuery,
-} from '../api/enrollmentEndpoints';
-import CreateEnrollment from '../components/CreateEnrollment';
-import UpdateEnrollment from '../components/UpdateEnrollment';
+import Iconify from '../../../common/Table/Iconify';
 import { dateAndTimeFormat } from '../../../common/utils/helper.function';
 import {
   advanceNumberFormat,
   dueNumberFormat,
   numberWithComma,
 } from '../../../common/utils/numberFormate';
+import ContainerLayout from '../../../layout/components/ContainerLayout';
+import {
+  useDeleteEnrollmentMutation,
+  useGetEnrollmentListQuery,
+  useUpdateEnrollmentStatusMutation,
+} from '../api/enrollmentEndpoints';
+import CreateEnrollment from '../components/CreateEnrollment';
+import UpdateEnrollment from '../components/UpdateEnrollment';
 
 const EnrollmentList = () => {
   const { can_create, can_delete, can_update } =
@@ -29,7 +31,7 @@ const EnrollmentList = () => {
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetEnrollmentListQuery(query);
   const [deleting, { isLoading: isDeleting }] = useDeleteEnrollmentMutation();
-
+  const [updateStatus] = useUpdateEnrollmentStatusMutation();
   return (
     <ContainerLayout
       onClick={() =>
@@ -101,6 +103,82 @@ const EnrollmentList = () => {
             render: (_text, record) => (
               <Space size='middle'>
                 <ViewButton path={`/enrollment/${record?._id}`} />
+                <Dropdown
+                  menu={{
+                    items: [
+                      {
+                        label: (
+                          <p
+                            onClick={() =>
+                              updateStatus({
+                                id: record?._id,
+                                status: 'APPROVED',
+                              })
+                            }
+                            style={{ color: 'green' }}
+                          >
+                            APPROVED
+                          </p>
+                        ),
+
+                        key: 'APPROVED',
+                      },
+                      // { label: 'Pending', key: 'pending' },
+                      {
+                        label: (
+                          <p
+                            onClick={() =>
+                              updateStatus({
+                                id: record?._id,
+                                status: 'CANCELLED',
+                              })
+                            }
+                            style={{ color: 'orange' }}
+                          >
+                            CANCELLED
+                          </p>
+                        ),
+
+                        key: 'CANCELLED',
+                      },
+                      {
+                        label: (
+                          <p
+                            onClick={() =>
+                              updateStatus({
+                                id: record?._id,
+                                status: 'REJECTED',
+                              })
+                            }
+                            style={{ color: 'red' }}
+                          >
+                            REJECTED
+                          </p>
+                        ),
+
+                        key: 'REJECTED',
+                      },
+                    ],
+                  }}
+                >
+                  <Tag
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}
+                    color={
+                      record?.status === 'APPROVED'
+                        ? 'green'
+                        : record?.status === 'REJECTED'
+                          ? 'red'
+                          : 'orange'
+                    }
+                  >
+                    {record?.status}
+                    <Iconify icon='iconamoon:arrow-down-2-light' />
+                  </Tag>
+                </Dropdown>
 
                 <EditButton
                   can_update={can_update}
