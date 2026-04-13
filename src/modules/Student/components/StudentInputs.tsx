@@ -34,11 +34,20 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
       <Row gutter={[8, 8]}>
         <FormInputText lg={8} name={'name'} label={'Name'} required />
         <FormInputEmail lg={8} name={'email'} label={'Email'} required />
-        <FormInputText lg={8} name={'code'} label={'Code'} required />
+        <FormInputText lg={8} name={'code'} label={'Code'} />
         <FormInputMobile
           lg={8}
           name={'mobile_no'}
           label={'Mobile No'}
+          required
+        />
+        <FormInputText lg={8} name={'education'} label={'Education'} required />
+        <FormInputText lg={8} name={'nid_no'} label={'NID'} required />
+        <FormInputDate lg={8} name={'dob'} label={'Date of Birth'} required />
+        <FormInputText
+          lg={8}
+          name={'nationality'}
+          label={'Nationality'}
           required
         />
         <SelectCountry
@@ -82,21 +91,21 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
         <FormInputText lg={8} name={'village'} label={'Village'} />
         <FormInputText
           lg={8}
-          name={'nationality'}
-          label={'Nationality'}
+          name={'office_address'}
+          label={'Office Address'}
+        />
+        <FormInputText lg={8} name={'occupation'} label={'Occupation'} />
+        <FormInputMobile
+          lg={8}
+          name={'co_mobile'}
+          label={'Emergency Contact Number'}
           required
         />
         <FormInputText
           lg={8}
-          name={'office_address'}
-          label={'Office Address'}
+          name={'relationship'}
+          label={'Relationship With Emergency Contact'}
         />
-        <FormInputDate lg={8} name={'dob'} label={'Date of Birth'} required />
-        <FormInputText lg={8} name={'occupation'} label={'Occupation'} />
-        <FormInputText lg={8} name={'nid_no'} label={'NID'} />
-        <FormInputMobile lg={8} name={'co_mobile'} label={'Co Mobile'} />
-        <FormInputText lg={8} name={'relationship'} label={'Relationship'} />
-        <FormInputText lg={8} name={'education'} label={'Education'} />
 
         <FormInputSelect
           name={'gender'}
@@ -107,6 +116,7 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
             { label: 'FEMALE', value: 'FEMALE' },
             { label: 'OTHER', value: 'OTHER' },
           ]}
+          required
         />
         {editMode && (
           <FormInputSelect
@@ -119,7 +129,14 @@ const StudentInputs = ({ onFinish, form, loading, editMode }: Props) => {
             ]}
           />
         )}
-        <FormImageUpload_V1 maxCount={1} name={'image'} label={'Photo'} />
+        <FormImageUpload_V1
+          maxCount={1}
+          accept='image/*'
+          buttonText='Upload Photo'
+          name={'image'}
+          label={'Photo'}
+          required
+        />
       </Row>
       <FromSubmit text={editMode ? 'Update' : 'Create'} loading={loading} />
     </Form>
