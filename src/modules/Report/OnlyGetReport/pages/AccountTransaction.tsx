@@ -1,4 +1,5 @@
 import { Table, Typography } from 'antd';
+import { FormInputSelect } from '../../../../common/Form/FormIInput';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import { SelectAccount } from '../../../../common/SelectWithApi/Select';
 import AntTable from '../../../../common/Table/AntTable';
@@ -8,18 +9,18 @@ import {
   dueNumberFormat,
 } from '../../../../common/utils/numberFormate';
 import ReportContainer from '../../../../layout/components/ReportContainer';
-import { useGetAccountLedgerQuery } from '../api/OnlyGetReportEndpoints';
-import type { IAccountLedgerQuery } from '../types/OnlyGetReportTypes';
+import { useGetAccountTransactionQuery } from '../api/OnlyGetReportEndpoints';
+import type { IAccountTransactionQuery } from '../types/OnlyGetReportTypes';
 
-const AccountLedger = () => {
-  const { query, setQuery } = useQueryParams<IAccountLedgerQuery>();
-  const { data, isLoading, isFetching } = useGetAccountLedgerQuery(query, {
-    skip: !query.from_date || !query.to_date || !query.account_id,
+const AccountTransaction = () => {
+  const { query, setQuery } = useQueryParams<IAccountTransactionQuery>();
+  const { data, isLoading, isFetching } = useGetAccountTransactionQuery(query, {
+    skip: !query.from_date && !query.to_date,
   });
 
   return (
     <ReportContainer
-      title='Account Ledger'
+      title='Account Transaction'
       additionalFilter={
         <>
           <SelectAccount
@@ -30,13 +31,27 @@ const AccountLedger = () => {
             lg={5}
             onChange={(e) => setQuery({ account_id: e })}
             defaultValue={query.account_id ? query?.account_id : undefined}
-            required
+          />
+          <FormInputSelect
+            label='With Balance Transfer'
+            name='is_balance_transfer'
+            sm={8}
+            md={8}
+            lg={5}
+            onChange={(e) => setQuery({ is_balance_transfer: e })}
+            defaultValue={
+              query.is_balance_transfer ? query?.is_balance_transfer : undefined
+            }
+            options={[
+              { label: 'Yes', value: 'true' },
+              { label: 'No', value: 'false' },
+            ]}
           />
         </>
       }
     >
       <AntTable
-        dataSource={data?.data?.transactions}
+        dataSource={data?.data}
         rowKey={'_id'}
         bordered
         size='small'
@@ -51,12 +66,6 @@ const AccountLedger = () => {
             render: (text) => dateAndTimeFormat(text),
           },
           { dataIndex: 'voucher_no', key: 'voucher_no', title: 'Voucher No' },
-          {
-            dataIndex: 'description',
-            key: 'description',
-            title: 'Description',
-            width: 400,
-          },
           {
             dataIndex: 'type',
             key: 'type',
@@ -73,9 +82,10 @@ const AccountLedger = () => {
               record.type === 'CREDIT' && advanceNumberFormat(record?.amount),
           },
           {
-            title: 'Last Balance',
-            dataIndex: 'last_balance',
-            render: (text) => advanceNumberFormat(text),
+            dataIndex: 'description',
+            key: 'description',
+            title: 'Description',
+            width: 400,
           },
         ]}
         summary={(record) => {
@@ -93,14 +103,7 @@ const AccountLedger = () => {
           return (
             <>
               <Table.Summary.Row>
-                <Table.Summary.Cell index={0} colSpan={5}>
-                  <Typography.Paragraph
-                    strong
-                    style={{ margin: 0, textAlign: 'right' }}
-                  >
-                    Total:
-                  </Typography.Paragraph>
-                </Table.Summary.Cell>
+                <Table.Summary.Cell index={0} colSpan={4}></Table.Summary.Cell>
 
                 <Table.Summary.Cell index={1}>
                   {dueNumberFormat(total.debit)}
@@ -110,9 +113,8 @@ const AccountLedger = () => {
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={3}></Table.Summary.Cell>
               </Table.Summary.Row>
-
               <Table.Summary.Row>
-                <Table.Summary.Cell index={0} colSpan={5}>
+                <Table.Summary.Cell index={0} colSpan={4}>
                   <Typography.Paragraph
                     strong
                     style={{ margin: 0, textAlign: 'right' }}
@@ -120,24 +122,10 @@ const AccountLedger = () => {
                     Available Balance:
                   </Typography.Paragraph>
                 </Table.Summary.Cell>
-                <Table.Summary.Cell index={1} colSpan={3}>
+                <Table.Summary.Cell index={0} colSpan={4}>
                   {total.credit > total.debit
-                    ? advanceNumberFormat(total.credit + total.debit)
-                    : dueNumberFormat(total.credit + total.debit)}
-                </Table.Summary.Cell>
-              </Table.Summary.Row>
-
-              <Table.Summary.Row>
-                <Table.Summary.Cell index={0} colSpan={5}>
-                  <Typography.Paragraph
-                    strong
-                    style={{ margin: 0, textAlign: 'right' }}
-                  >
-                    Last Available Balance:
-                  </Typography.Paragraph>
-                </Table.Summary.Cell>
-                <Table.Summary.Cell index={1} colSpan={3}>
-                  {data?.data?.total_last_balance}
+                    ? advanceNumberFormat(total.credit - total.debit)
+                    : dueNumberFormat(total.credit - total.debit)}
                 </Table.Summary.Cell>
               </Table.Summary.Row>
             </>
@@ -148,4 +136,4 @@ const AccountLedger = () => {
   );
 };
 
-export default AccountLedger;
+export default AccountTransaction;

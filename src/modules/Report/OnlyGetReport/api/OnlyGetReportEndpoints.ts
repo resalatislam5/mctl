@@ -4,6 +4,8 @@ import type { Response } from '../../../../common/types/common.type';
 import type {
   IAccountLedger,
   IAccountLedgerQuery,
+  IAccountTransaction,
+  IAccountTransactionQuery,
   IExpenseReport,
   IExpenseReportQuery,
   IStudentLedger,
@@ -45,7 +47,7 @@ const onlyGetReportEndpoints = api.injectEndpoints({
       providesTags: () => [CREATE_TAG('ENROLLMENT')],
     }),
     getAccountLedger: build.query<
-      Response<IAccountLedger[]>,
+      Response<IAccountLedger>,
       IAccountLedgerQuery
     >({
       query: (query) => ({
@@ -55,6 +57,23 @@ const onlyGetReportEndpoints = api.injectEndpoints({
       providesTags: () => [
         CREATE_TAG('MONEY_RECEIPT'),
         CREATE_TAG('EXPENSE_HISTORY'),
+        CREATE_TAG('ACCOUNT'),
+        CREATE_TAG('AGENT_PAYMENT'),
+      ],
+    }),
+    getAccountTransaction: build.query<
+      Response<IAccountTransaction[]>,
+      IAccountTransactionQuery
+    >({
+      query: (query) => ({
+        url: '/report/account-transaction',
+        params: query,
+      }),
+      providesTags: () => [
+        CREATE_TAG('MONEY_RECEIPT'),
+        CREATE_TAG('EXPENSE_HISTORY'),
+        CREATE_TAG('ACCOUNT'),
+        CREATE_TAG('AGENT_PAYMENT'),
       ],
     }),
   }),
@@ -65,4 +84,5 @@ export const {
   useGetExpenseReportQuery,
   useGetUpcomingInstallmentQuery,
   useGetAccountLedgerQuery,
+  useGetAccountTransactionQuery,
 } = onlyGetReportEndpoints;

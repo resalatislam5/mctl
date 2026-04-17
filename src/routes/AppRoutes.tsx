@@ -37,6 +37,7 @@ import StudentList from '../modules/Student/pages/StudentList';
 import ProfileLayout from '../modules/Profile/layout/ProfileLayout';
 import ProfileSettings from '../modules/Profile/pages/ProfileSetting';
 import AppConfigList from '../modules/AppConfig/pages/AppConfigList';
+import AccountTransaction from '../modules/Report/OnlyGetReport/pages/AccountTransaction';
 
 export interface IAppRoutes {
   path: string;
@@ -221,6 +222,11 @@ export const AppRoutes: IAppRoutes[] = [
     path: '/report/account-ledger',
     element: <AccountLedger />,
     name: 'ACCOUNT_LEDGER',
+  },
+  {
+    path: '/report/account-transaction',
+    element: <AccountTransaction />,
+    name: 'ACCOUNT_TRANSACTION',
   },
   {
     path: '/report/expense',
