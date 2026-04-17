@@ -24,6 +24,7 @@ export const tags = [
   'BALANCE_TRANSFER',
   'PROFILE',
   'APP_CONFIG',
+  'COURSE_PROGRESS',
 ] as const;
 
 type tagTypes = (typeof tags)[number];

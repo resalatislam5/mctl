@@ -343,7 +343,10 @@ export const SelectCourse = ({
   size = 'middle',
   mode,
   onChange,
-}: Props & {}) => {
+  noStyleLabel,
+  defaultValue,
+  ...rest
+}: Props & { noStyleLabel?: string }) => {
   const { data, isLoading } = useGetCourseSelectQuery({});
 
   // If API returns empty array or undefined
@@ -353,8 +356,14 @@ export const SelectCourse = ({
       <Form.Item
         name={name}
         label={label}
-        rules={[{ required, message: `${label} is required` }]}
+        rules={[
+          {
+            required,
+            message: `${noStyleLabel ? noStyleLabel : label} is required`,
+          },
+        ]}
         layout={layout}
+        {...rest}
       >
         <Select
           placeholder={`Select ${label}`}
@@ -385,6 +394,7 @@ export const SelectCourse = ({
           }
           mode={mode}
           allowClear
+          defaultValue={defaultValue}
           showSearch
           filterOption={(input, option) =>
             (option?.searchText ?? '')
@@ -393,6 +403,7 @@ export const SelectCourse = ({
           }
           notFoundContent={isLoading ? <Spin size='small' /> : <Empty />}
           onChange={onChange}
+          style={{ width: '100%' }}
         />
       </Form.Item>
     </Col>

@@ -25,6 +25,13 @@ export const navItems: INavItem[] = [
     name: 'ENROLLMENT',
   },
   {
+    key: '/course-progress',
+    to: '/course-progress',
+    label: 'Course Progress',
+    icon: 'hugeicons:progress-04',
+    name: 'COURSE_PROGRESS',
+  },
+  {
     key: '/money-receipt',
     to: '/money-receipt',
     label: 'Money Receipt List',

@@ -38,6 +38,7 @@ import ProfileLayout from '../modules/Profile/layout/ProfileLayout';
 import ProfileSettings from '../modules/Profile/pages/ProfileSetting';
 import AppConfigList from '../modules/AppConfig/pages/AppConfigList';
 import AccountTransaction from '../modules/Report/OnlyGetReport/pages/AccountTransaction';
+import CourseProgressList from '../modules/CourseProgress/pages/CourseProgressList';
 
 export interface IAppRoutes {
   path: string;
@@ -97,6 +98,11 @@ export const AppRoutes: IAppRoutes[] = [
     path: '/enrollment/:_id',
     element: <ViewEnrollment />,
     name: 'ENROLLMENT',
+  },
+  {
+    path: '/course-progress',
+    element: <CourseProgressList />,
+    name: 'COURSE_PROGRESS',
   },
   {
     path: '/money-receipt',

@@ -4,6 +4,7 @@ import SingleContainer from '../../../layout/components/SingleContainer';
 import StudentBasicInfo from './StudentBasicInfo';
 import StudentEnrollment from './StudentEnrollment';
 import StudentMoneyReceipt from './StudentMoneyReceipt';
+import StudentCourseProgress from './StudentCourseProgress';
 
 const ViewStudent = () => {
   const { id } = useParams();
@@ -28,6 +29,11 @@ const ViewStudent = () => {
             key: '3',
             label: 'Money Receipt',
             children: <StudentMoneyReceipt id={id} />,
+          },
+          {
+            key: '4',
+            label: 'Course Progress',
+            children: <StudentCourseProgress id={id} />,
           },
         ]}
       />

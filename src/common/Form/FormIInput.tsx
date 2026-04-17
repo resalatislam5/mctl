@@ -371,6 +371,7 @@ export const FormInputSelect = ({
           { required, message: `${label} is required` },
           ...(rules || []),
         ]}
+        {...rest}
       >
         <Select
           placeholder={placeholder || `Select ${label}`}
@@ -379,7 +380,7 @@ export const FormInputSelect = ({
           options={options}
           onChange={onChange}
           allowClear={allowClear}
-          {...rest}
+          style={{ width: '100%' }}
         />
       </Form.Item>
     </Col>
