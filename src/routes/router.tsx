@@ -5,6 +5,7 @@ import MainLayout from '../layout/pages/MainLayout';
 import { AppRoutes } from './AppRoutes';
 import PermissionRoutes from './PermissionRoutes';
 import ProtectedRoute from './ProtectedRoute';
+import NotFoundPage from '../common/components/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -35,5 +36,9 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
     ],
+  },
+  {
+    path: '*',
+    element: <NotFoundPage />,
   },
 ]);

@@ -3,7 +3,7 @@ import {
   LockOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Card, Layout, Menu, Typography } from 'antd';
+import { Card, Divider, Layout, Menu, theme, Typography } from 'antd';
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router';
 
@@ -33,21 +33,20 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
     },
   ];
 
+  const { token } = theme.useToken();
   return (
-    <div style={{ background: '#f5f5f5', padding: 32 }}>
+    <div style={{ padding: 32 }}>
       <Card
         style={{ maxWidth: 960, borderRadius: 12 }}
         bodyStyle={{ padding: 0 }}
       >
-        <Layout
-          style={{ borderRadius: 12, overflow: 'hidden', background: '#fff' }}
-        >
+        <Layout style={{ borderRadius: 12, overflow: 'hidden' }}>
           {/* Sidebar */}
           <Sider
             width={220}
             style={{
-              background: '#fff',
-              borderRight: '1px solid #f0f0f0',
+              background: token.colorBgContainer,
+              // borderRight: '1px solid #f0f0f0',
               borderRadius: '12px 0 0 12px',
             }}
           >
@@ -64,9 +63,16 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
               style={{ border: 'none', fontSize: 14 }}
             />
           </Sider>
-
+          <Divider
+            type='vertical'
+            style={{
+              margin: 0,
+            }}
+          />
           {/* Main Content */}
-          <Content style={{ padding: '28px 32px', background: '#fff' }}>
+          <Content
+            style={{ padding: '28px 32px', background: token.colorBgContainer }}
+          >
             {children}
           </Content>
         </Layout>

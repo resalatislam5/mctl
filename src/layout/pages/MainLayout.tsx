@@ -15,6 +15,7 @@ import {
   theme,
   type MenuProps,
 } from 'antd';
+import { Content } from 'antd/es/layout/layout';
 import { useCallback, useRef, useState } from 'react';
 import { Link, Outlet } from 'react-router';
 import { toggleTheme } from '../../app/features/themeSlice';
@@ -144,7 +145,7 @@ const MainLayout = () => {
           transition: resizing ? 'none' : 'width 0.12s ease-out',
         }}
       />
-      <Layout style={{ marginLeft: collapsed ? 80 : 260 }}>
+      <Layout style={{ marginLeft: collapsed ? 80 : 260, minHeight: '100vh' }}>
         <Header
           style={{
             padding: 0,
@@ -152,6 +153,9 @@ const MainLayout = () => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            position: 'sticky',
+            top: 0,
+            zIndex: 1000,
           }}
         >
           <Space>
@@ -203,7 +207,14 @@ const MainLayout = () => {
             </Dropdown>
           </Flex>
         </Header>
-        <Outlet />
+        <Content
+          style={{
+            overflow: 'auto',
+            height: 'calc(100vh - 64px)',
+          }}
+        >
+          <Outlet />
+        </Content>
       </Layout>
     </Layout>
   );

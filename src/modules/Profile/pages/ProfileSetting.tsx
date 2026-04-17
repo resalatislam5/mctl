@@ -166,15 +166,7 @@ const ProfileSettings: React.FC = () => {
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item label='Username (Read Only)'>
-              <Input
-                value={user.username}
-                readOnly
-                style={{
-                  background: '#f5f5f5',
-                  color: '#888',
-                  cursor: 'default',
-                }}
-              />
+              <Input value={user.username} disabled />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -191,15 +183,7 @@ const ProfileSettings: React.FC = () => {
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item label='Email Address (Read Only)'>
-              <Input
-                value={user.email}
-                readOnly
-                style={{
-                  background: '#f5f5f5',
-                  color: '#888',
-                  cursor: 'default',
-                }}
-              />
+              <Input value={user.email} disabled />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -214,11 +198,7 @@ const ProfileSettings: React.FC = () => {
         </Row>
 
         <Space style={{ marginTop: 8 }}>
-          <Button
-            type='primary'
-            htmlType='submit'
-            style={{ background: '#16a34a', borderColor: '#16a34a' }}
-          >
+          <Button type='primary' htmlType='submit'>
             Save Changes
           </Button>
           <Button onClick={() => form.resetFields()}>Cancel</Button>
