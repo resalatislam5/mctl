@@ -198,7 +198,7 @@ td, th {
                       <tr>
                         {' '}
                         <td colSpan={2}>
-                          <strong>Co Mobile Number:</strong>{' '}
+                          <strong>Emergency Contact:</strong>{' '}
                           {student_info?.co_mobile}{' '}
                         </td>
                         <td colSpan={2}>

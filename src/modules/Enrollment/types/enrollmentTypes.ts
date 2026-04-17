@@ -12,6 +12,7 @@ export interface IEnrollmentList {
   total_paid: string;
   student_name: string;
   batch_name: null;
+  student_code: string;
   status: IEnrollmentStatus;
 }
 

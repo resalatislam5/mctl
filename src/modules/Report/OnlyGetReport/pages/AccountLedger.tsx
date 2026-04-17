@@ -137,7 +137,7 @@ const AccountLedger = () => {
                   </Typography.Paragraph>
                 </Table.Summary.Cell>
                 <Table.Summary.Cell index={1} colSpan={3}>
-                  {data?.data?.total_last_balance}
+                  {data?.data?.total_last_balance || 0}
                 </Table.Summary.Cell>
               </Table.Summary.Row>
             </>

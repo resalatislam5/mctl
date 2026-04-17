@@ -7,7 +7,6 @@ export interface IAccountList {
   bank_name: string;
   branch_name: string;
   opening_balance: string;
-  available_balance: string;
   balance_transfer: 'YES' | 'NO';
   transfer_acc_type: 'CASH' | 'BANK' | 'MOBILE_BANKING';
   transfer_acc_id: string;

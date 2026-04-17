@@ -936,13 +936,15 @@ export const SelectAccount = ({
   onChange,
   defaultValue,
   option,
+  balance_transfer,
   ...rest
 }: Props & {
   payment_method?: ICreateAccount['account_type'];
   option?: Record<string, string | boolean>;
+  balance_transfer?: 'YES' | 'NO';
 }) => {
   const { data, isLoading } = useGetAccountSelectQuery(
-    { payment_method },
+    { payment_method, balance_transfer },
     option,
   );
 

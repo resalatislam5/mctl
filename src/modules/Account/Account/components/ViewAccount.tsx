@@ -11,7 +11,6 @@ const ViewAccount = ({ record }: { record: IAccountList }) => {
     bank_name,
     branch_name,
     opening_balance,
-    available_balance,
     charge_percent,
   } = record || {};
   return (
@@ -63,11 +62,6 @@ const ViewAccount = ({ record }: { record: IAccountList }) => {
               ]
             : []),
 
-          {
-            key: 'available_balance',
-            label: 'Available Balance',
-            children: available_balance,
-          },
           {
             key: 'opening_balance',
             label: 'Opening Balance',

@@ -22,8 +22,12 @@ export const dueNumberFormat = (value: number | string): JSX.Element => {
     return <span style={{ color: 'black' }}>Invalid format</span>;
   }
 
-  const color = num > 0 ? 'red' : 'black';
-  return <span style={{ color }}>{num.toLocaleString()}</span>;
+  const color = num === 0 ? 'black' : 'red';
+  return (
+    <span style={{ color }}>
+      {num === 0 ? 0 : Math.abs(num).toLocaleString()}
+    </span>
+  );
 };
 
 /**

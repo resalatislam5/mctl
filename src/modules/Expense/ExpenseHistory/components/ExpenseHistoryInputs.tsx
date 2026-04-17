@@ -63,6 +63,7 @@ const ExpenseHistoryInputs = ({ onFinish, form, loading, editMode }: Props) => {
           label={'Account'}
           lg={12}
           payment_method={account_type}
+          balance_transfer='NO'
           option={{ Skip: !account_type }}
           required
           disabled={!account_type}

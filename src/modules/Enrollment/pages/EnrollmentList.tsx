@@ -68,7 +68,13 @@ const EnrollmentList = () => {
           },
 
           { dataIndex: 'batch_no', key: 'batch_no', title: 'Batch No' },
+
           { dataIndex: 'code', key: 'code', title: 'Code' },
+          {
+            dataIndex: 'student_code',
+            key: 'student_code',
+            title: 'Student ID',
+          },
           {
             dataIndex: 'course_mode',
             key: 'course_mode',
