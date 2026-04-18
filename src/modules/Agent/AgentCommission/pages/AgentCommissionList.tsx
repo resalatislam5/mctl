@@ -112,6 +112,11 @@ const AgentCommissionList = () => {
             title: 'C Rate',
           },
           {
+            dataIndex: 'min_limit',
+            key: 'min_limit',
+            title: 'Min Limit',
+          },
+          {
             dataIndex: 'commission_amount',
             key: 'commission_amount',
             title: 'C Amount',

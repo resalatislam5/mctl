@@ -14,6 +14,7 @@ export interface IAgentCommissionList {
   __v: number;
   agent_name: string;
   batch_no: string;
+  min_limit: number;
 }
 
 export type IAgentCommissionQuery = Partial<{

@@ -96,6 +96,7 @@ const ContainerLayout = ({
                 name={'search'}
                 value={search || ''}
                 placeholder='Search'
+                allowClear
               />
             </Col>
           )}
