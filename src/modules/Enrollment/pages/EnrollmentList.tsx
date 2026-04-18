@@ -31,7 +31,8 @@ const EnrollmentList = () => {
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetEnrollmentListQuery(query);
   const [deleting, { isLoading: isDeleting }] = useDeleteEnrollmentMutation();
-  const [updateStatus] = useUpdateEnrollmentStatusMutation();
+  const [updateStatus, { isLoading: isUpdatingStatus }] =
+    useUpdateEnrollmentStatusMutation();
   return (
     <ContainerLayout
       onClick={() =>
@@ -181,7 +182,7 @@ const EnrollmentList = () => {
                           : 'orange'
                     }
                   >
-                    {record?.status}
+                    {isUpdatingStatus ? 'Loading...' : record?.status}
                     <Iconify icon='iconamoon:arrow-down-2-light' />
                   </Tag>
                 </Dropdown>

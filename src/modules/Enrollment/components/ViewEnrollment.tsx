@@ -91,8 +91,8 @@ td, th {
                     <Flex justify='space-between'>
                       <Image
                         src={user?.logo}
-                        width={300}
-                        height={100}
+                        // width={300}
+                        height={120}
                         preview={false}
                       />
                       <Image

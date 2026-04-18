@@ -25,7 +25,7 @@ const CourseProgressList = () => {
 
   return (
     <ContainerLayout
-      title='Course Progress List'
+      title='Course Progress'
       options={{ showButton: false }}
       additionalFilter={
         <>

@@ -1,6 +1,6 @@
 import { Flex, Spin } from 'antd';
 import { useCheckPermissionQuery } from '../auth/api/authEndpoint';
-import AccessDenied from '../common/ui/AccessDenied';
+import Forbidden403 from '../common/components/Forbidden403';
 import type { IAppRoutes } from './AppRoutes';
 
 type Props = {
@@ -20,7 +20,7 @@ const PermissionRoutes = ({ item }: Props) => {
   if (permission) {
     return item.element;
   } else {
-    return <AccessDenied />;
+    return <Forbidden403 />;
   }
 };
 
