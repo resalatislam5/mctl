@@ -68,6 +68,7 @@ export interface IViewEnrollment {
   package_id: string;
   agent_id: string;
   installment_type: string;
+  status: IEnrollmentStatus;
 }
 
 export interface InstallmentDate {

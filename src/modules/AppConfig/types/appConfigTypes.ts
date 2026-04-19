@@ -12,6 +12,8 @@ export interface IAppConfig {
   phone_2: string;
   enrollment_color: string;
   short_company_name: string;
+  seal_stamp: string;
+  seal_stamp_public_id: string;
 }
 
 export interface ICreateAppConfig {
@@ -25,4 +27,5 @@ export interface ICreateAppConfig {
   phone_2: string;
   enrollment_color: string;
   short_company_name: string;
+  seal_stamp: File;
 }

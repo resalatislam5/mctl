@@ -50,6 +50,7 @@ const ViewEnrollment = () => {
     batch_no,
     total_amount,
     total_paid,
+    status,
   } = data?.data || {};
   console.log(user?.enrollment_color);
 
@@ -88,6 +89,19 @@ td, th {
                 document_title={`${student_info?.name}_enrollment`}
                 content={
                   <>
+                    {status === 'APPROVED' && (
+                      <div
+                        style={{
+                          position: 'absolute',
+                          bottom: 150,
+                          right: 30,
+                          // top: 200,
+                          zIndex: 100,
+                        }}
+                      >
+                        <Image width={100} src={user?.seal_stamp} />
+                      </div>
+                    )}
                     <Flex justify='space-between'>
                       <Image
                         src={user?.logo}

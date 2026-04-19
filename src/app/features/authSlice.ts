@@ -21,6 +21,7 @@ const initialState: InitialStateType = {
     phone_2: '',
     enrollment_color: '',
     short_company_name: '',
+    seal_stamp: '',
   },
 };
 const authSlice = createSlice({

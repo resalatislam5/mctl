@@ -5,10 +5,13 @@ import AntModal from './common/Modal/AntModal';
 import { router } from './routes/router';
 import type { RootState } from './app/store';
 import { useEffect } from 'react';
+import { useDynamicHead } from './common/hooks/useDynamicHead';
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 function App() {
   const { mode } = useAppSelector((state: RootState) => state.theme);
+  const { user } = useAppSelector((state: RootState) => state.auth);
+  useDynamicHead(user?.short_company_name, user?.favicon);
 
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');

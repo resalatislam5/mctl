@@ -33,9 +33,9 @@ const AuthLayout = () => {
         }}
         gutter={[lg ? 140 : sm ? 40 : 20, 0]}
       >
-        <div style={{ position: 'absolute', top: 20, left: 20 }}>
+        {/* <div style={{ position: 'absolute', top: 20, left: 20 }}>
           <Image src='/logo.png' alt='Logo' width={60} preview={false} />
-        </div>
+        </div> */}
         <Col md={12}>
           <Outlet />
         </Col>

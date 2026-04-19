@@ -59,17 +59,22 @@ const AppConfigList = () => {
     phone_2,
     enrollment_color,
     short_company_name,
+    seal_stamp,
+    favicon,
+    logo,
   } = data?.data || {};
   const onFinish = (values: ICreateAppConfig) => {
-    const body = sanitizeFormData(values, { fileKeys: ['logo', 'favicon'] });
+    const body = sanitizeFormData(values, {
+      fileKeys: ['logo', 'favicon', 'seal_stamp'],
+    });
     updateAppConfig(body);
   };
 
   useEffect(() => {
     if (data?.data) {
       form.setFieldsValue({
-        logo: toUploadFileList(data?.data?.logo),
-        favicon: toUploadFileList(data?.data?.favicon),
+        logo: toUploadFileList(logo),
+        favicon: toUploadFileList(favicon),
         company_name,
         domain_name,
         support_email,
@@ -78,6 +83,7 @@ const AppConfigList = () => {
         phone_2,
         enrollment_color,
         short_company_name,
+        seal_stamp: toUploadFileList(seal_stamp),
       });
     }
   }, [
@@ -91,6 +97,9 @@ const AppConfigList = () => {
     phone_2,
     enrollment_color,
     short_company_name,
+    seal_stamp,
+    favicon,
+    logo,
   ]);
 
   return (
@@ -110,6 +119,12 @@ const AppConfigList = () => {
               <FormImageUpload_V1
                 label='Favicon'
                 name='favicon'
+                maxCount={1}
+                accept='image/*'
+              />
+              <FormImageUpload_V1
+                label='Seal Stamp'
+                name='seal_stamp'
                 maxCount={1}
                 accept='image/*'
               />
