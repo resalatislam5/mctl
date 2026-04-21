@@ -55,6 +55,7 @@ const AgentPaymentInputs = ({
           label={'Agent'}
           required
           onChange={() => form.resetFields(['commission_id'])}
+          disabled={editMode}
         />
         <SelectAgentCommission
           lg={8}
@@ -63,6 +64,7 @@ const AgentPaymentInputs = ({
           required
           agent_id={agent_id}
           option={{ skip: !agent_id }}
+          disabled={editMode}
         />
 
         <FormInputSelect

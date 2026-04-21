@@ -12,14 +12,14 @@ import { Content } from 'antd/es/layout/layout';
 import dayjs from 'dayjs';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useSearchParams } from 'react-router';
+import { useReactToPrint } from 'react-to-print';
 import CommonButton from '../../common/Button/CommonButton';
 import { useQueryParams } from '../../common/hooks/useQueryParams';
 import DynamicBreadcrumb from '../../common/ui/DynamicBreadcrumb';
 import { cleanQuery } from '../../common/utils/cleanQuery';
+import { datePresets } from '../../common/utils/constant';
 import useDebounce from '../../common/utils/debounced';
 import { dateForPost } from '../../common/utils/helper.function';
-import { useReactToPrint } from 'react-to-print';
-import { datePresets } from '../../common/utils/constant';
 
 interface Props {
   children: ReactNode;
@@ -115,7 +115,7 @@ const ReportContainer = ({
               </Col>
             )}
             {showDateRange && (
-              <Col xs={24} sm={8} lg={4}>
+              <Col xs={24} sm={8} lg={6}>
                 <Form.Item
                   name={'date'}
                   label={'Date'}
