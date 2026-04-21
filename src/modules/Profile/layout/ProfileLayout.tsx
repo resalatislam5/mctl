@@ -4,30 +4,27 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Card, Divider, Layout, Menu, theme, Typography } from 'antd';
-import { useState, type ReactNode } from 'react';
-import { Link } from 'react-router';
+import { type ReactNode } from 'react';
+import { Link, useLocation } from 'react-router';
 
 const { Title } = Typography;
 const { Sider, Content } = Layout;
 
-type MenuKey = 'profile' | 'password' | 'themes';
-
 const ProfileLayout = ({ children }: { children: ReactNode }) => {
-  const [selectedKey, setSelectedKey] = useState<MenuKey>('profile');
-
+  const location = useLocation();
   const menuItems = [
     {
-      key: 'profile',
+      key: '/profile',
       icon: <UserOutlined />,
       label: <Link to='/profile'>Profile Settings</Link>,
     },
     {
-      key: 'password',
+      key: '/profile/password',
       icon: <LockOutlined />,
       label: <Link to='/profile/password'>Change Password</Link>,
     },
     {
-      key: 'themes',
+      key: '/profile/themes',
       icon: <BgColorsOutlined />,
       label: <Link to='/profile/themes'>Themes</Link>,
     },
@@ -57,8 +54,7 @@ const ProfileLayout = ({ children }: { children: ReactNode }) => {
             </div>
             <Menu
               mode='inline'
-              selectedKeys={[selectedKey]}
-              onClick={({ key }) => setSelectedKey(key as MenuKey)}
+              selectedKeys={[location.pathname]}
               items={menuItems}
               style={{ border: 'none', fontSize: 14 }}
             />

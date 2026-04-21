@@ -5,12 +5,13 @@ import {
   Col,
   Form,
   Input,
+  message,
   Row,
   Space,
-  Tag,
   Typography,
 } from 'antd';
 import React from 'react';
+import { useAppSelector } from '../../../app/hooks/hooks';
 
 const { Title, Text } = Typography;
 
@@ -21,17 +22,10 @@ interface ProfileFormValues {
 
 const ProfileSettings: React.FC = () => {
   const [form] = Form.useForm<ProfileFormValues>();
-
-  const user = {
-    username: 'resalat',
-    name: 'Resalat Islam',
-    email: 'resalat.m360ict@gmail.com',
-    phone: '01765975545',
-    phoneCode: '+88',
-    type: 'ADMIN',
-  };
+  const { user } = useAppSelector((state) => state.auth);
 
   const handleFinish = (values: ProfileFormValues) => {
+    message.error('This api is not implemented yet');
     console.log('Saved:', values);
   };
   return (
@@ -118,29 +112,14 @@ const ProfileSettings: React.FC = () => {
         {/* Info */}
         <div>
           <Title level={3} style={{ margin: 0, marginBottom: 6 }}>
-            {user.name}
+            {user?.name}
           </Title>
           <Text
             type='secondary'
             style={{ fontSize: 14, display: 'block', marginBottom: 8 }}
           >
-            E-mail: {user.email}
+            E-mail: {user?.email}
           </Text>
-          <Space>
-            <Text type='secondary' style={{ fontSize: 14 }}>
-              Type:
-            </Text>
-            <Tag
-              color='success'
-              style={{
-                fontWeight: 700,
-                fontSize: 12,
-                padding: '2px 10px',
-              }}
-            >
-              {user.type}
-            </Tag>
-          </Space>
         </div>
       </Space>
 
@@ -158,15 +137,15 @@ const ProfileSettings: React.FC = () => {
         form={form}
         layout='vertical'
         initialValues={{
-          name: user.name,
-          phoneNumber: user.phone,
+          name: user?.name,
+          phoneNumber: user?.phone,
         }}
         onFinish={handleFinish}
       >
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item label='Username (Read Only)'>
-              <Input value={user.username} disabled />
+              <Input value={'dummy'} disabled />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -183,7 +162,7 @@ const ProfileSettings: React.FC = () => {
         <Row gutter={24}>
           <Col span={12}>
             <Form.Item label='Email Address (Read Only)'>
-              <Input value={user.email} disabled />
+              <Input value={user?.email} disabled />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -192,7 +171,7 @@ const ProfileSettings: React.FC = () => {
               name='phoneNumber'
               rules={[{ required: true, message: 'Please enter phone number' }]}
             >
-              <Input addonBefore={user.phoneCode} placeholder='Phone number' />
+              <Input placeholder='Phone number' />
             </Form.Item>
           </Col>
         </Row>

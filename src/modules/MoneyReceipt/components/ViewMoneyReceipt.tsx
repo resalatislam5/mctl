@@ -154,7 +154,6 @@ const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
 };
 const ViewMoneyReceipt = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { data } = useGetSingleMoneyReceiptQuery(id as string, { skip: !id });
 

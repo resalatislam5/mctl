@@ -12,10 +12,11 @@ import {
   Progress,
   Row,
   Space,
-  Tag,
+  theme,
   Typography,
 } from 'antd';
 import React, { useState } from 'react';
+import { useAppSelector } from '../../../app/hooks/hooks';
 import { sanitizeObjectValue } from '../../../common/utils/sanitizeObjectValue';
 import { useChangePasswordMutation } from '../api/profileEndpoints';
 import type { IChangePassword } from '../types/profileTypes';
@@ -49,12 +50,8 @@ const ChangePassword: React.FC = () => {
   const [changePassword] = useChangePasswordMutation();
   const [form] = Form.useForm<ChangePasswordFormValues>();
   const [new_password, setNew_password] = useState('');
-
-  const user = {
-    name: 'Resalat Islam',
-    email: 'resalat.m360ict@gmail.com',
-    type: 'ADMIN',
-  };
+  const { user } = useAppSelector((state) => state.auth);
+  const { token } = theme.useToken();
 
   const strength = getPasswordStrength(new_password);
 
@@ -149,29 +146,14 @@ const ChangePassword: React.FC = () => {
         </div>
         <div>
           <Title level={3} style={{ margin: 0, marginBottom: 6 }}>
-            {user.name}
+            {user?.name}
           </Title>
           <Text
             type='secondary'
             style={{ fontSize: 14, display: 'block', marginBottom: 8 }}
           >
-            E-mail: {user.email}
+            E-mail: {user?.email}
           </Text>
-          <Space>
-            <Text type='secondary' style={{ fontSize: 14 }}>
-              Type:
-            </Text>
-            <Tag
-              color='success'
-              style={{
-                fontWeight: 700,
-                fontSize: 12,
-                padding: '2px 10px',
-              }}
-            >
-              {user.type}
-            </Tag>
-          </Space>
         </div>
       </Space>
 
@@ -288,8 +270,8 @@ const ChangePassword: React.FC = () => {
         {/* Password Tips */}
         <div
           style={{
-            background: '#f9fafb',
-            border: '1px solid #e8e8e8',
+            background: token.colorBgLayout,
+            border: `1px solid ${token.colorBorder}`,
             borderRadius: 8,
             padding: '12px 16px',
             marginBottom: 24,

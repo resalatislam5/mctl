@@ -156,7 +156,6 @@ const AgentPaymentReceipt = ({
 };
 const ViewAgentPayment = () => {
   const { id } = useParams();
-  console.log(id);
 
   const { data } = useGetSingleAgentPaymentQuery(id as string, { skip: !id });
 

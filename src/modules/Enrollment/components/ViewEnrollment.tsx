@@ -20,10 +20,11 @@ type TdWithBgProps = {
 
 const TdWithBg = ({ title, style, ...rest }: TdWithBgProps) => {
   const { user } = useAppSelector((state) => state.auth);
+  const { color_themes } = useAppSelector((state) => state.theme);
   return (
     <td
       style={{
-        background: user?.enrollment_color || '#03645a',
+        background: user?.enrollment_color || color_themes?.primary,
         color: 'white',
         // padding: 5,
         textTransform: 'uppercase',
@@ -42,6 +43,7 @@ const ViewEnrollment = () => {
   const { data } = useGetSingleEnrollmentQuery(_id as string, { skip: !_id });
 
   const { user } = useAppSelector((state) => state.auth);
+  const { color_themes } = useAppSelector((state) => state.theme);
   const {
     student_info,
     course_names,
@@ -52,7 +54,6 @@ const ViewEnrollment = () => {
     total_paid,
     status,
   } = data?.data || {};
-  console.log(user?.enrollment_color);
 
   return (
     <ContainerLayout
@@ -235,20 +236,20 @@ td, th {
                       <tr>
                         <td colSpan={4}>
                           <strong>Total Payable Amount:</strong>{' '}
-                          {numberWithComma(total_amount || '')}
+                          {numberWithComma(total_amount || 0)}
                         </td>
                       </tr>
                       <tr>
                         <td colSpan={4}>
                           <strong>Paid Amount:</strong>{' '}
-                          {advanceNumberFormat(total_paid || '')}
+                          {advanceNumberFormat(total_paid || 0)}
                         </td>
                       </tr>
                       <tr>
                         <td colSpan={4}>
                           <strong>Due Amount's (if any):</strong>{' '}
                           {dueNumberFormat(
-                            Number(total_amount) - Number(total_paid),
+                            Number(total_amount || 0) - Number(total_paid || 0),
                           )}
                         </td>
                       </tr>
@@ -315,7 +316,8 @@ td, th {
                         <td
                           style={{
                             textTransform: 'none',
-                            background: user?.enrollment_color || '#03645a',
+                            background:
+                              user?.enrollment_color || color_themes?.primary,
                             color: 'white',
                             padding: 5,
                           }}

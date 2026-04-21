@@ -115,7 +115,7 @@ const ReportContainer = ({
               </Col>
             )}
             {showDateRange && (
-              <Col xs={24} sm={8} lg={6}>
+              <Col xs={24} sm={8} lg={4}>
                 <Form.Item
                   name={'date'}
                   label={'Date'}
@@ -135,6 +135,7 @@ const ReportContainer = ({
                     ]}
                     presets={datePresets}
                     name={'date'}
+                    style={{ width: '100%' }}
                   />
                 </Form.Item>
               </Col>

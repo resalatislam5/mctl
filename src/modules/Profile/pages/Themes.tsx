@@ -1,11 +1,24 @@
 import { CheckOutlined } from '@ant-design/icons';
-import { Button, message, Space, Tag, Typography } from 'antd';
-import React, { useState } from 'react';
+import { Button, Space, Typography } from 'antd';
+import React from 'react';
+import {
+  setColorTheme,
+  setFontFamily,
+  setFontSize,
+  setTheme,
+  type themeMode,
+} from '../../../app/features/themeSlice';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks/hooks';
 
 const { Title, Text } = Typography;
 
-/* ─── Theme Definitions ─────────────────────────────────── */
 const FONT_FAMILIES = [
+  {
+    id: 'segoe_ui',
+    label: 'Segoe UI',
+    value: "'Segoe UI', sans-serif",
+    sample: 'Aa',
+  },
   { id: 'inter', label: 'Inter', value: "'Inter', sans-serif", sample: 'Aa' },
   {
     id: 'poppins',
@@ -43,12 +56,13 @@ const COLOR_THEMES = [
   {
     id: 'forest',
     label: 'Forest Green',
-    primary: '#16a34a',
+    primary: '#00b96b',
     bg: '#f0fdf4',
-    accent: '#bbf7d0',
-    text: '#14532d',
-    preview: ['#16a34a', '#22c55e', '#bbf7d0'],
+    accent: '#6ce7b3',
+    text: '#0a7845',
+    preview: ['#00b96b', '#22c55e', '#6ce7b3'],
   },
+
   {
     id: 'ocean',
     label: 'Ocean Blue',
@@ -99,33 +113,23 @@ const COLOR_THEMES = [
 const DARK_MODE_OPTIONS = [
   { id: 'light', label: 'Light', icon: '☀️' },
   { id: 'dark', label: 'Dark', icon: '🌙' },
-  { id: 'system', label: 'System', icon: '💻' },
 ];
 
 const FONT_SIZES = [
-  { id: 'sm', label: 'Small', value: '13px' },
-  { id: 'md', label: 'Medium', value: '15px' },
-  { id: 'lg', label: 'Large', value: '17px' },
+  { id: 'sm', label: 'Small', value: 12 },
+  { id: 'md', label: 'Medium', value: 14 },
+  { id: 'lg', label: 'Large', value: 16 },
 ];
 
 /* ─── Component ─────────────────────────────────────────── */
 const Themes: React.FC = () => {
-  const [activeColor, setActiveColor] = useState('forest');
-  const [activeFont, setActiveFont] = useState('inter');
-  const [activeDark, setActiveDark] = useState('light');
-  const [activeFontSize, setActiveFontSize] = useState('md');
+  const dispatch = useAppDispatch();
+  const { color_themes, fontFamily, fontSize, mode } = useAppSelector(
+    (state) => state.theme,
+  );
+  const { user } = useAppSelector((state) => state.auth);
 
-  const user = {
-    name: 'Resalat Islam',
-    email: 'resalat.m360ict@gmail.com',
-    type: 'ADMIN',
-  };
-
-  const selectedTheme = COLOR_THEMES.find((t) => t.id === activeColor)!;
-
-  const handleSave = () => {
-    message.success('Theme preferences saved!');
-  };
+  const selectedTheme = COLOR_THEMES.find((t) => t.id === color_themes?.id)!;
 
   return (
     <div>
@@ -208,20 +212,20 @@ const Themes: React.FC = () => {
         </div>
         <div>
           <Title level={4} style={{ margin: 0, marginBottom: 4 }}>
-            {user.name}
+            {user?.name}
           </Title>
           <Text
             type='secondary'
             style={{ fontSize: 13, display: 'block', marginBottom: 6 }}
           >
-            {user.email}
+            {user?.email}
           </Text>
-          <Tag
+          {/* <Tag
             color='success'
             style={{ fontWeight: 700, fontSize: 11, padding: '1px 8px' }}
           >
-            {user.type}
-          </Tag>
+            {user?.user_type}
+          </Tag> */}
         </div>
       </Space>
 
@@ -230,8 +234,8 @@ const Themes: React.FC = () => {
         style={{
           borderRadius: 10,
           padding: '14px 18px',
-          background: selectedTheme.bg,
-          border: `1.5px solid ${selectedTheme.accent}`,
+          background: selectedTheme?.bg,
+          border: `1.5px solid ${selectedTheme?.accent}`,
           marginBottom: 28,
           display: 'flex',
           alignItems: 'center',
@@ -244,15 +248,16 @@ const Themes: React.FC = () => {
             width: 36,
             height: 36,
             borderRadius: 8,
-            background: selectedTheme.primary,
+            background: selectedTheme?.primary,
             flexShrink: 0,
           }}
         />
         <div style={{ flex: 1 }}>
           <Text
             style={{
-              fontFamily: FONT_FAMILIES.find((f) => f.id === activeFont)?.value,
-              fontSize: FONT_SIZES.find((s) => s.id === activeFontSize)?.value,
+              fontFamily: FONT_FAMILIES.find((f) => f.id === fontFamily.id)
+                ?.value,
+              fontSize: FONT_SIZES.find((s) => s.id === fontSize?.id)?.value,
               color: selectedTheme.text,
               fontWeight: 600,
               display: 'block',
@@ -262,7 +267,8 @@ const Themes: React.FC = () => {
           </Text>
           <Text
             style={{
-              fontFamily: FONT_FAMILIES.find((f) => f.id === activeFont)?.value,
+              fontFamily: FONT_FAMILIES.find((f) => f.id === fontFamily.id)
+                ?.value,
               fontSize: '12px',
               color: selectedTheme.text,
               opacity: 0.7,
@@ -297,17 +303,28 @@ const Themes: React.FC = () => {
         {COLOR_THEMES.map((theme) => (
           <div
             key={theme.id}
-            onClick={() => setActiveColor(theme.id)}
+            onClick={() => {
+              dispatch(
+                setColorTheme({
+                  primary: theme.primary,
+                  id: theme.id,
+                  bg: theme.bg,
+                  accent: theme.accent,
+                  text: theme.text,
+                  preview: theme.preview,
+                }),
+              );
+            }}
             style={{
               cursor: 'pointer',
               borderRadius: 10,
               border:
-                activeColor === theme.id
+                color_themes.id === theme.id
                   ? `2px solid ${theme.primary}`
                   : '2px solid #e8e8e8',
               padding: '10px 14px',
               minWidth: 120,
-              background: activeColor === theme.id ? theme.bg : '#fafafa',
+              background: color_themes.id === theme.id ? theme.bg : '#fafafa',
               transition: 'all 0.2s',
               position: 'relative',
             }}
@@ -329,7 +346,7 @@ const Themes: React.FC = () => {
             <Text style={{ fontSize: 12, fontWeight: 600, color: '#333' }}>
               {theme.label}
             </Text>
-            {activeColor === theme.id && (
+            {color_themes.id === theme.id && (
               <div
                 style={{
                   position: 'absolute',
@@ -364,16 +381,25 @@ const Themes: React.FC = () => {
         {FONT_FAMILIES.map((font) => (
           <div
             key={font.id}
-            onClick={() => setActiveFont(font.id)}
+            onClick={() =>
+              dispatch(
+                setFontFamily({
+                  id: font.id,
+                  label: font.label,
+                  value: font.value,
+                }),
+              )
+            }
             style={{
               cursor: 'pointer',
               borderRadius: 8,
               border:
-                activeFont === font.id
+                fontFamily.id === font.id
                   ? `2px solid ${selectedTheme.primary}`
                   : '2px solid #e8e8e8',
               padding: '10px 16px',
-              background: activeFont === font.id ? selectedTheme.bg : '#fafafa',
+              background:
+                fontFamily.id === font.id ? selectedTheme.bg : '#fafafa',
               transition: 'all 0.2s',
               textAlign: 'center',
               minWidth: 100,
@@ -384,7 +410,8 @@ const Themes: React.FC = () => {
                 fontFamily: font.value,
                 fontSize: 22,
                 fontWeight: 700,
-                color: activeFont === font.id ? selectedTheme.primary : '#555',
+                color:
+                  fontFamily.id === font.id ? selectedTheme.primary : '#555',
                 lineHeight: 1.2,
                 marginBottom: 4,
               }}
@@ -402,17 +429,25 @@ const Themes: React.FC = () => {
         {FONT_SIZES.map((size) => (
           <div
             key={size.id}
-            onClick={() => setActiveFontSize(size.id)}
+            onClick={() =>
+              dispatch(
+                setFontSize({
+                  id: size.id,
+                  label: size.label,
+                  value: size.value,
+                }),
+              )
+            }
             style={{
               cursor: 'pointer',
               borderRadius: 8,
               border:
-                activeFontSize === size.id
-                  ? `2px solid ${selectedTheme.primary}`
+                fontSize?.id === size.id
+                  ? `2px solid ${selectedTheme?.primary}`
                   : '2px solid #e8e8e8',
               padding: '10px 24px',
               background:
-                activeFontSize === size.id ? selectedTheme.bg : '#fafafa',
+                fontSize?.id === size.id ? selectedTheme.bg : '#fafafa',
               transition: 'all 0.2s',
               textAlign: 'center',
             }}
@@ -420,9 +455,8 @@ const Themes: React.FC = () => {
             <Text
               style={{
                 fontSize: size.value,
-                color:
-                  activeFontSize === size.id ? selectedTheme.primary : '#555',
-                fontWeight: activeFontSize === size.id ? 700 : 400,
+                color: fontSize.id === size.id ? selectedTheme.primary : '#555',
+                fontWeight: fontSize.id === size.id ? 700 : 400,
               }}
             >
               {size.label}
@@ -437,16 +471,18 @@ const Themes: React.FC = () => {
         {DARK_MODE_OPTIONS.map((opt) => (
           <div
             key={opt.id}
-            onClick={() => setActiveDark(opt.id)}
+            onClick={() => {
+              dispatch(setTheme(opt.id as themeMode));
+            }}
             style={{
               cursor: 'pointer',
               borderRadius: 8,
               border:
-                activeDark === opt.id
+                mode === opt.id
                   ? `2px solid ${selectedTheme.primary}`
                   : '2px solid #e8e8e8',
               padding: '10px 24px',
-              background: activeDark === opt.id ? selectedTheme.bg : '#fafafa',
+              background: mode === opt.id ? selectedTheme.bg : '#fafafa',
               transition: 'all 0.2s',
               textAlign: 'center',
               minWidth: 90,
@@ -456,8 +492,8 @@ const Themes: React.FC = () => {
             <Text
               style={{
                 fontSize: 12,
-                color: activeDark === opt.id ? selectedTheme.primary : '#555',
-                fontWeight: activeDark === opt.id ? 700 : 400,
+                color: mode === opt.id ? selectedTheme.primary : '#555',
+                fontWeight: mode === opt.id ? 700 : 400,
               }}
             >
               {opt.label}
@@ -469,21 +505,11 @@ const Themes: React.FC = () => {
       {/* Actions */}
       <Space>
         <Button
-          type='primary'
-          style={{
-            background: selectedTheme.primary,
-            borderColor: selectedTheme.primary,
-          }}
-          onClick={handleSave}
-        >
-          Save Preferences
-        </Button>
-        <Button
           onClick={() => {
-            setActiveColor('forest');
-            setActiveFont('inter');
-            setActiveDark('light');
-            setActiveFontSize('md');
+            dispatch(setColorTheme(COLOR_THEMES[0]));
+            dispatch(setFontFamily(FONT_FAMILIES[0]));
+            dispatch(setFontSize(FONT_SIZES[1]));
+            dispatch(setTheme(DARK_MODE_OPTIONS[0].id as themeMode));
           }}
         >
           Reset to Default

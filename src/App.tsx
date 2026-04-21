@@ -9,7 +9,9 @@ import { useDynamicHead } from './common/hooks/useDynamicHead';
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 function App() {
-  const { mode } = useAppSelector((state: RootState) => state.theme);
+  const { mode, color_themes, fontFamily, fontSize } = useAppSelector(
+    (state: RootState) => state.theme,
+  );
   const { user } = useAppSelector((state: RootState) => state.auth);
   useDynamicHead(user?.short_company_name, user?.favicon);
 
@@ -24,16 +26,18 @@ function App() {
         theme={{
           algorithm: mode === 'light' ? defaultAlgorithm : darkAlgorithm,
           token: {
-            colorPrimary: '#00b96b',
-            // colorBgLayout: "",
-            // colorBgContainer: "#1f1f1f",
+            colorPrimary: color_themes?.primary || '#00b96b',
             // marginLG: 0,
             paddingMD: 10,
+            fontFamily:
+              fontFamily?.value ||
+              '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+            fontSize: fontSize?.value || 14,
           },
           components: {
             Table: {
               ...(mode === 'light' && {
-                headerBg: '#6ce7b3',
+                headerBg: color_themes?.accent || '#6ce7b3',
               }),
             },
           },
