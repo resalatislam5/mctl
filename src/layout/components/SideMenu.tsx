@@ -9,10 +9,11 @@ import {
 } from 'antd';
 import type { SliderProps } from 'antd/es/slider';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router';
+import { Link, useLocation } from 'react-router';
 import { addUser } from '../../app/features/authSlice';
 import { useAppDispatch, useAppSelector } from '../../app/hooks/hooks';
 import { useCheckPermissionQuery } from '../../auth/api/authEndpoint';
+import Iconify from '../../common/Table/Iconify';
 import { useBreakpoint } from '../../common/utils/constant';
 import type { INavItem } from '../types/layoutTypes';
 import { navItems, renderItems } from '../utils/navItems';
@@ -201,7 +202,22 @@ const SideMenu = ({
         selectedKeys={[normalizePath(location.pathname)]}
         openKeys={openKeys}
         onOpenChange={onOpenChange}
-        items={isLoading ? skeletonItems : menuItems}
+        items={
+          isLoading
+            ? skeletonItems
+            : [
+                {
+                  key: '/',
+                  label: (
+                    <Link to={'/'} style={{ width: '100%', display: 'block' }}>
+                      Dashboard
+                    </Link>
+                  ),
+                  icon: <Iconify icon='material-symbols:dashboard-rounded' />,
+                },
+                ...menuItems,
+              ]
+        }
         style={{ borderRight: 0 }}
       />
     </Sider>

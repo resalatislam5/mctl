@@ -3,13 +3,13 @@ import { Link } from 'react-router';
 import type { INavItem } from '../types/layoutTypes';
 
 export const navItems: INavItem[] = [
-  {
-    key: '/',
-    to: '/',
-    label: 'Dashboard',
-    icon: 'material-symbols:dashboard-rounded',
-    name: 'DASHBOARD',
-  },
+  // {
+  //   key: '/',
+  //   to: '/',
+  //   label: 'Dashboard',
+  //   icon: 'material-symbols:dashboard-rounded',
+  //   name: 'DASHBOARD',
+  // },
   {
     key: '/student',
     to: '/student',

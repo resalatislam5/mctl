@@ -28,6 +28,7 @@ export type permissionTags =
   | 'APP_CONFIG'
   | 'ACCOUNT_TRANSACTION'
   | 'COURSE_PROGRESS'
+  | 'PROFILE'
   | 'BALANCE_TRANSFER';
 
 const DEFAULT_PERMISSION = {

@@ -15,6 +15,8 @@ const PermissionRoutes = ({ item }: Props) => {
       </Flex>
     );
   }
+
+  if (!item.isGuarded) return item.element;
   const permission = data?.data?.permissions?.some((e) => e.name === item.name);
 
   if (permission) {
