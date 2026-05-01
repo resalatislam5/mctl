@@ -188,9 +188,9 @@ const SideMenu = ({
           />
         ) : (
           <>
-            <Divider style={{ margin: 0 }}>Admin Panel</Divider>
+            {/* <Divider style={{ margin: 0 }}>Admin Panel</Divider> */}
             <Typography.Title level={5} style={{ fontWeight: 700 }}>
-              {user?.company_name || 'Admin Panel'}
+              {user?.company_name || 'Ems'}
             </Typography.Title>
             <HeaderTime />
           </>

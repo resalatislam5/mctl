@@ -48,4 +48,5 @@ export interface IViewMoneyReceipt {
   enrollment_code: string;
   course_type: string;
   total_amount: string;
+  acc_name: string;
 }

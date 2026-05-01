@@ -38,6 +38,7 @@ import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
 import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
 import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
+import Dashboard_V2 from '../modules/Dashboard/pages/Dashboard_V2';
 
 export interface IAppRoutes {
   path: string;
@@ -49,7 +50,7 @@ export interface IAppRoutes {
 export const AppRoutes: IAppRoutes[] = [
   {
     path: '/',
-    element: <Dashboard />,
+    element: <Dashboard_V2 />,
     name: 'DASHBOARD',
     isGuarded: true,
   },

@@ -1,18 +1,21 @@
 import {
+  BellOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  SettingOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import { Icon } from '@iconify/react';
 import {
-  Avatar,
+  Badge,
   Button,
   Dropdown,
   Flex,
   Layout,
   Space,
   theme,
+  Tooltip,
   type MenuProps,
 } from 'antd';
 import { Content } from 'antd/es/layout/layout';
@@ -174,26 +177,36 @@ const MainLayout = () => {
             {/* <h4>Role</h4>
             </Flex> */}
           </Space>
-          <Flex gap={16} align='center' style={{ marginRight: 30 }}>
-            <Button
-              size='middle'
-              style={{ padding: '2px 8px' }}
-              onClick={() => dispatch(toggleTheme())}
-            >
-              {mode === 'light' ? (
-                <Icon style={{}} icon={'material-symbols:dark-mode'} />
-              ) : (
-                <Icon style={{}} icon={'material-symbols:light-mode'} />
-              )}
-            </Button>
+          <Flex gap={12} align='center' style={{ marginRight: 30 }}>
+            <Tooltip title='Notifications'>
+              <Badge count={5} size='small'>
+                <Button type='text' icon={<BellOutlined />} size='small' />
+              </Badge>
+            </Tooltip>
+            <Tooltip title='Theme'>
+              <Button
+                size='middle'
+                style={{ padding: '2px 8px' }}
+                onClick={() => dispatch(toggleTheme())}
+                type='text'
+              >
+                {mode === 'light' ? (
+                  <Icon style={{}} icon={'material-symbols:dark-mode'} />
+                ) : (
+                  <Icon style={{}} icon={'material-symbols:light-mode'} />
+                )}
+              </Button>
+            </Tooltip>
 
-            <Dropdown
-              menu={{ items }}
-              trigger={['click']}
-              placement='bottomRight'
-              overlayStyle={{ minWidth: 160 }}
-            >
-              <Avatar
+            <Tooltip title='Settings'>
+              <Dropdown
+                menu={{ items }}
+                trigger={['click']}
+                placement='bottomRight'
+                overlayStyle={{ minWidth: 160 }}
+              >
+                <Button type='text' icon={<SettingOutlined />} size='small' />
+                {/* <Avatar
                 size={30}
                 shape='square'
                 icon={<UserOutlined />}
@@ -202,9 +215,10 @@ const MainLayout = () => {
 
                   borderRadius: 6,
                   fontSize: 13,
-                }}
-              />
-            </Dropdown>
+                  }}
+              /> */}
+              </Dropdown>
+            </Tooltip>
           </Flex>
         </Header>
         <Content

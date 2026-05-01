@@ -2,7 +2,10 @@ import { Flex, Space, Tabs, Typography } from 'antd';
 import type React from 'react';
 import { useParams } from 'react-router';
 import PrintHeader from '../../../common/print/PrintHeader';
-import { dateAndTimeFormat } from '../../../common/utils/helper.function';
+import {
+  dateAndTimeFormat,
+  numberToWords,
+} from '../../../common/utils/helper.function';
 import A4PageContainer from '../../../layout/components/A4PageContainer';
 import ContainerLayout from '../../../layout/components/ContainerLayout';
 import { useGetSingleMoneyReceiptQuery } from '../api/moneyReceiptEndpoints';
@@ -19,7 +22,6 @@ const TwoItem = ({ title, value, style }: TTwoItemProps) => {
     <Flex gap={10} style={{ ...style }}>
       <Typography.Text
         style={{
-          // flex: '0 0 120px', // fixed 200px
           display: 'inline-block',
           whiteSpace: 'nowrap',
         }}
@@ -31,7 +33,6 @@ const TwoItem = ({ title, value, style }: TTwoItemProps) => {
         style={{
           borderBottom: '1px dotted #000',
           width: '100%',
-          // marginTop: value ? 0 : 20,
           marginTop: value ? 0 : value === 0 ? 0 : 20,
         }}
       >
@@ -53,30 +54,12 @@ const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
     student_name,
     voucher_no,
     total_amount,
+    acc_name,
   } = data || {};
   return (
     <div style={{ border: '2px solid #000', padding: '16px' }}>
-      {/* <Flex align='center'>
-        <Image src={logo} width={100} height={100} preview={false} />
-        <Flex vertical>
-          <Typography.Title
-            level={1}
-            color='primary'
-            style={{ marginBottom: 0, color: token.colorPrimary }}
-          >
-            <span style={{ fontWeight: 900 }}>MCTL GLOBAL</span> PRIVATE LIMITED
-          </Typography.Title>
-
-          <Flex align='center' justify='center' gap={8}>
-            <Typography.Text style={{ fontSize: '12px' }}>
-              Ground Floor, Building No: 46, Road No: 11, Nikunjo, Dhaka-1229,
-              Tel: +880 1792608242, +880 1781242251
-            </Typography.Text>
-          </Flex>
-        </Flex>
-      </Flex> */}
       <PrintHeader />
-      <Flex vertical gap={16} style={{ width: '100%', marginTop: '20px' }}>
+      <Flex vertical gap={12} style={{ width: '100%', marginTop: '20px' }}>
         <Flex justify='space-between' gap={8}>
           <Space>
             <Typography.Text>Voucher No: </Typography.Text>{' '}
@@ -121,7 +104,7 @@ const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
           <TwoItem
             style={{ width: '50%' }}
             title={'Paid Amount'}
-            value={paid_amount}
+            value={amount}
           />
           <TwoItem
             style={{ width: '50%' }}
@@ -135,8 +118,17 @@ const MoneyReceipt = ({ data }: { data: IViewMoneyReceipt | undefined }) => {
             title={'Payment Method'}
             value={payment_method}
           />
-          <TwoItem style={{ width: '50%' }} title={'Amount'} value={amount} />
+          <TwoItem
+            style={{ width: '50%' }}
+            title={'Account Name'}
+            value={acc_name}
+          />
         </Flex>
+        <TwoItem
+          style={{ width: '100%' }}
+          title={'In Words'}
+          value={numberToWords(amount)}
+        />
         <Flex justify='end'>
           <Typography.Text
             style={{

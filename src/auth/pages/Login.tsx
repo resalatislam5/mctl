@@ -4,6 +4,7 @@ import {
   ConfigProvider,
   Flex,
   Form,
+  Image,
   Row,
   Space,
   theme,
@@ -40,6 +41,14 @@ const Login = () => {
     <ConfigProvider theme={{ algorithm: theme.defaultAlgorithm }}>
       <Flex style={{ flexDirection: 'column' }} gap={40}>
         <Space orientation='vertical'>
+          <Image
+            src='/src/assets/ems-logo.png'
+            alt='logo'
+            width={150}
+            preview={false}
+            style={{ marginLeft: -10 }}
+          />
+
           <h1 style={{ fontSize: sm ? 50 : 40 }}>Welcome Back!</h1>
           <Text>Please enter log in details below</Text>
         </Space>

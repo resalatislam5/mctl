@@ -106,3 +106,11 @@ html.light .modal-container {
     max-height: none !important;
   }
 }
+
+.ant-card {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06) !important;
+}
+.ant-table-thead > tr > th {
+  background: #fafafa !important;
+  font-size: 12px !important;
+}
