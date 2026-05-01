@@ -18,7 +18,7 @@ import DivisionList from '../modules/Configuration/Division/pages/DivisionList';
 import PackageList from '../modules/Configuration/Package/pages/PackageList';
 import UpazilaList from '../modules/Configuration/Upazila/pages/UpazilaList';
 import CourseProgressList from '../modules/CourseProgress/pages/CourseProgressList';
-import Dashboard from '../modules/Dashboard/pages/Dashboard';
+import Dashboard_V2 from '../modules/Dashboard/pages/Dashboard_V2';
 import ViewEnrollment from '../modules/Enrollment/components/ViewEnrollment';
 import EnrollmentList from '../modules/Enrollment/pages/EnrollmentList';
 import ViewExpenseHistory from '../modules/Expense/ExpenseHistory/components/ViewExpenseHistory';
@@ -38,7 +38,6 @@ import StudentLedger from '../modules/Report/OnlyGetReport/pages/StudentLedger';
 import UpcomingInstallment from '../modules/Report/OnlyGetReport/pages/UpcomingInstallment';
 import ViewStudent from '../modules/Student/components/ViewStudent';
 import StudentList from '../modules/Student/pages/StudentList';
-import Dashboard_V2 from '../modules/Dashboard/pages/Dashboard_V2';
 
 export interface IAppRoutes {
   path: string;
