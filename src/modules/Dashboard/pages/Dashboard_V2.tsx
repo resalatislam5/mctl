@@ -25,6 +25,7 @@ import {
   Timeline,
   Typography,
 } from 'antd';
+import dayjs from 'dayjs';
 import React from 'react';
 import {
   Area,
@@ -41,28 +42,20 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { dateAndTimeFormat } from '../../../common/utils/helper.function';
+import { useGetDashboardDataQuery } from '../api/dashboardEndpoints';
 
 const { Content } = Layout;
 const { Title, Text } = Typography;
 
-const enrollmentTrend = [
-  { month: 'Jan', enrollments: 480, students: 320 },
-  { month: 'Feb', enrollments: 520, students: 360 },
-  { month: 'Mar', enrollments: 610, students: 410 },
-  { month: 'Apr', enrollments: 740, students: 490 },
-  { month: 'May', enrollments: 890, students: 580 },
-  { month: 'Jun', enrollments: 803, students: 540 },
+const courseColors = [
+  '#1677ff',
+  '#52c41a',
+  '#fa8c16',
+  '#722ed1',
+  '#13c2c2',
+  '#eb2f96',
 ];
-
-const courseData = [
-  { name: 'IELTS Prep', students: 1420, color: '#1677ff' },
-  { name: 'TOEFL', students: 880, color: '#52c41a' },
-  { name: 'GRE/GMAT', students: 620, color: '#fa8c16' },
-  { name: 'Spoken English', students: 540, color: '#722ed1' },
-  { name: 'UK Visa Prep', students: 380, color: '#13c2c2' },
-  { name: 'PTE Academic', students: 290, color: '#eb2f96' },
-];
-
 const agentColumns = [
   {
     title: 'Rank',
@@ -219,120 +212,6 @@ const agentData = [
   },
 ];
 
-const studentColumns = [
-  {
-    title: 'Student',
-    key: 'student',
-    render: (r: any) => (
-      <Space>
-        <Avatar
-          style={{ background: '#e6f4ff', color: '#1677ff', fontSize: 11 }}
-          size={28}
-        >
-          {r.name.slice(0, 2).toUpperCase()}
-        </Avatar>
-        <div>
-          <div style={{ fontSize: 13, fontWeight: 500 }}>{r.name}</div>
-          <div style={{ fontSize: 11, color: '#8c8c8c' }}>{r.id}</div>
-        </div>
-      </Space>
-    ),
-  },
-  {
-    title: 'Course',
-    dataIndex: 'course',
-    key: 'course',
-    render: (c: string) => <Tag>{c}</Tag>,
-  },
-  {
-    title: 'Enrolled',
-    dataIndex: 'date',
-    key: 'date',
-    render: (d: string) => (
-      <Text type='secondary' style={{ fontSize: 12 }}>
-        {d}
-      </Text>
-    ),
-  },
-  {
-    title: 'Payment',
-    dataIndex: 'payment',
-    key: 'payment',
-    render: (p: string) => (
-      <Tag
-        color={p === 'Paid' ? 'success' : p === 'Partial' ? 'warning' : 'error'}
-      >
-        {p}
-      </Tag>
-    ),
-  },
-  {
-    title: 'Progress',
-    dataIndex: 'progress',
-    key: 'progress',
-    render: (v: number) => (
-      <Progress percent={v} size='small' style={{ width: 90 }} />
-    ),
-  },
-];
-
-const recentStudents = [
-  {
-    key: '1',
-    name: 'Rima Khatun',
-    id: 'STU-2041',
-    course: 'IELTS',
-    date: 'May 1, 2026',
-    payment: 'Paid',
-    progress: 35,
-  },
-  {
-    key: '2',
-    name: 'Tanvir Ahmed',
-    id: 'STU-2040',
-    course: 'TOEFL',
-    date: 'Apr 30, 2026',
-    payment: 'Partial',
-    progress: 20,
-  },
-  {
-    key: '3',
-    name: 'Sadia Parvin',
-    id: 'STU-2039',
-    course: 'GRE/GMAT',
-    date: 'Apr 29, 2026',
-    payment: 'Paid',
-    progress: 60,
-  },
-  {
-    key: '4',
-    name: 'Karim Uddin',
-    id: 'STU-2038',
-    course: 'UK Visa',
-    date: 'Apr 28, 2026',
-    payment: 'Unpaid',
-    progress: 5,
-  },
-  {
-    key: '5',
-    name: 'Nazmul Islam',
-    id: 'STU-2037',
-    course: 'Spoken Eng',
-    date: 'Apr 27, 2026',
-    payment: 'Paid',
-    progress: 80,
-  },
-  {
-    key: '6',
-    name: 'Jasmine Akter',
-    id: 'STU-2036',
-    course: 'PTE',
-    date: 'Apr 26, 2026',
-    payment: 'Paid',
-    progress: 45,
-  },
-];
-
 const activityItems = [
   {
     color: 'green',
@@ -373,6 +252,9 @@ const activityItems = [
 ];
 
 const Dashboard_V2: React.FC = () => {
+  const { data } = useGetDashboardDataQuery();
+  const { summery, trend, course, student_enrollment } = data?.data || {};
+
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Layout>
@@ -398,37 +280,37 @@ const Dashboard_V2: React.FC = () => {
             {[
               {
                 label: 'Total Students',
-                value: 4281,
+                value: summery?.students?.total,
                 prefix: <UserOutlined />,
                 color: '#1677ff',
-                trend: '+12.4%',
-                positive: true,
+                trend: `${(summery?.students?.growth || 0) > 0 ? '+' : ''}${summery?.students?.growth || 0}%`,
+                positive: (summery?.students?.growth || 0) > 0,
                 sub: 'vs last month',
               },
               {
                 label: 'Total Enrollments',
-                value: 6043,
+                value: summery?.enrollments?.total,
                 prefix: <BookOutlined />,
                 color: '#52c41a',
-                trend: '+8.7%',
-                positive: true,
+                trend: `${(summery?.enrollments?.growth || 0) > 0 ? '+' : ''}${summery?.enrollments?.growth || 0}%`,
+                positive: (summery?.enrollments?.growth || 0) > 0,
                 sub: 'vs last month',
               },
               {
                 label: 'Active Agents',
-                value: 38,
+                value: summery?.agents?.total,
                 prefix: <TeamOutlined />,
                 color: '#fa8c16',
-                trend: '+3',
+                trend: summery?.agents?.thisMonth,
                 positive: true,
-                sub: 'new this month',
+                sub: 'new agents this month',
               },
               {
                 label: 'Pending Payments',
-                value: 143,
+                value: summery?.payments?.pendingEnrollment,
                 prefix: <ExclamationCircleOutlined />,
                 color: '#ff4d4f',
-                trend: '৳286K',
+                trend: '৳' + summery?.payments?.totalOutStanding,
                 positive: false,
                 sub: 'outstanding',
               },
@@ -451,7 +333,9 @@ const Dashboard_V2: React.FC = () => {
                       color: k.color,
                     }}
                     suffix={
-                      k.label === 'Pending Payments' ? ' invoices' : undefined
+                      k.label === 'Pending Payments'
+                        ? ' Enrollments'
+                        : undefined
                     }
                   />
                   <div
@@ -492,7 +376,8 @@ const Dashboard_V2: React.FC = () => {
                 title='Monthly Enrollment & Student Trend'
                 extra={
                   <Text type='secondary' style={{ fontSize: 12 }}>
-                    Jan – Jun 2026
+                    {trend?.[0]?.month} – {trend?.[trend.length - 1]?.month}{' '}
+                    {dayjs().format('YYYY')}
                   </Text>
                 }
                 bordered={false}
@@ -501,7 +386,7 @@ const Dashboard_V2: React.FC = () => {
               >
                 <ResponsiveContainer width='100%' height={240}>
                   <AreaChart
-                    data={enrollmentTrend}
+                    data={trend}
                     margin={{ top: 5, right: 10, left: -10, bottom: 0 }}
                   >
                     <defs>
@@ -594,7 +479,7 @@ const Dashboard_V2: React.FC = () => {
                 <ResponsiveContainer width='100%' height={160}>
                   <PieChart>
                     <Pie
-                      data={courseData}
+                      data={course}
                       dataKey='students'
                       nameKey='name'
                       cx='50%'
@@ -602,8 +487,14 @@ const Dashboard_V2: React.FC = () => {
                       outerRadius={70}
                       innerRadius={38}
                     >
-                      {courseData.map((_, i) => (
-                        <Cell key={i} fill={courseData[i].color} />
+                      {/* {course?.map((_, i) => (
+                        <Cell key={i} fill={courseColors[i % courseColors.length]} />
+                      ))} */}
+                      {course?.map((_, i) => (
+                        <Cell
+                          key={i}
+                          fill={courseColors[i % courseColors.length]}
+                        />
                       ))}
                     </Pie>
                     <RTooltip
@@ -620,9 +511,9 @@ const Dashboard_V2: React.FC = () => {
                     marginTop: 8,
                   }}
                 >
-                  {courseData.map((c) => (
+                  {course?.map((c, i) => (
                     <div
-                      key={c.name}
+                      key={i}
                       style={{
                         display: 'flex',
                         alignItems: 'center',
@@ -635,7 +526,7 @@ const Dashboard_V2: React.FC = () => {
                             width: 8,
                             height: 8,
                             borderRadius: 2,
-                            background: c.color,
+                            background: courseColors[i % courseColors.length],
                             display: 'inline-block',
                           }}
                         />
@@ -667,7 +558,7 @@ const Dashboard_V2: React.FC = () => {
               >
                 <ResponsiveContainer width='100%' height={220}>
                   <BarChart
-                    data={courseData}
+                    data={course}
                     margin={{ top: 5, right: 10, left: -10, bottom: 0 }}
                   >
                     <CartesianGrid
@@ -695,8 +586,11 @@ const Dashboard_V2: React.FC = () => {
                       name='Students'
                       radius={[4, 4, 0, 0]}
                     >
-                      {courseData.map((_, i) => (
-                        <Cell key={i} fill={courseData[i].color} />
+                      {course?.map((_, i) => (
+                        <Cell
+                          key={i}
+                          fill={courseColors[i % courseColors.length]}
+                        />
                       ))}
                     </Bar>
                   </BarChart>
@@ -773,7 +667,7 @@ const Dashboard_V2: React.FC = () => {
                   </Space>
                 }
                 extra={
-                  <Button type='link' size='small'>
+                  <Button type='link' size='small' href='/student'>
                     View all students
                   </Button>
                 }
@@ -781,8 +675,66 @@ const Dashboard_V2: React.FC = () => {
                 style={{ borderRadius: 10 }}
               >
                 <Table
-                  columns={studentColumns}
-                  dataSource={recentStudents}
+                  columns={[
+                    {
+                      title: 'Student',
+                      key: 'student',
+                      render: (r: any) => (
+                        <Space>
+                          <Avatar
+                            style={{
+                              background: '#e6f4ff',
+                              color: '#1677ff',
+                              fontSize: 11,
+                            }}
+                            size={28}
+                            src={r?.image}
+                          />
+                          <div>
+                            <div style={{ fontSize: 13, fontWeight: 500 }}>
+                              {r.name}
+                            </div>
+                            <div style={{ fontSize: 11, color: '#8c8c8c' }}>
+                              {r.student_code}
+                            </div>
+                          </div>
+                        </Space>
+                      ),
+                    },
+                    {
+                      title: 'Mobile No',
+                      dataIndex: 'mobile_no',
+                      key: 'mobile_no',
+                    },
+                    {
+                      title: 'Enrolled',
+                      dataIndex: 'admission_date',
+                      key: 'admission_date',
+                      render: (d: string) => (
+                        <Text type='secondary' style={{ fontSize: 12 }}>
+                          {dateAndTimeFormat(d)}
+                        </Text>
+                      ),
+                    },
+                    {
+                      title: 'Payment',
+
+                      render: (_, record) => (
+                        <Tag
+                          color={
+                            record?.total_paid === record?.total_amount
+                              ? 'success'
+                              : 'error'
+                          }
+                        >
+                          {record?.total_paid === record?.total_amount
+                            ? 'Paid'
+                            : 'Unpaid'}
+                        </Tag>
+                      ),
+                    },
+                  ]}
+                  dataSource={student_enrollment}
                   pagination={false}
                   size='small'
                 />
