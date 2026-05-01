@@ -18,6 +18,7 @@ import {
 import { useBreakpoint } from '../../common/utils/constant';
 import { useLoginMutation } from '../api/authEndpoint';
 import type { LoginTypes } from '../types/authTypes';
+import { ems_logo } from '../../common/ui/image';
 
 const { Text } = Typography;
 const Login = () => {
@@ -42,7 +43,7 @@ const Login = () => {
       <Flex style={{ flexDirection: 'column' }} gap={40}>
         <Space orientation='vertical'>
           <Image
-            src='/src/assets/ems-logo.png'
+            src={ems_logo}
             alt='logo'
             width={150}
             preview={false}
