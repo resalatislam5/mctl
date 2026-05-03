@@ -1,28 +1,24 @@
 import { Space } from 'antd';
 import { openModal } from '../../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../../app/hooks/hooks';
-import DeleteButton from '../../../../common/Button/DeleteButton';
 import EditButton from '../../../../common/Button/EditButton';
 import AntTable from '../../../../common/Table/AntTable';
 import { getStatusTag } from '../../../../common/utils/status';
 import ContainerLayout from '../../../../layout/components/ContainerLayout';
 
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
-import {
-  useDeleteUpazilaMutation,
-  useGetUpazilaListQuery,
-} from '../api/upazilaEndpoints';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
+import { useGetUpazilaListQuery } from '../api/upazilaEndpoints';
 import CreateUpazila from '../components/CreateUpazila';
 import UpdateUpazila from '../components/UpdateUpazila';
-import useCheckPermission from '../../../../common/hooks/useCheckPermission';
-import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const UpazilaList = () => {
-  const { can_create, can_delete, can_update } = useCheckPermission('UPAZILA');
+  const { can_create, can_update } = useCheckPermission('UPAZILA');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetUpazilaListQuery(query);
-  const [deleting, { isLoading: isDeleting }] = useDeleteUpazilaMutation();
+  // const [deleting, { isLoading: isDeleting }] = useDeleteUpazilaMutation();
 
   return (
     <ContainerLayout
@@ -80,11 +76,11 @@ const UpazilaList = () => {
                     )
                   }
                 />
-                <DeleteButton
+                {/* <DeleteButton
                   can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
-                />
+                /> */}
               </Space>
             ),
           },

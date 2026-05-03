@@ -1,27 +1,23 @@
 import { Space } from 'antd';
 import { openModal } from '../../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../../app/hooks/hooks';
-import DeleteButton from '../../../../common/Button/DeleteButton';
 import EditButton from '../../../../common/Button/EditButton';
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
+import { useQueryParams } from '../../../../common/hooks/useQueryParams';
 import AntTable from '../../../../common/Table/AntTable';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 import { getStatusTag } from '../../../../common/utils/status';
 import ContainerLayout from '../../../../layout/components/ContainerLayout';
-import {
-  useDeleteCountryMutation,
-  useGetCountryListQuery,
-} from '../api/countryEndpoints';
+import { useGetCountryListQuery } from '../api/countryEndpoints';
 import CreateCountry from '../components/CreateCountry';
 import UpdateCountry from '../components/UpdateCountry';
-import { useQueryParams } from '../../../../common/hooks/useQueryParams';
-import useCheckPermission from '../../../../common/hooks/useCheckPermission';
-import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const CountryList = () => {
-  const { can_delete, can_create, can_update } = useCheckPermission('COUNTRY');
+  const { can_create, can_update } = useCheckPermission('COUNTRY');
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetCountryListQuery(query);
-  const [deleting, { isLoading: isDeleting }] = useDeleteCountryMutation();
+  // const [deleting, { isLoading: isDeleting }] = useDeleteCountryMutation();
 
   return (
     <ContainerLayout
@@ -80,11 +76,11 @@ const CountryList = () => {
                   }
                 />
 
-                <DeleteButton
+                {/* <DeleteButton
                   can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
-                />
+                /> */}
               </Space>
             ),
           },

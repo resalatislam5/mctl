@@ -8,10 +8,17 @@ import {
 
 import dayjs from 'dayjs';
 import FromSubmit from '../../../common/Button/FromSubmit';
-import { FormInputSelect } from '../../../common/Form/FormIInput';
+import {
+  FormInputDate,
+  FormInputSelect,
+  FormInputText,
+} from '../../../common/Form/FormIInput';
 import { SelectCourse } from '../../../common/SelectWithApi/Select';
 import AntTable from '../../../common/Table/AntTable';
-import type { ICreateCourseProgress } from '../types/courseProgressTypes';
+import {
+  CertificateStatusEnum,
+  type ICreateCourseProgress,
+} from '../types/courseProgressTypes';
 
 type Props = {
   onFinish: (arg: ICreateCourseProgress) => void;
@@ -46,7 +53,6 @@ const CourseProgressInputs = ({ onFinish, form, loading, editMode }: Props) => {
                       noStyleLabel={'Course'}
                       noStyle
                       style={{ margin: 0 }}
-                      required
                       disabled
                       lg={24}
                     />
@@ -54,36 +60,86 @@ const CourseProgressInputs = ({ onFinish, form, loading, editMode }: Props) => {
                   width: 200,
                 },
                 {
-                  title: 'Hard Copy',
+                  title: 'Completion Status',
                   render: (_: string, field: FormListFieldData) => (
                     <FormInputSelect
-                      name={[field.name, 'status']}
+                      name={[field.name, 'completion_status']}
                       style={{ margin: 0 }}
                       label={''}
-                      placeholder='Select Hard Copy'
+                      placeholder='Select Completion Status'
                       options={[
-                        { label: 'Yes', value: 'YES' },
-                        { label: 'No', value: 'NO' },
+                        { label: 'ONGOING', value: 'ONGOING' },
+                        { label: 'COMPLETED', value: 'COMPLETED' },
+                        { label: 'ABSENT', value: 'ABSENT' },
+                        { label: 'CANCELLED', value: 'CANCELLED' },
                       ]}
                       lg={24}
-                      required
                     />
                   ),
                 },
                 {
-                  title: 'Soft Copy',
+                  title: 'Certificate Status',
                   render: (_: string, field: FormListFieldData) => (
                     <FormInputSelect
-                      name={[field.name, 'soft_copy']}
+                      name={[field.name, 'certificate_status']}
                       style={{ margin: 0 }}
                       label={''}
-                      placeholder='Select Soft Copy'
+                      placeholder='Select Certificate Status'
+                      options={CertificateStatusEnum}
+                      lg={24}
+                    />
+                  ),
+                },
+                {
+                  title: 'Doll Card Status',
+                  render: (_: string, field: FormListFieldData) => (
+                    <FormInputSelect
+                      name={[field.name, 'doll_card_status']}
+                      style={{ margin: 0 }}
+                      label={''}
+                      placeholder='Select Doll Card Status'
+                      options={CertificateStatusEnum}
+                      lg={24}
+                    />
+                  ),
+                },
+                {
+                  title: 'Delivery Status',
+                  render: (_: string, field: FormListFieldData) => (
+                    <FormInputSelect
+                      name={[field.name, 'delivery_status']}
+                      style={{ margin: 0 }}
+                      label={''}
+                      placeholder='Select Delivery Status'
                       options={[
-                        { label: 'Yes', value: 'YES' },
-                        { label: 'No', value: 'NO' },
+                        { label: 'ONLINE_COPY', value: 'ONLINE_COPY' },
+                        { label: 'HARD_COPY', value: 'HARD_COPY' },
                       ]}
                       lg={24}
-                      required
+                    />
+                  ),
+                },
+                {
+                  title: 'Delivery Date',
+                  render: (_: string, field: FormListFieldData) => (
+                    <FormInputDate
+                      name={[field.name, 'delivery_date']}
+                      style={{ margin: 0 }}
+                      label={''}
+                      placeholder='Select Delivery Date'
+                      lg={24}
+                    />
+                  ),
+                },
+                {
+                  title: 'Certificate No',
+                  render: (_: string, field: FormListFieldData) => (
+                    <FormInputText
+                      name={[field.name, 'certificate_no']}
+                      style={{ margin: 0 }}
+                      label={''}
+                      placeholder='Enter Certificate No'
+                      lg={24}
                     />
                   ),
                 },

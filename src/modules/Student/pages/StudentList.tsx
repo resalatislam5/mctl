@@ -73,7 +73,7 @@ const StudentList = () => {
           { dataIndex: 'name', key: 'name', title: 'Name' },
           { dataIndex: 'mobile_no', key: 'mobile_no', title: 'Mobile No' },
           { dataIndex: 'email', key: 'email', title: 'Email' },
-          { dataIndex: 'nid_no', key: 'nid_no', title: 'NID' },
+          { dataIndex: 'nid_no', key: 'nid_no', title: 'NID/PASSPORT' },
           // { dataIndex: 'code', key: 'code', title: 'Code' },
           {
             dataIndex: 'status',

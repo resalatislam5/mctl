@@ -1,3 +1,4 @@
+type CertificateStatusType = 'REQUESTED' | 'ISSUED_BY_BOARD' | 'PRINTED' | null;
 export interface ICourseProgressList {
   _id: string;
   student_id: string;
@@ -54,7 +55,17 @@ export interface IViewCourseProgress {
 
 export interface Course {
   course_id: string;
-  status: string;
-  soft_copy: string;
   name: string;
+  certificate_no?: string | null;
+  delivery_date?: string | null;
+  certificate_status?: CertificateStatusType;
+  doll_card_status?: CertificateStatusType;
+  delivery_status?: 'ONLINE_COPY' | 'HARD_COPY' | null;
+  completion_status?: 'ONGOING' | 'COMPLETED' | 'ABSENT' | 'CANCELLED';
 }
+
+export const CertificateStatusEnum = [
+  { label: 'REQUESTED', value: 'REQUESTED' },
+  { label: 'ISSUED_BY_BOARD', value: 'ISSUED_BY_BOARD' },
+  { label: 'PRINTED', value: 'PRINTED' },
+];

@@ -1,29 +1,25 @@
 import { Space } from 'antd';
 import { openModal } from '../../../../app/features/modalSlice';
 import { useAppDispatch } from '../../../../app/hooks/hooks';
-import DeleteButton from '../../../../common/Button/DeleteButton';
 import EditButton from '../../../../common/Button/EditButton';
 import AntTable from '../../../../common/Table/AntTable';
 import { getStatusTag } from '../../../../common/utils/status';
 import ContainerLayout from '../../../../layout/components/ContainerLayout';
 
+import useCheckPermission from '../../../../common/hooks/useCheckPermission';
 import { useQueryParams } from '../../../../common/hooks/useQueryParams';
-import {
-  useDeleteDistrictMutation,
-  useGetDistrictListQuery,
-} from '../api/districtEndpoints';
+import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
+import { useGetDistrictListQuery } from '../api/districtEndpoints';
 import CreateDistrict from '../components/CreateDistrict';
 import UpdateDistrict from '../components/UpdateDistrict';
-import useCheckPermission from '../../../../common/hooks/useCheckPermission';
-import { dateAndTimeFormat } from '../../../../common/utils/helper.function';
 
 const DistrictList = () => {
-  const { can_create, can_delete, can_update } = useCheckPermission('DISTRICT');
+  const { can_create, can_update } = useCheckPermission('DISTRICT');
 
   const dispatch = useAppDispatch();
   const { query } = useQueryParams();
   const { data, isLoading, isFetching } = useGetDistrictListQuery(query);
-  const [deleting, { isLoading: isDeleting }] = useDeleteDistrictMutation();
+  // const [deleting, { isLoading: isDeleting }] = useDeleteDistrictMutation();
 
   return (
     <ContainerLayout
@@ -81,11 +77,11 @@ const DistrictList = () => {
                     )
                   }
                 />
-                <DeleteButton
+                {/* <DeleteButton
                   can_delete={can_delete}
                   loading={isDeleting}
                   onClick={() => deleting(record._id)}
-                />
+                /> */}
               </Space>
             ),
           },

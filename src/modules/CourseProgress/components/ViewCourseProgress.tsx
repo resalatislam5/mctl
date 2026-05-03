@@ -22,14 +22,34 @@ const ViewCourseProgress = ({ _id }: { _id: string }) => {
             key: 'name',
           },
           {
-            title: 'Hard Copy',
-            dataIndex: 'status',
-            key: 'status',
+            title: 'Completion Status',
+            dataIndex: 'completion_status',
+            key: 'completion_status',
           },
           {
-            title: 'Soft Copy',
-            dataIndex: 'soft_copy',
-            key: 'soft_copy',
+            title: 'Certificate Status',
+            dataIndex: 'certificate_status',
+            key: 'certificate_status',
+          },
+          {
+            title: 'Doll Card Status',
+            dataIndex: 'doll_card_status',
+            key: 'doll_card_status',
+          },
+          {
+            title: 'Delivery Status',
+            dataIndex: 'delivery_status',
+            key: 'delivery_status',
+          },
+          {
+            title: 'Delivery Date',
+            dataIndex: 'delivery_date',
+            key: 'delivery_date',
+          },
+          {
+            title: 'Certificate No',
+            dataIndex: 'certificate_no',
+            key: 'certificate_no',
           },
         ]}
       />

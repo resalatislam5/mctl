@@ -61,7 +61,11 @@ const AccountList = () => {
             title: 'Account Type',
           },
           { dataIndex: 'name', key: 'name', title: 'Account Name' },
-          { dataIndex: 'acc_number', key: 'acc_number', title: 'Account Name' },
+          {
+            dataIndex: 'acc_number',
+            key: 'acc_number',
+            title: 'Account Number',
+          },
           {
             dataIndex: 'status',
             key: 'status',

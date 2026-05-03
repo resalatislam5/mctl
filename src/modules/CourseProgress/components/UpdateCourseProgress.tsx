@@ -8,6 +8,7 @@ import {
 } from '../api/courseProgressEndpoints';
 import type { ICreateCourseProgress } from '../types/courseProgressTypes';
 import CourseProgressInputs from './CourseProgressInputs';
+import dayjs from 'dayjs';
 
 type Props = {
   _id: string;
@@ -33,8 +34,14 @@ const UpdateCourseProgress = ({ _id }: Props) => {
       form.setFieldsValue({
         courses: courses.map((course) => ({
           course_id: course.course_id,
-          status: course.status,
-          soft_copy: course.soft_copy,
+          completion_status: course.completion_status,
+          certificate_status: course.certificate_status,
+          doll_card_status: course.doll_card_status,
+          delivery_status: course.delivery_status,
+          delivery_date: course.delivery_date
+            ? dayjs(course.delivery_date)
+            : undefined,
+          certificate_no: course.certificate_no,
         })),
       });
     }
